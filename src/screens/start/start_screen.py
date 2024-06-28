@@ -7,12 +7,15 @@ This is the first screen that opens at the start of the application.
 '''
 
 import tkinter as tk
-from tkinter import tkk
+from tkinter import ttk
 
-def start_screen():
-    None
+def render():
+    root = tk.Tk()
+    tk.Label(root, text = 'Text to Music Converter').pack
+
+    root.mainloop()
 
 def test():
-    start_screen()
+    render()
 if __name__ == '__main__':
     test()
