@@ -6,7 +6,7 @@ Created on 2024-06-28
 This is the starting point of the application, to where every major module is imported.
 '''
 
-import screens.start as start_screen
+from screens.start import start_screen
 
 if __name__ == '__main__':
-    start_screen
+    start_screen.render()
