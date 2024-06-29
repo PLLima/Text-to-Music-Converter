@@ -15,6 +15,9 @@ class main_application(tk.Frame):
         self.parent = parent
 
     def begin(self):
+        self.parent.wm_title("Text to Music Converter")
+        self.parent.geometry("400x200")
+        
         start_screen(self.parent).render()
 
 def main():

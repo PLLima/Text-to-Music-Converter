@@ -15,12 +15,9 @@ class start_screen(tk.Frame):
         self.parent = parent
 
     def render(self):
-        self.parent.wm_title("Text to Music Converter")
-        # tk.Label(root, text = 'Text to Music Converter').pack()
+        tk.Label(self.parent, text = 'Turn Text into Music').pack(side="top", fill="both", expand=True)
 
-        frm = ttk.Frame(self.parent, padding = 10)
-        frm.grid()
-        ttk.Label(frm, text = "Hello World").grid(column = 0, row = 0)
-        ttk.Button(frm, text = "Quit", command = self.parent.destroy).grid(column = 1, row = 0)
-
-        self.parent.mainloop()
+        # frm = ttk.Frame(self.parent, padding = 10)
+        # frm.grid()
+        # ttk.Label(frm, text = "Hello World").grid(column = 0, row = 0)
+        # ttk.Button(frm, text = "Quit", command = self.parent.destroy).grid(column = 1, row = 0)
