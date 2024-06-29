@@ -14,15 +14,33 @@ class main_application(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
 
+    def set_app_name(self, name):
+        self.app_name = name
+        self.parent.wm_title(name)
+
+    def get_app_name(self):
+        return self.app_name
+    
+    def set_app_screen_size(self, size):
+        self.app_screen_size = size
+        self.parent.geometry(size)
+    
+    def get_app_screen_size(self):
+        return self.app_screen_size
+
     def begin(self):
-        self.parent.wm_title("Text to Music Converter")
-        self.parent.geometry("400x200")
-        
+        # Starting point of the application
         start_screen(self.parent).render()
 
 def main():
     root = tk.Tk()
-    main_application(root).begin()
+
+    # Set main screen parameters
+    app = main_application(root)
+    app.set_app_name("Text to Music Converter")
+    app.set_app_screen_size("400x200")
+
+    app.begin()
     root.mainloop()
 
 if __name__ == '__main__':
