@@ -7,39 +7,39 @@ This is the starting point of the application, to where every major module is im
 '''
 
 import tkinter as tk
-from screens.start import start_screen
+from screens.start import startScreen
 
-class main_application(tk.Frame):
+class mainApplication(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
 
-    def set_app_name(self, name):
-        self.app_name = name
+    def setAppName(self, name):
+        self.appName = name
         self.parent.wm_title(name)
 
-    def get_app_name(self):
-        return self.app_name
+    def getAppName(self):
+        return self.appName
     
-    def set_app_screen_size(self, size):
-        self.app_screen_size = size
+    def setAppScreenSize(self, size):
+        self.appScreenSize = size
         self.parent.geometry(size)
     
-    def get_app_screen_size(self):
-        return self.app_screen_size
+    def getAppScreenSize(self):
+        return self.appScreenSize
 
     def begin(self):
         # Starting point of the application
-        start_screen(self.parent).render()
+        startScreen(self.parent).render()
 
 def main():
     root = tk.Tk()
 
     # Set main screen parameters
-    app = main_application(root)
-    app.set_app_name("Text to Music Converter")
-    app.set_app_screen_size("400x200")
-
+    app = mainApplication(root)
+    app.setAppName("Text to Music Converter")
+    app.setAppScreenSize("400x200")
+    
     app.begin()
     root.mainloop()
 

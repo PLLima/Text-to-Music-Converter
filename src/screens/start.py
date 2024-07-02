@@ -9,7 +9,7 @@ This is the first screen that opens at the start of the application.
 import tkinter as tk
 from tkinter import ttk
 
-class start_screen(tk.Frame):
+class startScreen(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
