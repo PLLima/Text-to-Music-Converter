@@ -3,7 +3,7 @@ Created on 2024-06-29
 
 @author: Pedro Lubaszewski Lima
 
-File with automated unit tests for the main_application class.
+File with automated unit tests for the mainApplication class.
 '''
 
 import unittest
