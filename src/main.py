@@ -6,7 +6,7 @@ Created on 2024-06-28
 This is the starting point of the application, to where every major module is imported.
 '''
 
-import re
+from utils.enums import ScreenMeasure
 import tkinter as tk
 from screens.start import startScreen
 
@@ -23,17 +23,15 @@ class mainApplication(tk.Frame):
         return self.appName
 
     def setMinAppScreenSize(self, minSize):
-        splitMinSize = re.split('x', minSize)
-
         self.appMinScreenSize = minSize
-        self.parent.minsize(splitMinSize[0], splitMinSize[1])
+        self.parent.minsize(minSize[ScreenMeasure.WIDTH], minSize[ScreenMeasure.HEIGHT])
 
     def getMinAppScreenSize(self):
         return self.appMinScreenSize
 
     def setAppScreenSize(self, size):
         self.appScreenSize = size
-        self.parent.geometry(size)
+        self.parent.geometry("x".join(size))
 
     def getAppScreenSize(self):
         return self.appScreenSize
@@ -50,8 +48,8 @@ def main():
     # Set main screen parameters
     app = mainApplication(root)
     app.setAppName("Text to Music Converter")
-    app.setAppScreenSize("x".join(initialScreenSize))
-    app.setMinAppScreenSize("x".join(minScreenSize))
+    app.setAppScreenSize(initialScreenSize)
+    app.setMinAppScreenSize(minScreenSize)
     
     app.begin()
     root.mainloop()
