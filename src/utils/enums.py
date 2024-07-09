@@ -1,5 +1,3 @@
-from enum import Enum
-
-class ScreenMeasure(Enum):
+class ScreenMeasure():
     WIDTH = 0
     HEIGHT = 1
