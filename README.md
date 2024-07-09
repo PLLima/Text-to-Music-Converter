@@ -2,8 +2,10 @@
 A simple desktop application that takes a text input, initial parameters and turns it into a music track.
 
 
-Framework: https://docs.python.org/3/library/tkinter.html
+## Frameworks
 
-Tests Framework: https://docs.python.org/3/library/unittest.html
+GUI: https://docs.python.org/3/library/tkinter.html
 
-http://scamp.marcevanstein.com/
+Tests: https://docs.python.org/3/library/unittest.html
+
+Audio: http://scamp.marcevanstein.com/
