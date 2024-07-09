@@ -4,3 +4,5 @@ A simple desktop application that takes a text input, initial parameters and tur
 
 Framework: https://docs.python.org/3/library/tkinter.html
 Tests Framework: https://docs.python.org/3/library/unittest.html
+
+http://scamp.marcevanstein.com/
