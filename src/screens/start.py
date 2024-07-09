@@ -14,8 +14,13 @@ class startScreen(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
 
+    def writeTitle(self, title):
+        title = tk.Label(self.parent, font=('Inter', 14), text=title)
+
+        title.pack(side="top", fill="both", expand=True)
+
     def render(self):
-        tk.Label(self.parent, text = 'Turn Text into Music').pack(side="top", fill="both", expand=True)
+        self.writeTitle('Turn Text into Music')
 
         # frm = ttk.Frame(self.parent, padding = 10)
         # frm.grid()
