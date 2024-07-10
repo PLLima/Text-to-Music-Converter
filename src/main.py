@@ -6,14 +6,15 @@ Created on 2024-06-28
 This is the starting point of the application, to where every major module is imported.
 '''
 
-from utils.enums import ScreenMeasure
+from common.enums import ScreenMeasure
+from common.classes import Child
 import tkinter as tk
 from screens.start import startScreen
 
-class mainApplication(tk.Frame):
+class mainApplication(tk.Frame, Child):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        self.parent = parent
+        self.setParent(parent)
 
     def setAppName(self, name):
         self.appName = name
@@ -38,7 +39,7 @@ class mainApplication(tk.Frame):
 
     def begin(self):
         # Starting point of the application
-        startScreen(self.parent).render()
+        startScreen(self).render()
 
 def main():
     minScreenSize = ['360', '256']
@@ -47,7 +48,7 @@ def main():
 
     # Set main screen parameters
     app = mainApplication(root)
-    app.setAppName("Text to Music Converter")
+    app.setAppName('Text to Music Converter')
     app.setAppScreenSize(initialScreenSize)
     app.setMinAppScreenSize(minScreenSize)
     

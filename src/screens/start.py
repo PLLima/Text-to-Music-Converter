@@ -6,16 +6,19 @@ Created on 2024-06-28
 This is the first screen that opens at the start of the application.
 '''
 
+from common.classes import Child
+from common.enums import ScreenMeasure, TextStyles
 import tkinter as tk
 from tkinter import ttk
 
-class startScreen(tk.Frame):
+class startScreen(tk.Frame, Child):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        self.parent = parent
+        self.setParent(parent)
 
     def writeTitle(self, title):
-        title = tk.Label(self.parent, font=('Inter', 14), text=title)
+        screenSize = self.parent.getAppScreenSize()
+        title = tk.Label(self.getParent().getParent(), font=('Inter', int(TextStyles.MAIN_HEADER * int(screenSize[ScreenMeasure.HEIGHT]))), text=title)
 
         title.pack(side="top", fill="both", expand=True)
 
