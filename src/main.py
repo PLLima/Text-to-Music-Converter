@@ -41,8 +41,8 @@ class mainApplication(tk.Frame):
         startScreen(self.parent).render()
 
 def main():
-    minScreenSize = ['400', '200']
-    initialScreenSize = ['400', '200']
+    minScreenSize = ['360', '256']
+    initialScreenSize = ['720', '512']
     root = tk.Tk()
 
     # Set main screen parameters
