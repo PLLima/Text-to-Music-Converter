@@ -17,13 +17,13 @@ class testStartScreen(unittest.TestCase):
         initialScreenSize = ['120', '120']
         root = tk.Tk()
         mainApp = mainApplication(root)
-        self.app = startScreen(mainApp)
-        self.app.getParent().setAppScreenSize(initialScreenSize)
+        self.startScreen = startScreen(mainApp)
+        self.startScreen.getParent().setAppScreenSize(initialScreenSize)
 
     def testRender(self):
-        self.app.render()
-        self.app.getParent().getParent().update()
-        self.assertTrue(self.app.winfo_exists(), "Start screen wasn't rendered.")
+        self.startScreen.render()
+        self.startScreen.getParent().getParent().update()
+        self.assertTrue(self.startScreen.winfo_exists(), "Start screen wasn't rendered.")
 
 if __name__ == '__main__':
     unittest.main()
