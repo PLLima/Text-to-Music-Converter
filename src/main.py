@@ -6,7 +6,7 @@ Created on 2024-06-28
 This is the starting point of the application, to where every major module is imported.
 '''
 
-from common.enums import ScreenMeasure
+from common.dictionaries import SCREEN_MEASURE
 from common.classes import Child
 import tkinter as tk
 from screens.start import startScreen
@@ -25,7 +25,7 @@ class mainApplication(tk.Frame, Child):
 
     def setMinAppScreenSize(self, minSize):
         self.appMinScreenSize = minSize
-        self.parent.minsize(minSize[ScreenMeasure.WIDTH], minSize[ScreenMeasure.HEIGHT])
+        self.parent.minsize(minSize[SCREEN_MEASURE["Width"]], minSize[SCREEN_MEASURE["Height"]])
 
     def getMinAppScreenSize(self):
         return self.appMinScreenSize
@@ -42,7 +42,7 @@ class mainApplication(tk.Frame, Child):
         startScreen(self).render()
 
 def main():
-    minScreenSize = ['360', '256']
+    minScreenSize = ['720', '512']
     initialScreenSize = ['720', '512']
     root = tk.Tk()
 
