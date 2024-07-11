@@ -14,19 +14,19 @@ class mainHeader(tk.Frame, Child):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
-        self.setInstance()
+        self.__setInstance()
 
-    def setInstance(self):
+    def __setInstance(self):
         self.instance = tk.Label(self.getParent(), justify='center')
 
-    def getInstance(self):
+    def __getInstance(self):
         return self.instance
 
     def setContent(self, content):
-        self.getInstance().configure(text=content)
+        self.__getInstance().configure(text=content)
 
     def setFontSize(self, fontSize):
-        self.getInstance().configure(font=(FONTS["MainHeader"], fontSize))
+        self.__getInstance().configure(font=(FONTS["MainHeader"], fontSize))
 
     def render(self):
-        self.getInstance().pack(side='top', fill='both', expand=True)
+        self.__getInstance().pack(side='top', fill='both', expand=True)
