@@ -9,7 +9,7 @@ File with automated unit tests for the mainApplication class.
 import unittest
 
 import tkinter as tk
-from src.common.enums import ScreenMeasure
+from src.common.dictionaries import SCREEN_MEASURE
 from src.main import mainApplication
 
 class testMainApplication(unittest.TestCase):
@@ -31,8 +31,8 @@ class testMainApplication(unittest.TestCase):
         self.app.setAppScreenSize(intendedScreenSize)
         self.app.getParent().update()
 
-        self.assertEqual(int(minScreenSize[ScreenMeasure.WIDTH]), self.app.getParent().winfo_width(), "App minimum screen width disrespected.")
-        self.assertEqual(int(minScreenSize[ScreenMeasure.HEIGHT]), self.app.getParent().winfo_height(), "App minimum screen height disrespected.")
+        self.assertEqual(int(minScreenSize[SCREEN_MEASURE["Width"]]), self.app.getParent().winfo_width(), "App minimum screen width disrespected.")
+        self.assertEqual(int(minScreenSize[SCREEN_MEASURE["Height"]]), self.app.getParent().winfo_height(), "App minimum screen height disrespected.")
 
     def testGetMinAppScreenSize(self):
         minScreenSize = ['120', '120']
@@ -44,8 +44,8 @@ class testMainApplication(unittest.TestCase):
         self.app.setAppScreenSize(screenSize)
         self.app.getParent().update()
 
-        self.assertEqual(int(screenSize[ScreenMeasure.WIDTH]), self.app.getParent().winfo_width(), "App screen width incorrect.")
-        self.assertEqual(int(screenSize[ScreenMeasure.HEIGHT]), self.app.getParent().winfo_height(), "App screen height incorrect.")
+        self.assertEqual(int(screenSize[SCREEN_MEASURE["Width"]]), self.app.getParent().winfo_width(), "App screen width incorrect.")
+        self.assertEqual(int(screenSize[SCREEN_MEASURE["Height"]]), self.app.getParent().winfo_height(), "App screen height incorrect.")
 
     def testGetAppScreenSize(self):
         screenSize = ['100', '100']
