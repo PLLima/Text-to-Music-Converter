@@ -16,9 +16,13 @@ class startScreen(tk.Frame, Child):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
 
-    def writeTitle(self, title):
+    def calculateFontSize(self, textScale):
         screenSize = self.parent.getAppScreenSize()
-        title = tk.Label(self.getParent().getParent(), font=('Inter', int(TextStyles.MAIN_HEADER * int(screenSize[ScreenMeasure.HEIGHT]))), text=title)
+
+        return int(textScale * int(screenSize[ScreenMeasure.HEIGHT]))
+
+    def writeTitle(self, title):
+        title = tk.Label(self.getParent().getParent(), font=('Inter', self.calculateFontSize(TextStyles.MAIN_HEADER)), text=title)
 
         title.pack(side="top", fill="both", expand=True)
 
