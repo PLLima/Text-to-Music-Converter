@@ -3,12 +3,12 @@ Created on 2024-07-10
 
 @author: Pedro Lubaszewski Lima
 
-File with automated unit tests for the class inside the classes.py file.
+File with automated unit tests for the classes inside the classes.py file.
 '''
 
 import unittest
 
-from src.common.classes import Child
+from src.common.classes import *
 
 class testChild(unittest.TestCase):
     def setUp(self):
