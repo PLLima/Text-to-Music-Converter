@@ -18,7 +18,7 @@ class startScreen(tk.Frame, Child):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
 
-    def writeTitle(self, title):
+    def __writeTitle(self, title):
         screenSize = self.getParent().getAppScreenSize()
 
         mainTitle = mainHeader(self.getParent().getParent())
@@ -28,7 +28,7 @@ class startScreen(tk.Frame, Child):
         mainTitle.render()
 
     def render(self):
-        self.writeTitle('Turn Text into Music')
+        self.__writeTitle('Turn Text into Music')
 
         # frm = ttk.Frame(self.parent, padding = 10)
         # frm.grid()
