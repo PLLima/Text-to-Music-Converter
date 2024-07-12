@@ -10,12 +10,11 @@ from common.classes import Child
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.widgets.mainHeader import mainHeader
-import tkinter as tk
 from tkinter import ttk
 
-class startScreen(tk.Frame, Child):
+class startScreen(ttk.Frame, Child):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
+        ttk.Frame.__init__(self, parent)
         self.setParent(parent)
 
     def __writeTitle(self, title):

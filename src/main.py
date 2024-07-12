@@ -9,30 +9,31 @@ This is the starting point of the application, to where every major module is im
 from common.dictionaries import SCREEN_MEASURE
 from common.classes import Child
 import tkinter as tk
+from tkinter import ttk
 from screens.start import startScreen
 
-class mainApplication(tk.Frame, Child):
+class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
 
     def setAppName(self, name):
         self.appName = name
-        self.parent.wm_title(name)
+        self.getParent().wm_title(name)
 
     def getAppName(self):
         return self.appName
 
     def setMinAppScreenSize(self, minSize):
         self.appMinScreenSize = minSize
-        self.parent.minsize(minSize[SCREEN_MEASURE["Width"]], minSize[SCREEN_MEASURE["Height"]])
+        self.getParent().minsize(minSize[SCREEN_MEASURE["Width"]], minSize[SCREEN_MEASURE["Height"]])
 
     def getMinAppScreenSize(self):
         return self.appMinScreenSize
 
     def setAppScreenSize(self, size):
         self.appScreenSize = size
-        self.parent.geometry("x".join(size))
+        self.getParent().geometry("x".join(size))
 
     def getAppScreenSize(self):
         return self.appScreenSize

@@ -8,12 +8,13 @@ This file contains the classes related to the main header widget of the applicat
 
 from common.classes import Child
 from common.dictionaries import FONTS
+from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkFont
 
-class mainHeader(tk.Frame, Child):
+class mainHeader(ttk.Frame, Child):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
+        ttk.Frame.__init__(self, parent)
         self.setParent(parent)
         self.__setInstance()
 
