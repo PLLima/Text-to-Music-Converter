@@ -9,6 +9,7 @@ This file contains the classes related to the main header widget of the applicat
 from common.classes import Child
 from common.dictionaries import FONTS
 import tkinter as tk
+import tkinter.font as tkFont
 
 class mainHeader(tk.Frame, Child):
     def __init__(self, parent):
@@ -25,8 +26,15 @@ class mainHeader(tk.Frame, Child):
     def setContent(self, content):
         self.__getInstance().configure(text=content)
 
+    def getContent(self):
+        return self.__getInstance().cget("text")
+
     def setFontSize(self, fontSize):
-        self.__getInstance().configure(font=(FONTS["MainHeader"], fontSize))
+        self.font = tkFont.Font(family=FONTS["MainHeader"], size=fontSize, weight='bold')
+        self.__getInstance().configure(font=self.font)
+
+    def getFontSize(self):
+        return self.font.actual()["size"]
 
     def render(self):
         self.__getInstance().pack(side='top', fill='both', expand=True)
