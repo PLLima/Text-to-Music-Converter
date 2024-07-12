@@ -14,7 +14,7 @@ from screens.start import startScreen
 
 class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
+        ttk.Frame.__init__(self, parent)
         self.setParent(parent)
 
     def setAppName(self, name):
