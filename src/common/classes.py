@@ -12,3 +12,13 @@ class Child():
 
     def getParent(self):
         return self.parent
+    
+class WindowSizeNotifier():
+    def __init__(self, window, eventHandler):
+        self.window = window
+        self.eventHandler = eventHandler
+        self.window.bind('<Configure>', self.__handleEvent)
+
+    def __handleEvent(self, event):
+        if event.widget == self.window:
+            self.eventHandler()
