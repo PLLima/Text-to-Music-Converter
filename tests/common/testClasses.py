@@ -15,13 +15,9 @@ class testChild(unittest.TestCase):
         self.parent = 'Test'
         self.child = Child()
 
-    def testSetParent(self):
+    def testSetGetParent(self):
         self.child.setParent(self.parent)
-        self.assertEqual(self.child.parent, self.parent, "Parent incorrectly setted.")
-
-    def testGetParent(self):
-        self.child.setParent(self.parent)
-        self.assertEqual(self.child.getParent(), self.parent, "Gotten incorrect parent.")
+        self.assertEqual(self.child.getParent(), self.parent, "Parent incorrectly setted.")
 
 if __name__ == '__main__':
     unittest.main()
