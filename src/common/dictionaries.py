@@ -13,10 +13,12 @@ SCREEN_MEASURE = {
 
 TEXT_SCALES = {
     "MainHeader": 0.0625,
-    "MainSubtitle": 0.026041667
+    "MainSubtitle": 0.026041667,
+    "TextButton": 0.026041667
 }
 
 FONTS = {
     "MainHeader": 'Courier New',
-    "MainSubtitle": 'Courier New'
+    "MainSubtitle": 'Courier New',
+    "TextButton": 'Courier New'
 }
