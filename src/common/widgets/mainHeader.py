@@ -38,4 +38,4 @@ class mainHeader(ttk.Frame, Child):
         return self.font.actual()["size"]
 
     def render(self):
-        self.__getInstance().pack(side='top', fill='both', expand=True)
+        self.__getInstance().pack(fill='both', pady = 15)
