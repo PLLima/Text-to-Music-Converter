@@ -31,11 +31,11 @@ class mainHeader(ttk.Frame, Child):
         return self.__getInstance().cget("text")
 
     def setFontSize(self, fontSize):
-        self.font = tkFont.Font(family=FONTS["MainHeader"], size=fontSize, weight='bold')
-        self.__getInstance().configure(font=self.font)
+        self.__font = tkFont.Font(family=FONTS["MainHeader"], size=fontSize, weight='bold')
+        self.__getInstance().configure(font=self.__font)
 
     def getFontSize(self):
-        return self.font.actual()["size"]
+        return self.__font.actual()["size"]
 
     def render(self):
         self.__getInstance().pack(fill='both', pady = 15)
