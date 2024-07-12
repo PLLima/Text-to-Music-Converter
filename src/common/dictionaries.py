@@ -16,5 +16,5 @@ TEXT_SCALES = {
 }
 
 FONTS = {
-    "MainHeader": 'Inter'
+    "MainHeader": 'Courier New'
 }
