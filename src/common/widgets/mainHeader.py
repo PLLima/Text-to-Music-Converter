@@ -19,10 +19,10 @@ class mainHeader(ttk.Frame, Child):
         self.__setInstance()
 
     def __setInstance(self):
-        self.instance = tk.Label(self.getParent(), justify='center')
+        self.__instance = tk.Label(self.getParent(), justify='center')
 
     def __getInstance(self):
-        return self.instance
+        return self.__instance
 
     def setContent(self, content):
         self.__getInstance().configure(text=content)
