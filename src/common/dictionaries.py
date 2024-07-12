@@ -12,9 +12,11 @@ SCREEN_MEASURE = {
     }
 
 TEXT_SCALES = {
-    "MainHeader": 0.0625
+    "MainHeader": 0.0625,
+    "MainSubtitle": 0.026041667
 }
 
 FONTS = {
-    "MainHeader": 'Courier New'
+    "MainHeader": 'Courier New',
+    "MainSubtitle": 'Courier New'
 }
