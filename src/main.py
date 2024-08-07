@@ -11,7 +11,6 @@ from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
 from screens.start import startScreen
-from screens.learnMore import learnScreen
 
 class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
@@ -39,16 +38,9 @@ class mainApplication(ttk.Frame, Child):
     def getAppScreenSize(self):
         return self.__appScreenSize
 
-    def setAppBackgroundColor(self, backgroundColor):
-        self.__backgroundColor = backgroundColor
-        self.getParent().configure(bg=backgroundColor)
-
-    def getAppBackgroundColor(self):
-        return self.__backgroundColor
-
     def begin(self):
         # Starting point of the application
-        learnScreen(self).render()
+        startScreen(self).render()
 
 def main():
     minScreenSize = ['720', '512']
@@ -60,7 +52,6 @@ def main():
     app.setAppName('Text to Music Converter')
     app.setAppScreenSize(initialScreenSize)
     app.setMinAppScreenSize(minScreenSize)
-    app.setAppBackgroundColor('white')
     
     app.begin()
     root.mainloop()
