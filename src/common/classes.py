@@ -12,7 +12,12 @@ class Child():
 
     def getParent(self):
         return self.__parent
-    
+
+class Destroyable():
+    def destroy(self):
+        for widget in self.winfo_children():
+            widget.destroy()
+
 class WindowSizeNotifier():
     def __init__(self, window, eventHandler):
         self.__window = window
