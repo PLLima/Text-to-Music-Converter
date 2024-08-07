@@ -72,7 +72,7 @@ class textButton(_button):
         self.getInstance().configure(bg=BUTTON_COLORS["Gray"])
         self.getInstance().configure(activebackground=BUTTON_COLORS["Gray"])
         self.getInstance().configure(highlightbackground=BUTTON_COLORS["Gray"])
-        self.getInstance().configure(cursor='arrow')
+        self.getInstance().configure(cursor='X_cursor')
 
     def setBackgroundColor(self, backgroundColor):
         if backgroundColor == BUTTON_COLORS["Red"]:
