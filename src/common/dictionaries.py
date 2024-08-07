@@ -30,8 +30,8 @@ FONTS = {
 
 BUTTON_COLORS = {
     "Black": '#000000',
-    "Gray": '#',
-    "Red": '#',
+    "Gray": '#636363',
+    "Red": '#f66a6a',
 
     "Foreground": '#ffffff',
     "BlackActive": '#2F2F2F',

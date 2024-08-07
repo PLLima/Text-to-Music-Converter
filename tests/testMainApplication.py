@@ -53,6 +53,12 @@ class testMainApplication(unittest.TestCase):
 
         self.assertEqual(self.app.getAppScreenSize(), screenSize, "App screen size incorrect.")
 
+    def testGetAppBackgroundColor(self):
+        backgroundColor = 'white'
+        self.app.setAppBackgroundColor(backgroundColor)
+
+        self.assertEqual(self.app.getAppBackgroundColor(), backgroundColor, "App screen color incorrect.")
+
     def testBegin(self):
         self.app.begin()
         self.app.getParent().update()

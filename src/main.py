@@ -19,25 +19,32 @@ class mainApplication(ttk.Frame, Child):
         self.setParent(parent)
 
     def setAppName(self, name):
-        self.appName = name
+        self.__appName = name
         self.getParent().wm_title(name)
 
     def getAppName(self):
-        return self.appName
+        return self.__appName
 
     def setMinAppScreenSize(self, minSize):
-        self.appMinScreenSize = minSize
+        self.__appMinScreenSize = minSize
         self.getParent().minsize(minSize[SCREEN_MEASURE["Width"]], minSize[SCREEN_MEASURE["Height"]])
 
     def getMinAppScreenSize(self):
-        return self.appMinScreenSize
+        return self.__appMinScreenSize
 
     def setAppScreenSize(self, size):
-        self.appScreenSize = size
+        self.__appScreenSize = size
         self.getParent().geometry("x".join(size))
 
     def getAppScreenSize(self):
-        return self.appScreenSize
+        return self.__appScreenSize
+
+    def setAppBackgroundColor(self, backgroundColor):
+        self.__backgroundColor = backgroundColor
+        self.getParent().configure(bg=backgroundColor)
+
+    def getAppBackgroundColor(self):
+        return self.__backgroundColor
 
     def begin(self):
         # Starting point of the application
@@ -53,6 +60,7 @@ def main():
     app.setAppName('Text to Music Converter')
     app.setAppScreenSize(initialScreenSize)
     app.setMinAppScreenSize(minScreenSize)
+    app.setAppBackgroundColor('white')
     
     app.begin()
     root.mainloop()
