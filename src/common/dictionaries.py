@@ -37,7 +37,3 @@ BUTTON_COLORS = {
     "BlackActive": '#2F2F2F',
     "RedActive": '#FB8585',
 }
-
-COLORS = {
-    "TextButtonForeground": '#ffffff',
-}
