@@ -9,8 +9,10 @@ This is the first screen that opens at the start of the application.
 from common.classes import Child
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
+from common.dictionaries import BUTTON_COLORS
 from common.widgets.mainHeader import mainHeader
 from common.widgets.mainSubtitle import mainSubtitle
+from common.widgets.button import textButton
 from tkinter import ttk
 
 class startScreen(ttk.Frame, Child):
@@ -31,6 +33,7 @@ class startScreen(ttk.Frame, Child):
         buttonsFrame = ttk.Frame(mainFrame)
         # Center widgets inside main frame
         mainFrame.grid_rowconfigure(0, weight=1)
+        mainFrame.grid_rowconfigure(1, weight=1)
         mainFrame.grid_columnconfigure(0, weight=1)
 
         screenSize = self.getParent().getAppScreenSize()
@@ -44,12 +47,22 @@ class startScreen(ttk.Frame, Child):
         subtitle.setContent('Create beautiful melodies from your words')
         subtitle.render()
 
-        textsFrame.grid(row=0, column=0, sticky="")
-        buttonsFrame.grid(row=0, column=0, sticky="")
-        mainFrame.pack(expand=True, fill='both')
-        # self.__writeTitle('Turn Text into Music')
+        buttonsFrame.grid_rowconfigure(0, weight=1)
+        buttonsFrame.grid_columnconfigure(0, weight=1)
+        buttonsFrame.grid_columnconfigure(1, weight=1)
 
-        # frm = ttk.Frame(self.parent, padding = 10)
-        # frm.grid()
-        # ttk.Label(frm, text = "Hello World").grid(column = 0, row = 0)
-        # ttk.Button(frm, text = "Quit", command = self.parent.destroy).grid(column = 1, row = 0)
+        getStartedButton = textButton(buttonsFrame, None)
+        getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
+        getStartedButton.setBackgroundColor(BUTTON_COLORS["Red"])
+        getStartedButton.setPadding(padx=30, pady=7)
+        getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=15)
+
+        learnMoreButton = textButton(buttonsFrame, None)
+        learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
+        learnMoreButton.setBackgroundColor(BUTTON_COLORS["Black"])
+        learnMoreButton.setPadding(padx=35, pady=7)
+        learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=15)
+
+        textsFrame.grid(row=0, column=0, sticky="S")
+        buttonsFrame.grid(row=1, column=0, sticky="N")
+        mainFrame.pack(expand=True, fill='both')
