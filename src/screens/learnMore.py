@@ -9,7 +9,7 @@ from tkinter import Label
 
 class Table():
     def __init__(self, root, screenSize):
-        # Dados da tabela
+        # Table data
         lst = [('Text', 'Musical Action or Instrument', 'Text', 'Musical Action or Instrument'),
                ('A or a', 'Note A', '-', 'Reset volume to initial set value'),
                ('B or b', 'Note B', 'O, o, U, u, I or i', 'If last character was a note then repeat it, else play MIDI instrument "Telephone Ring"(125)'),
@@ -21,20 +21,19 @@ class Table():
                ('Space', 'Silence or pause', ';', 'Change BPM to random value'),
                ('+', 'Double the volume', 'Any other Character', 'Keep previous state')]
         
-
-        # Número total de linhas e colunas
         total_rows = len(lst)
         total_columns = len(lst[0])
 
-        # Espessura da borda e largura mínima da célula
-        border_thickness = 0.5  # Ajuste a espessura da borda aqui
-        min_cell_width = 200  # Largura mínima da célula em pixels
-        iPadding = 20 # Padding X e Y interno das labels
+        border_thickness = 0.5
+        min_cell_width = 200
+        # Internal Label paddings
+        iPadding = 20
 
-        # Código para criar a tabela usando Labels com bordas
+        # Create table using bordered Labels
         for i in range(total_rows):
             for j in range(total_columns):
-                wraplength = min_cell_width  # Defina o valor apropriado para a largura desejada da célula
+                # Define an apropriate value for cell width
+                wraplength = min_cell_width
                 if i == 0:
                     self.e = Label(root, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'bold'), 
                                    text=lst[i][j], borderwidth=border_thickness, relief='solid', anchor='center',
@@ -45,10 +44,10 @@ class Table():
                                    wraplength=wraplength, justify='center', background='#ffffff')
                 self.e.grid(row=i, column=j, padx=0, pady=0, sticky='nsew', ipadx=iPadding, ipady=iPadding)
 
-        # Ajuste das colunas para ter a mesma largura mínima
+        # Adjust columns to have the same minimum width
         for j in range(total_columns):
             root.grid_columnconfigure(j, weight=1, minsize=min_cell_width)
-        # Ajuste das linhas para ter a mesma altura
+        # Adjust lines to have the same height
         for i in range(total_rows):
             root.grid_rowconfigure(i, weight=1)
 
@@ -78,6 +77,7 @@ class learnScreen(ttk.Frame, Child):
         title.setContent('Character Mapping')
         title.render()
 
-        table = Table(tableFrame, screenSize)  # Adicionando a tabela no tableFrame
+        # Add table widget to tableFrame
+        table = Table(tableFrame, screenSize)
 
         mainFrame.pack(expand=True, fill='both')
