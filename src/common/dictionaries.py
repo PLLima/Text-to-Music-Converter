@@ -15,7 +15,7 @@ TEXT_SCALES = {
     "MainHeader": 0.0725,
     "MainSubtitle": 0.029041667,
     "TextButton": 0.030041667,
-    "ScreenTitle": 0.0425,
+    "ScreenTitle": 0.054133333,
     "TableContent": 0.015,
 }
 
