@@ -13,11 +13,13 @@ from common.dictionaries import BUTTON_COLORS
 from common.widgets.title import mainHeader, mainSubtitle
 from common.widgets.button import textButton
 from tkinter import ttk
+from screens.learnMore import learnScreen
 
 class startScreen(ttk.Frame, Child):
-    def __init__(self, parent):
+    def __init__(self, parent, screenSize):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
+        self.screenSize = screenSize
 
     # def __writeTitle(self, title):
     #     screenSize = self.getParent().getAppScreenSize()
@@ -27,7 +29,7 @@ class startScreen(ttk.Frame, Child):
     #     mainTitle.render()
 
     def render(self):
-        mainFrame = ttk.Frame(self.getParent().getParent())
+        mainFrame = ttk.Frame(self.getParent())
         textsFrame = ttk.Frame(mainFrame)
         buttonsFrame = ttk.Frame(mainFrame)
         # Center widgets inside main frame
@@ -35,14 +37,14 @@ class startScreen(ttk.Frame, Child):
         mainFrame.grid_rowconfigure(1, weight=1)
         mainFrame.grid_columnconfigure(0, weight=1)
 
-        screenSize = self.getParent().getAppScreenSize()
+        #screenSize = self.getParent().getAppScreenSize()
         title = mainHeader(textsFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], screenSize))
+        title.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], self.screenSize))
         title.setContent('Turn Text into Music')
         title.getInstance().pack(pady=25)
 
         subtitle = mainSubtitle(textsFrame)
-        subtitle.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], screenSize))
+        subtitle.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], self.screenSize))
         subtitle.setContent('Create beautiful melodies from your words')
         subtitle.getInstance().pack(pady=[0, 90])
 
@@ -51,13 +53,15 @@ class startScreen(ttk.Frame, Child):
         buttonsFrame.grid_columnconfigure(1, weight=1)
 
         getStartedButton = textButton(buttonsFrame, None)
-        getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
+        getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], self.screenSize))
         getStartedButton.setBackgroundColor(BUTTON_COLORS["Red"])
         getStartedButton.setPadding(padx=45, pady=10)
         getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
-        learnMoreButton = textButton(buttonsFrame, None)
-        learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
+        #learnMoreButton = textButton(buttonsFrame, learnScreen(self.getParent(), self.screenSize).render())
+        learnMoreButton = textButton(buttonsFrame, lambda: learnScreen(self.getParent(), self.screenSize).render())
+
+        learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], self.screenSize))
         learnMoreButton.setBackgroundColor(BUTTON_COLORS["Black"])
         learnMoreButton.setPadding(padx=50, pady=10)
         learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
@@ -65,3 +69,4 @@ class startScreen(ttk.Frame, Child):
         textsFrame.grid(row=0, column=0, sticky="S")
         buttonsFrame.grid(row=1, column=0, sticky="N")
         mainFrame.pack(expand=True, fill='both')
+        

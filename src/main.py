@@ -48,7 +48,7 @@ class mainApplication(ttk.Frame, Child, Closeable):
 
     def begin(self):
         # Starting point of the application
-        startScreen(self).render()
+        startScreen(self.getParent(), self.getAppScreenSize()).render()
 
 def main():
     minScreenSize = ['1280', '720']

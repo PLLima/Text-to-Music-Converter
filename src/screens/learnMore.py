@@ -51,19 +51,20 @@ class Table():
             parent.grid_rowconfigure(i, weight=1)
 
 class learnScreen(ttk.Frame, Child):
-    def __init__(self, parent):
+    def __init__(self, parent, screenSize):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
+        self.screenSize = screenSize
 
     def render(self):
-        mainFrame = ttk.Frame(self.getParent().getParent())
+        mainFrame = ttk.Frame(self.getParent())
         
         # Center widgets inside main frame
         mainFrame.grid_rowconfigure(0, weight=1)
         mainFrame.grid_rowconfigure(1, weight=1)
         mainFrame.grid_columnconfigure(0, weight=1)
 
-        screenSize = self.getParent().getAppScreenSize()
+        
         
         titleFrame = ttk.Frame(mainFrame)
         titleFrame.grid(row=0, column=0, sticky="S", pady=20)
@@ -72,11 +73,11 @@ class learnScreen(ttk.Frame, Child):
         tableFrame.grid(row=1, column=0, sticky="N")
         
         title = screenTitle(titleFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], screenSize))
+        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.screenSize))
         title.setContent('Character Mapping')
         title.getInstance().pack(fill='both')
 
         # Add table widget to tableFrame
-        table = Table(tableFrame, screenSize)
+        table = Table(tableFrame, self.screenSize)
 
         mainFrame.pack(expand=True, fill='both')
