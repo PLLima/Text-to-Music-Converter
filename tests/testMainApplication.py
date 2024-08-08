@@ -39,6 +39,21 @@ class testMainApplication(unittest.TestCase):
         self.app.setMinAppScreenSize(minScreenSize)
         self.assertEqual(self.app.getMinAppScreenSize(), minScreenSize, "App minimum screen size incorrect.")
 
+    def testSetMaxAppScreenSize(self):
+        maxScreenSize = ['400', '200']
+        intendedScreenSize = ['800', '300']
+        self.app.setMaxAppScreenSize(maxScreenSize)
+        self.app.setAppScreenSize(intendedScreenSize)
+        self.app.getParent().update()
+
+        self.assertEqual(int(maxScreenSize[SCREEN_MEASURE["Width"]]), self.app.getParent().winfo_width(), "App maximum screen width disrespected.")
+        self.assertEqual(int(maxScreenSize[SCREEN_MEASURE["Height"]]), self.app.getParent().winfo_height(), "App maximum screen height disrespected.")
+
+    def testGetMaxAppScreenSize(self):
+        maxScreenSize = ['120', '120']
+        self.app.setMaxAppScreenSize(maxScreenSize)
+        self.assertEqual(self.app.getMaxAppScreenSize(), maxScreenSize, "App maximum screen size incorrect.")
+
     def testSetAppScreenSize(self):
         screenSize = ['120', '120']
         self.app.setAppScreenSize(screenSize)
