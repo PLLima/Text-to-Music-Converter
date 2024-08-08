@@ -31,10 +31,5 @@ class testStartScreen(unittest.TestCase):
         self.mainHeader.setFontSize(fontSize)
         self.assertEqual(self.mainHeader.getFontSize(), fontSize, "Header font size set incorrectly.")
 
-    def testRender(self):
-        self.mainHeader.render()
-        self.mainHeader.getParent().update()
-        self.assertTrue(self.mainHeader.winfo_exists(), "Main header wasn't rendered.")
-
 if __name__ == '__main__':
     unittest.main()

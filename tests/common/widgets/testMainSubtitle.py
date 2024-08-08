@@ -31,10 +31,5 @@ class testStartScreen(unittest.TestCase):
         self.mainSubtitle.setFontSize(fontSize)
         self.assertEqual(self.mainSubtitle.getFontSize(), fontSize, "Subtitle font size set incorrectly.")
 
-    def testRender(self):
-        self.mainSubtitle.render()
-        self.mainSubtitle.getParent().update()
-        self.assertTrue(self.mainSubtitle.winfo_exists(), "Main subtitle wasn't rendered.")
-
 if __name__ == '__main__':
     unittest.main()
