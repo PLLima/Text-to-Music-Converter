@@ -39,12 +39,12 @@ class startScreen(ttk.Frame, Child):
         title = mainHeader(textsFrame)
         title.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], screenSize))
         title.setContent('Turn Text into Music')
-        title.getInstance().pack(fill='both', pady=25)
+        title.getInstance().pack(pady=25)
 
         subtitle = mainSubtitle(textsFrame)
         subtitle.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], screenSize))
         subtitle.setContent('Create beautiful melodies from your words')
-        subtitle.getInstance().pack(fill='both', pady=[0, 90])
+        subtitle.getInstance().pack(pady=[0, 90])
 
         buttonsFrame.grid_rowconfigure(0, weight=1)
         buttonsFrame.grid_columnconfigure(0, weight=1)

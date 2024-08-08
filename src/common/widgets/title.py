@@ -19,13 +19,17 @@ class title(ttk.Frame, Child):
         self.__setInstance()
 
     def __setInstance(self):
-        self.__instance = tk.Label(self.getParent(), justify='center', cursor='xterm')
+        self.__instance = tk.Text(self.getParent(), height=1, borderwidth=0, bg='#d9d9d9', highlightthickness=0)
+        self.getInstance().tag_configure("center", justify='center')
 
     def getInstance(self):
         return self.__instance
 
     def setContent(self, content):
-        self.getInstance().configure(text=content)
+        self.getInstance().configure(width=len(content))
+        self.getInstance().insert(1.0, content)
+        self.getInstance().tag_add("center", "1.0", "end")
+        self.getInstance().configure(state='disabled')
 
     def getContent(self):
         return self.getInstance().cget("text")
