@@ -3,8 +3,8 @@ from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.dictionaries import FONTS
 from common.widgets.title import screenTitle
+import tkinter as tk
 from tkinter import ttk
-from tkinter import Label
 
 class Table():
     def __init__(self, parent, screenSize):
@@ -34,11 +34,11 @@ class Table():
                 # Define an apropriate value for cell width
                 wraplength = min_cell_width
                 if i == 0:
-                    self.e = Label(parent, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'bold'), 
+                    self.e = tk.Label(parent, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'bold'), 
                                    text=lst[i][j], borderwidth=border_thickness, relief='solid', anchor='center',
                                    wraplength=wraplength, justify='center', background='#dcdcdc')
                 else:
-                    self.e = Label(parent, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'normal'), 
+                    self.e = tk.Label(parent, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'normal'), 
                                    text=lst[i][j], borderwidth=border_thickness, relief='solid', anchor='center',
                                    wraplength=wraplength, justify='center', background='#ffffff')
                 self.e.grid(row=i, column=j, padx=0, pady=0, sticky='nsew', ipadx=iPadding, ipady=iPadding)
