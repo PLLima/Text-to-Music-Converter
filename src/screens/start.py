@@ -10,8 +10,7 @@ from common.classes import Child
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.dictionaries import BUTTON_COLORS
-from common.widgets.mainHeader import mainHeader
-from common.widgets.mainSubtitle import mainSubtitle
+from common.widgets.title import mainHeader, mainSubtitle
 from common.widgets.button import textButton
 from tkinter import ttk
 
