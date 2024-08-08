@@ -12,11 +12,11 @@ SCREEN_MEASURE = {
     }
 
 TEXT_SCALES = {
-    "MainHeader": 0.0625,
-    "MainSubtitle": 0.026041667,
-    "TextButton": 0.026041667,
-    "ScreenTitle": 0.0525,
-    "TableContent": 0.025,
+    "MainHeader": 0.0725,
+    "MainSubtitle": 0.029041667,
+    "ScreenTitle": 0.054133333,
+    "TextButton": 0.030041667,
+    "TableContent": 0.015,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
@@ -24,6 +24,7 @@ TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
 FONTS = {
     "MainHeader": 'Courier New',
     "MainSubtitle": 'Courier New',
+    "ScreenTitle": 'Courier New',
     "TextButton": 'Courier New',
     "Table": 'Courier New',
 }
@@ -36,8 +37,4 @@ BUTTON_COLORS = {
     "Foreground": '#ffffff',
     "BlackActive": '#2F2F2F',
     "RedActive": '#FB8585',
-}
-
-COLORS = {
-    "TextButtonForeground": '#ffffff',
 }

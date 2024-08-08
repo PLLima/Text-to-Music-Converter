@@ -36,6 +36,10 @@ class textButton(_button):
     def __init__(self, parent, clickHandler):
         super().__init__(parent, clickHandler)
         self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(disabledforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(highlightcolor=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(cursor='hand2')
 
     def setPadding(self, padx, pady):
         self.getInstance().configure(padx=padx, pady=pady)
@@ -57,26 +61,33 @@ class textButton(_button):
     def __setBackgroundColorRed(self):
         self.getInstance().configure(bg=BUTTON_COLORS["Red"])
         self.getInstance().configure(activebackground=BUTTON_COLORS["RedActive"])
-        self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(highlightbackground=BUTTON_COLORS["RedActive"])
 
     def __setBackgroundColorBlack(self):
         self.getInstance().configure(bg=BUTTON_COLORS["Black"])
         self.getInstance().configure(activebackground=BUTTON_COLORS["BlackActive"])
-        self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(highlightbackground=BUTTON_COLORS["BlackActive"])
+
+    def __setBackgroundColorGray(self):
+        self.getInstance().configure(bg=BUTTON_COLORS["Gray"])
+        self.getInstance().configure(activebackground=BUTTON_COLORS["Gray"])
+        self.getInstance().configure(highlightbackground=BUTTON_COLORS["Gray"])
+        self.getInstance().configure(cursor='X_cursor')
 
     def setBackgroundColor(self, backgroundColor):
         if backgroundColor == BUTTON_COLORS["Red"]:
             self.__setBackgroundColorRed()
         elif backgroundColor == BUTTON_COLORS["Black"]:
             self.__setBackgroundColorBlack()
+        elif backgroundColor == BUTTON_COLORS["Gray"]:
+            self.__setBackgroundColorGray()
 
     def getBackground(self):
         return self.getInstance().cget("bg")
 
     def enable(self):
-        self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])
         self.getInstance().configure(state=tk.NORMAL)
 
     def disable(self):
+        self.setBackgroundColor(BUTTON_COLORS["Gray"])
         self.getInstance().configure(state=tk.DISABLED)
-        self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])

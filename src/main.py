@@ -7,13 +7,13 @@ This is the starting point of the application, to where every major module is im
 '''
 
 from common.dictionaries import SCREEN_MEASURE
-from common.classes import Child
+from common.classes import Child, Closeable
 import tkinter as tk
 from tkinter import ttk
 from screens.start import startScreen
 from screens.learnMore import learnScreen
 
-class mainApplication(ttk.Frame, Child):
+class mainApplication(ttk.Frame, Child, Closeable):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
@@ -32,6 +32,13 @@ class mainApplication(ttk.Frame, Child):
     def getMinAppScreenSize(self):
         return self.__appMinScreenSize
 
+    def setMaxAppScreenSize(self, maxSize):
+        self.__appMaxScreenSize = maxSize
+        self.getParent().maxsize(maxSize[SCREEN_MEASURE["Width"]], maxSize[SCREEN_MEASURE["Height"]])
+
+    def getMaxAppScreenSize(self):
+        return self.__appMaxScreenSize
+
     def setAppScreenSize(self, size):
         self.__appScreenSize = size
         self.getParent().geometry("x".join(size))
@@ -39,28 +46,21 @@ class mainApplication(ttk.Frame, Child):
     def getAppScreenSize(self):
         return self.__appScreenSize
 
-    def setAppBackgroundColor(self, backgroundColor):
-        self.__backgroundColor = backgroundColor
-        self.getParent().configure(bg=backgroundColor)
-
-    def getAppBackgroundColor(self):
-        return self.__backgroundColor
-
     def begin(self):
         # Starting point of the application
         startScreen(self).render()
 
 def main():
-    minScreenSize = ['720', '512']
-    initialScreenSize = ['720', '512']
+    minScreenSize = ['1280', '720']
+    maxScreenSize = ['1280', '720']
     root = tk.Tk()
 
     # Set main screen parameters
     app = mainApplication(root)
     app.setAppName('Text to Music Converter')
-    app.setAppScreenSize(initialScreenSize)
     app.setMinAppScreenSize(minScreenSize)
-    app.setAppBackgroundColor('#ffffff')
+    app.setMaxAppScreenSize(maxScreenSize)
+    app.setAppScreenSize(maxScreenSize)
     
     app.begin()
     root.mainloop()
