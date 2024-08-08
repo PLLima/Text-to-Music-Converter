@@ -31,6 +31,13 @@ class mainApplication(ttk.Frame, Child):
     def getMinAppScreenSize(self):
         return self.__appMinScreenSize
 
+    def setMaxAppScreenSize(self, maxSize):
+        self.__appMaxScreenSize = maxSize
+        self.getParent().maxsize(maxSize[SCREEN_MEASURE["Width"]], maxSize[SCREEN_MEASURE["Height"]])
+
+    def getMaxAppScreenSize(self):
+        return self.__appMaxScreenSize
+
     def setAppScreenSize(self, size):
         self.__appScreenSize = size
         self.getParent().geometry("x".join(size))
@@ -43,15 +50,16 @@ class mainApplication(ttk.Frame, Child):
         startScreen(self).render()
 
 def main():
-    minScreenSize = ['720', '512']
-    initialScreenSize = ['720', '512']
+    minScreenSize = ['1280', '720']
+    maxScreenSize = ['1280', '720']
     root = tk.Tk()
 
     # Set main screen parameters
     app = mainApplication(root)
     app.setAppName('Text to Music Converter')
-    app.setAppScreenSize(initialScreenSize)
     app.setMinAppScreenSize(minScreenSize)
+    app.setMaxAppScreenSize(maxScreenSize)
+    app.setAppScreenSize(maxScreenSize)
     
     app.begin()
     root.mainloop()
