@@ -7,13 +7,13 @@ This is the starting point of the application, to where every major module is im
 '''
 
 from common.dictionaries import SCREEN_MEASURE
-from common.classes import Child
+from common.classes import Child, Closeable
 import tkinter as tk
 from tkinter import ttk
 from screens.start import startScreen
 from screens.learnMore import learnScreen
 
-class mainApplication(ttk.Frame, Child):
+class mainApplication(ttk.Frame, Child, Closeable):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
