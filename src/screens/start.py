@@ -54,14 +54,14 @@ class startScreen(ttk.Frame, Child):
         getStartedButton = textButton(buttonsFrame, None)
         getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
         getStartedButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        getStartedButton.setPadding(padx=30, pady=7)
-        getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=15)
+        getStartedButton.setPadding(padx=45, pady=10)
+        getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
         learnMoreButton = textButton(buttonsFrame, None)
         learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], screenSize))
         learnMoreButton.setBackgroundColor(BUTTON_COLORS["Black"])
-        learnMoreButton.setPadding(padx=35, pady=7)
-        learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=15)
+        learnMoreButton.setPadding(padx=50, pady=10)
+        learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
 
         textsFrame.grid(row=0, column=0, sticky="S")
         buttonsFrame.grid(row=1, column=0, sticky="N")

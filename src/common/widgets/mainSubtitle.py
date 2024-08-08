@@ -38,4 +38,4 @@ class mainSubtitle(ttk.Frame, Child):
         return self.__font.actual()["size"]
 
     def render(self):
-        self.__getInstance().pack(fill='both', pady=[0, 60])
+        self.__getInstance().pack(fill='both', pady=[0, 90])
