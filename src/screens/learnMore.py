@@ -25,9 +25,9 @@ class Table():
         total_columns = len(lst[0])
 
         border_thickness = 0.5
-        min_cell_width = 200
+        min_cell_width = 150
         # Internal Label paddings
-        iPadding = 20
+        iPadding = 7
 
         # Create table using bordered Labels
         for i in range(total_rows):

@@ -11,6 +11,7 @@ from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
 from screens.start import startScreen
+from screens.learnMore import learnScreen
 
 class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
