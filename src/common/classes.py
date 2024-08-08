@@ -13,10 +13,11 @@ class Child():
     def getParent(self):
         return self.__parent
 
-class Destroyable():
-    def destroy(self):
+class Closeable():
+    def close(self):
         for widget in self.winfo_children():
             widget.destroy()
+        self.destroy()
 
 class WindowSizeNotifier():
     def __init__(self, window, eventHandler):
