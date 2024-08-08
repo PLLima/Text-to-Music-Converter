@@ -21,21 +21,18 @@ class mainSubtitle(ttk.Frame, Child):
     def __setInstance(self):
         self.__instance = tk.Label(self.getParent(), justify='center', cursor='xterm')
 
-    def __getInstance(self):
+    def getInstance(self):
         return self.__instance
 
     def setContent(self, content):
-        self.__getInstance().configure(text=content)
+        self.getInstance().configure(text=content)
 
     def getContent(self):
-        return self.__getInstance().cget("text")
+        return self.getInstance().cget("text")
 
     def setFontSize(self, fontSize):
         self.__font = tkFont.Font(family=FONTS["MainSubtitle"], size=fontSize)
-        self.__getInstance().configure(font=self.__font)
+        self.getInstance().configure(font=self.__font)
 
     def getFontSize(self):
         return self.__font.actual()["size"]
-
-    def render(self):
-        self.__getInstance().pack(fill='both', pady=[0, 90])
