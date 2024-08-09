@@ -4,6 +4,7 @@ from common.dictionaries import BUTTON_COLORS
 from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkFont
+from PIL import Image, ImageTk
 
 class button(ttk.Frame, Child):
     def __init__(self, parent, clickHandler):
@@ -24,15 +25,6 @@ class button(ttk.Frame, Child):
     def getEventHandler(self):
         return self.__eventHandler
 
-class textButton(button):
-    def __init__(self, parent, clickHandler):
-        super().__init__(parent, clickHandler)
-        self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])
-        self.getInstance().configure(disabledforeground=BUTTON_COLORS["Foreground"])
-        self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
-        self.getInstance().configure(highlightcolor=BUTTON_COLORS["Foreground"])
-        self.getInstance().configure(cursor='hand2')
-
     def setPadding(self, padx, pady):
         self.getInstance().configure(padx=padx, pady=pady)
 
@@ -41,6 +33,15 @@ class textButton(button):
 
     def getPaddingY(self):
         return self.getInstance().cget("pady")
+
+class textButton(button):
+    def __init__(self, parent, clickHandler):
+        super().__init__(parent, clickHandler)
+        self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(disabledforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(highlightcolor=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(cursor='hand2')
 
     def __setFont(self, fontSize):
         self.__font = tkFont.Font(family=FONTS["TextButton"], size=fontSize)
@@ -86,3 +87,24 @@ class textButton(button):
     def disable(self):
         self.setBackgroundColor(BUTTON_COLORS["Gray"])
         self.getInstance().configure(state=tk.DISABLED)
+
+class iconButton(button):
+    def __init__(self, parent, clickHandler):
+        super().__init__(parent, clickHandler)
+        self.getInstance().configure(highlightcolor=BUTTON_COLORS["Foreground"])
+        self.getInstance().configure(cursor='hand2')
+
+    def setIcon(self, image):
+        self.__icon = image
+        self.getInstance().configure(image=image)
+
+    def getIcon(self):
+        return self.__icon
+    
+class backButton(iconButton):
+    def __init__(self, parent, clickHandler):
+        super().__init__(parent, clickHandler)
+        
+        backarrow = Image.open('./src/images/backarrow.png')
+        icon = ImageTk.PhotoImage(backarrow.resize((56,56)))
+        self.setIcon(icon)

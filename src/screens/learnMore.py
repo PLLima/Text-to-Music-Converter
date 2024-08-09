@@ -6,6 +6,7 @@ from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.dictionaries import FONTS
 from common.widgets.title import screenTitle
+from common.widgets.button import backButton
 
 class Table():
     def __init__(self, parent, screenSize):
@@ -52,33 +53,36 @@ class Table():
             parent.grid_rowconfigure(i, weight=1)
 
 class learnScreen(ttk.Frame, Child):
-    def __init__(self, parent, screenSize):
+    def __init__(self, parent, lastScreen, screenSize):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
-        self.screenSize = screenSize
+        self.__screenSize = screenSize
+        self.__lastScreen = lastScreen
+
+    def switchScreen(self, nextScreen):
+        self.destroy()
+        nextScreen.render()
 
     def render(self):
-        mainFrame = ttk.Frame(self.getParent())
-        
+        headerFrame = ttk.Frame(self)
+        tableFrame = ttk.Frame(self)
         # Center widgets inside main frame
-        mainFrame.grid_rowconfigure(0, weight=1)
-        mainFrame.grid_rowconfigure(1, weight=1)
-        mainFrame.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure((0, 1), weight=1)
+        self.grid_columnconfigure(0, weight=1)
 
-        
-        
-        titleFrame = ttk.Frame(mainFrame)
-        titleFrame.grid(row=0, column=0, sticky="S", pady=20)
-        
-        tableFrame = ttk.Frame(mainFrame)
-        tableFrame.grid(row=1, column=0, sticky="N")
-        
-        title = screenTitle(titleFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.screenSize))
+        headerFrame.grid_columnconfigure((0, 1, 2), weight=1, uniform='column')
+
+        returnButton = backButton(headerFrame, lambda: self.switchScreen(self.__lastScreen))
+        returnButton.getInstance().grid(row=0, column=0, sticky="W", padx=45)
+
+        title = screenTitle(headerFrame)
+        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.__screenSize))
         title.setContent('Character Mapping')
-        title.getInstance().pack(fill='both')
+        title.getInstance().grid(row=0, column=1, sticky="E")
 
         # Add table widget to tableFrame
-        table = Table(tableFrame, self.screenSize)
+        Table(tableFrame, self.__screenSize)
 
-        mainFrame.pack(expand=True, fill='both')
+        headerFrame.grid(row=0, column=0, sticky="S", pady=20)
+        tableFrame.grid(row=1, column=0, sticky="N")
+        self.pack(expand=True, fill='both')
