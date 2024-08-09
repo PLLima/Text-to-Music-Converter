@@ -9,7 +9,7 @@ class button(ttk.Frame, Child):
     def __init__(self, parent, clickHandler):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
-        self.setEventHandler(clickHandler)
+        self.__setEventHandler(clickHandler)
         self.__setInstance()
 
     def __setInstance(self):
@@ -18,7 +18,7 @@ class button(ttk.Frame, Child):
     def getInstance(self):
         return self.__instance
 
-    def setEventHandler(self, eventHandler):
+    def __setEventHandler(self, eventHandler):
         self.__eventHandler = eventHandler
 
     def getEventHandler(self):
@@ -37,14 +37,17 @@ class textButton(button):
         self.getInstance().configure(padx=padx, pady=pady)
 
     def getPaddingX(self):
-        self.getInstance().cget("padx")
+        return self.getInstance().cget("padx")
 
     def getPaddingY(self):
-        self.getInstance().cget("pady")
+        return self.getInstance().cget("pady")
+
+    def __setFont(self, fontSize):
+        self.__font = tkFont.Font(family=FONTS["TextButton"], size=fontSize)
+        self.getInstance().configure(font=self.__font)
 
     def setText(self, text, fontSize):
-        font = tkFont.Font(family=FONTS["TextButton"], size=fontSize)
-        self.getInstance().configure(font=font)
+        self.__setFont(fontSize)
         self.getInstance().configure(text=text)
 
     def getText(self):
@@ -74,7 +77,7 @@ class textButton(button):
         elif backgroundColor == BUTTON_COLORS["Gray"]:
             self.__setBackgroundColorGray()
 
-    def getBackground(self):
+    def getBackgroundColor(self):
         return self.getInstance().cget("bg")
 
     def enable(self):
