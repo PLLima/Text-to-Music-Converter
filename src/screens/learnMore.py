@@ -65,24 +65,31 @@ class learnScreen(ttk.Frame, Child):
 
     def render(self):
         headerFrame = ttk.Frame(self)
+        titleFrame = ttk.Frame(headerFrame)
         tableFrame = ttk.Frame(self)
         # Center widgets inside main frame
         self.grid_rowconfigure((0, 1), weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        headerFrame.grid_columnconfigure((0, 1, 2), weight=1, uniform='column')
+        titleFrame.grid_rowconfigure(0, weight=1)
+        titleFrame.grid_columnconfigure(0, weight=1)
+
+        headerFrame.grid_columnconfigure(0, weight=1, uniform='column')
+        headerFrame.grid_columnconfigure(1, weight=1)
+        headerFrame.grid_columnconfigure(2, weight=1, uniform='column')
 
         returnButton = backButton(headerFrame, lambda: self.switchScreen(self.__lastScreen))
         returnButton.getInstance().grid(row=0, column=0, sticky="W", padx=45)
 
-        title = screenTitle(headerFrame)
+        title = screenTitle(titleFrame)
         title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.__screenSize))
         title.setContent('Character Mapping')
-        title.getInstance().grid(row=0, column=1, sticky="E")
+        title.getInstance().grid(row=0, column=1, sticky="NSEW")
 
         # Add table widget to tableFrame
         Table(tableFrame, self.__screenSize)
 
-        headerFrame.grid(row=0, column=0, sticky="S", pady=20)
+        headerFrame.grid(row=0, column=0, sticky="NSEW", pady=20)
+        titleFrame.grid(row=0, column=1, sticky="")
         tableFrame.grid(row=1, column=0, sticky="N")
         self.pack(expand=True, fill='both')
