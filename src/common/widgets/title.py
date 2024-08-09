@@ -12,7 +12,7 @@ class title(ttk.Frame, Child):
 
     def __setInstance(self):
         self.__instance = tk.Text(self.getParent(), height=1, borderwidth=0, bg='#d9d9d9', highlightthickness=0)
-        self.getInstance().tag_configure("center", justify='center')
+        self.getInstance().tag_configure('center', justify='center')
 
     def getInstance(self):
         return self.__instance
@@ -20,11 +20,11 @@ class title(ttk.Frame, Child):
     def setContent(self, content):
         self.getInstance().configure(width=len(content))
         self.getInstance().insert(1.0, content)
-        self.getInstance().tag_add("center", "1.0", "end")
+        self.getInstance().tag_add('center', '1.0', 'end')
         self.getInstance().configure(state='disabled')
 
     def getContent(self):
-        return self.getInstance().cget("text")
+        return self.getInstance().get('1.0', 'end')
 
     def setFont(self, font):
         self.__font = font
