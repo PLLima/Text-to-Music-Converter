@@ -5,7 +5,7 @@ from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkFont
 
-class _button(ttk.Frame, Child):
+class button(ttk.Frame, Child):
     def __init__(self, parent, clickHandler):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
@@ -24,7 +24,7 @@ class _button(ttk.Frame, Child):
     def getEventHandler(self):
         return self.__eventHandler
 
-class textButton(_button):
+class textButton(button):
     def __init__(self, parent, clickHandler):
         super().__init__(parent, clickHandler)
         self.getInstance().configure(fg=BUTTON_COLORS["Foreground"])
