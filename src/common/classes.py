@@ -18,6 +18,7 @@ class Closeable():
         for widget in self.winfo_children():
             widget.destroy()
         self.destroy()
+    
 
 class WindowSizeNotifier():
     def __init__(self, window, eventHandler):
