@@ -30,3 +30,7 @@ BUTTON_COLORS = {
     "BlackActive": '#2F2F2F',
     "RedActive": '#FB8585',
 }
+
+BUTTON_ICONS = {
+    "BackArrow": './src/images/backarrow.png',
+}

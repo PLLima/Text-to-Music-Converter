@@ -2,7 +2,7 @@ import unittest
 
 import tkinter as tk
 from PIL import Image, ImageTk
-from src.common.dictionaries import BUTTON_COLORS
+from src.common.dictionaries import BUTTON_COLORS, BUTTON_ICONS
 from src.common.widgets.button import textButton, iconButton, backButton
 
 class testTextButton(unittest.TestCase):
@@ -93,7 +93,7 @@ class testIconButton(unittest.TestCase):
         self.assertEqual(self.iconButton.getPaddingY(), paddingY, "Y Padding not returned accordingly.")
 
     def testSetGetIcon(self):
-        backarrow = Image.open('./src/images/backarrow.png')
+        backarrow = Image.open(BUTTON_ICONS["BackArrow"])
         icon = ImageTk.PhotoImage(backarrow)
         self.iconButton.setIcon(icon)
         self.assertEqual(self.iconButton.getIcon(), icon, "Icon not returned accordingly.")

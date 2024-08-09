@@ -1,6 +1,6 @@
 from common.classes import Child
 from common.dictionaries import FONTS
-from common.dictionaries import BUTTON_COLORS
+from common.dictionaries import BUTTON_COLORS, BUTTON_ICONS
 from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkFont
@@ -105,6 +105,6 @@ class backButton(iconButton):
     def __init__(self, parent, clickHandler):
         super().__init__(parent, clickHandler)
         
-        backarrow = Image.open('./src/images/backarrow.png')
+        backarrow = Image.open(BUTTON_ICONS["BackArrow"])
         icon = ImageTk.PhotoImage(backarrow.resize((56,56)))
         self.setIcon(icon)
