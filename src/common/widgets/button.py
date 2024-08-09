@@ -1,11 +1,3 @@
-'''
-Created on 2024-07-12
-
-@author: Pedro Lubaszewski Lima
-
-This file contains the classes related to the button widgets of the application.
-'''
-
 from common.classes import Child
 from common.dictionaries import FONTS
 from common.dictionaries import BUTTON_COLORS

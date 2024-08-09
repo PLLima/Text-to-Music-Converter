@@ -1,11 +1,3 @@
-'''
-Created on 2024-07-11
-
-@author: Pedro Lubaszewski Lima
-
-This file contains the classes related to the main header widget of the application.
-'''
-
 from common.classes import Child
 from common.dictionaries import FONTS
 from tkinter import ttk

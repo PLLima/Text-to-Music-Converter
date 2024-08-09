@@ -1,11 +1,3 @@
-'''
-Created on 2024-07-11
-
-@author: Pedro Lubaszewski Lima
-
-File with automated unit tests for the functions inside the functions.py file.
-'''
-
 import unittest
 
 from src.common.dictionaries import TEXT_SCALES, SCREEN_MEASURE

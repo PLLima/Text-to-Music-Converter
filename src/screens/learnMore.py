@@ -1,10 +1,11 @@
+import tkinter as tk
+from tkinter import ttk
+
 from common.classes import Child
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.dictionaries import FONTS
 from common.widgets.title import screenTitle
-import tkinter as tk
-from tkinter import ttk
 
 class Table():
     def __init__(self, parent, screenSize):

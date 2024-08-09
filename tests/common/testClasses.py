@@ -1,12 +1,3 @@
-'''
-Created on 2024-07-10
-
-@author: Pedro Lubaszewski Lima
-
-File with automated unit tests for the classes inside the classes.py file.
-'''
-
-from logging import root
 import unittest
 
 import tkinter as tk

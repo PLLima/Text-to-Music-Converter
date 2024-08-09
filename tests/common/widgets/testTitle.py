@@ -1,11 +1,3 @@
-'''
-Created on 2024-07-11
-
-@author: Pedro Lubaszewski Lima
-
-File with automated unit tests for the mainHeader widget.
-'''
-
 import unittest
 
 import tkinter as tk

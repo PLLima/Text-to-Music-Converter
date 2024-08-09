@@ -1,11 +1,3 @@
-'''
-Created on 2024-07-02
-
-@author: Pedro Lubaszewski Lima
-
-File with automated unit tests for the startScreen class.
-'''
-
 import unittest
 
 import tkinter as tk
