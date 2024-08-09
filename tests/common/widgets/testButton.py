@@ -1,8 +1,9 @@
 import unittest
 
 import tkinter as tk
+from PIL import Image, ImageTk
 from src.common.dictionaries import BUTTON_COLORS
-from src.common.widgets.button import textButton
+from src.common.widgets.button import textButton, iconButton, backButton
 
 class testTextButton(unittest.TestCase):
     def setUp(self):
@@ -71,6 +72,41 @@ class testTextButton(unittest.TestCase):
         self.textButton.disable()
         self.textButton.enable()
         self.assertEqual(self.textButton.getInstance().cget("state"), tk.NORMAL, "Button not enabled.")
+
+class testIconButton(unittest.TestCase):
+    def setUp(self):
+        root = tk.Toplevel()
+        self.iconButton = iconButton(root, None)
+
+    def testSetPadding(self):
+        paddingX = 10
+        paddingY = 10
+        self.iconButton.setPadding(paddingX, paddingY)
+        self.assertEqual(self.iconButton.getInstance().cget("padx"), paddingX, "X Padding not set accordingly.")
+        self.assertEqual(self.iconButton.getInstance().cget("pady"), paddingY, "Y Padding not set accordingly.")
+
+    def testGetPadding(self):
+        paddingX = 10
+        paddingY = 10
+        self.iconButton.setPadding(paddingX, paddingY)
+        self.assertEqual(self.iconButton.getPaddingX(), paddingX, "X Padding not returned accordingly.")
+        self.assertEqual(self.iconButton.getPaddingY(), paddingY, "Y Padding not returned accordingly.")
+
+    def testSetGetIcon(self):
+        backarrow = Image.open('./src/images/backarrow.png')
+        icon = ImageTk.PhotoImage(backarrow)
+        self.iconButton.setIcon(icon)
+        self.assertEqual(self.iconButton.getIcon(), icon, "Icon not returned accordingly.")
+
+class testBackButton(unittest.TestCase):
+    def setUp(self):
+        root = tk.Tk()
+        self.backButton = backButton(root, None)
+
+    def testRender(self):
+        self.backButton.getInstance().pack()
+        self.backButton.getParent().update()
+        self.assertTrue(self.backButton.winfo_exists(), "Back button wasn't rendered.")
 
 if __name__ == '__main__':
     unittest.main()
