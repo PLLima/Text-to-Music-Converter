@@ -1,9 +1,10 @@
+from tkinter import ttk
+
 from common.classes import Child, Closeable
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES, BUTTON_COLORS
 from common.widgets.title import mainHeader, mainSubtitle
 from common.widgets.button import textButton
-from tkinter import ttk
 from screens.learnMore import learnScreen
 
 class startScreen(ttk.Frame, Child, Closeable):
@@ -13,17 +14,17 @@ class startScreen(ttk.Frame, Child, Closeable):
         self.screenSize = screenSize
 
     def switchScreen(self, nextScreen):
-        """Destroy the current screen and render the next one."""
+        # Destroy the current screen and render the next one.
         self.destroyCurrentScreen()
-        nextScreen.render()  # Renderiza a nova tela
+        nextScreen.render()
 
     def destroyCurrentScreen(self):
-        """Destroy the current frame and its widgets."""
+        # Destroy the current frame and its widgets.
         if self.currentFrame:
             self.currentFrame.destroy()
 
     def createMainFrame(self):
-        """Create and configure the main frame and its widgets."""
+        # Create and configure the main frame and its widgets.
         frame = ttk.Frame(self.getParent())
         frame.pack(expand=True, fill='both')
 
