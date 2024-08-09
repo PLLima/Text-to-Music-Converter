@@ -21,8 +21,7 @@ class startScreen(ttk.Frame, Child):
         textsFrame = ttk.Frame(self)
         buttonsFrame = ttk.Frame(self)
 
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure((0, 1), weight=1)
         self.grid_columnconfigure(0, weight=1)
 
         title = mainHeader(textsFrame)
@@ -36,8 +35,7 @@ class startScreen(ttk.Frame, Child):
         subtitle.getInstance().pack(pady=[0, 90])
 
         buttonsFrame.grid_rowconfigure(0, weight=1)
-        buttonsFrame.grid_columnconfigure(0, weight=1)
-        buttonsFrame.grid_columnconfigure(1, weight=1)
+        buttonsFrame.grid_columnconfigure((0, 1), weight=1)
 
         getStartedButton = textButton(buttonsFrame, None)
         getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], self.__screenSize))
@@ -45,7 +43,7 @@ class startScreen(ttk.Frame, Child):
         getStartedButton.setPadding(padx=45, pady=10)
         getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
-        learnMoreButton = textButton(buttonsFrame, lambda: self.switchScreen(learnScreen(self.getParent(), self.__screenSize)))
+        learnMoreButton = textButton(buttonsFrame, lambda: self.switchScreen(learnScreen(self.getParent(), self, self.__screenSize)))
         learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], self.__screenSize))
         learnMoreButton.setBackgroundColor(BUTTON_COLORS["Black"])
         learnMoreButton.setPadding(padx=50, pady=10)
