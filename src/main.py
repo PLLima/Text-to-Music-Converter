@@ -1,11 +1,10 @@
 from common.dictionaries import SCREEN_MEASURE
-from common.classes import Child, Closeable
+from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
 from screens.start import startScreen
-from screens.learnMore import learnScreen
 
-class mainApplication(ttk.Frame, Child, Closeable):
+class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)

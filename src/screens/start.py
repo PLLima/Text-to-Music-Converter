@@ -1,13 +1,13 @@
 from tkinter import ttk
 
-from common.classes import Child, Closeable
+from common.classes import Child
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES, BUTTON_COLORS
 from common.widgets.title import mainHeader, mainSubtitle
 from common.widgets.button import textButton
 from screens.learnMore import learnScreen
 
-class startScreen(ttk.Frame, Child, Closeable):
+class startScreen(ttk.Frame, Child):
     def __init__(self, parent, screenSize):
         ttk.Frame.__init__(self, parent)
         self.setParent(parent)
