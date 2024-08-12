@@ -53,15 +53,20 @@ class Table():
             parent.grid_rowconfigure(i, weight=1)
 
 class learnScreen(ttk.Frame, Child):
-    def __init__(self, parent, lastScreen, screenSize):
-        ttk.Frame.__init__(self, parent)
-        self.setParent(parent)
-        self.__screenSize = screenSize
-        self.__lastScreen = lastScreen
+    def __init__(self, appController):
+        self.setParent(appController.getParent())
+        ttk.Frame.__init__(self, self.getParent())
+        self.__setAppController(appController)
+
+    def __setAppController(self, appController):
+        self.__appController = appController
+
+    def __getAppController(self):
+        return self.__appController
 
     def switchScreen(self, nextScreen):
+        nextScreen
         self.destroy()
-        nextScreen.render()
 
     def render(self):
         headerFrame = ttk.Frame(self)
@@ -78,16 +83,16 @@ class learnScreen(ttk.Frame, Child):
         headerFrame.grid_columnconfigure(1, weight=1)
         headerFrame.grid_columnconfigure(2, weight=1, uniform='column')
 
-        returnButton = backButton(headerFrame, lambda: self.switchScreen(self.__lastScreen))
+        returnButton = backButton(headerFrame, lambda: self.switchScreen(self.__getAppController().renderStartScreen()))
         returnButton.getInstance().grid(row=0, column=0, sticky="W", padx=45)
 
         title = screenTitle(titleFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.__screenSize))
+        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.__getAppController().getScreenSize()))
         title.setContent('Character Mapping')
         title.getInstance().grid(row=0, column=1, sticky="NSEW")
 
         # Add table widget to tableFrame
-        Table(tableFrame, self.__screenSize)
+        Table(tableFrame, self.__getAppController().getScreenSize())
 
         headerFrame.grid(row=0, column=0, sticky="NSEW", pady=20)
         titleFrame.grid(row=0, column=1, sticky="")

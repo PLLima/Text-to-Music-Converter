@@ -2,7 +2,7 @@ from common.dictionaries import SCREEN_MEASURE
 from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
-from screens.start import startScreen
+from controller import appController
 
 class mainApplication(ttk.Frame, Child):
     def __init__(self, parent):
@@ -39,7 +39,7 @@ class mainApplication(ttk.Frame, Child):
 
     def begin(self):
         # Starting point of the application
-        startScreen(self.getParent(), self.getAppScreenSize()).render()
+        appController(self).renderStartScreen()
 
 def main():
     minScreenSize = ['1280', '720']
