@@ -1,7 +1,7 @@
 SCREEN_MEASURE = {
     "Width": 0,
     "Height": 1,
-    }
+}
 
 TEXT_SCALES = {
     "MainHeader": 0.0725,
@@ -19,6 +19,7 @@ FONTS = {
     "ScreenTitle": 'Courier New',
     "TextButton": 'Courier New',
     "Table": 'Courier New',
+    "Textbox": 'Courier New',
 }
 
 BUTTON_COLORS = {
@@ -33,4 +34,11 @@ BUTTON_COLORS = {
 
 BUTTON_ICONS = {
     "BackArrow": './src/images/backarrow.png',
+}
+
+TEXTBOX_COLORS = {
+    "Background": '#dcdcdc',
+    "Foreground": '#000000',
+    "ForegroundDisabled": '#636363',
+    "Border": '#636363',
 }
