@@ -54,7 +54,7 @@ class startScreen(ttk.Frame, Screen):
         self.grid_columnconfigure(0, weight=1)
 
         self.__setTextsFrame('Turn Text into Music', 'Create beautiful melodies from your words')
-        self.__setButtonsFrame('Get Started', None,
+        self.__setButtonsFrame('Get Started', lambda: self.switchScreen(self.getAppController().renderParamsScreen()),
                                'Learn More', lambda: self.switchScreen(self.getAppController().renderLearnScreen()))
 
         self.__getTextsFrame().grid(row=0, column=0, sticky="S")
