@@ -12,12 +12,8 @@ class startScreen(ttk.Frame, Screen):
         ttk.Frame.__init__(self, self.getParent())
         self.setAppController(appController)
 
-    def render(self):
+    def __getTextsFrame(self):
         textsFrame = ttk.Frame(self)
-        buttonsFrame = ttk.Frame(self)
-
-        self.grid_rowconfigure((0, 1), weight=1)
-        self.grid_columnconfigure(0, weight=1)
 
         title = mainHeader(textsFrame)
         title.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], self.getAppController().getScreenSize()))
@@ -28,6 +24,11 @@ class startScreen(ttk.Frame, Screen):
         subtitle.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], self.getAppController().getScreenSize()))
         subtitle.setContent('Create beautiful melodies from your words')
         subtitle.getInstance().pack(pady=[0, 90])
+
+        return textsFrame
+
+    def __getButtonsFrame(self):
+        buttonsFrame = ttk.Frame(self)
 
         buttonsFrame.grid_rowconfigure(0, weight=1)
         buttonsFrame.grid_columnconfigure((0, 1), weight=1)
@@ -44,6 +45,12 @@ class startScreen(ttk.Frame, Screen):
         learnMoreButton.setPadding(padx=50, pady=10)
         learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
 
-        textsFrame.grid(row=0, column=0, sticky="S")
-        buttonsFrame.grid(row=1, column=0, sticky="N")
+        return buttonsFrame
+
+    def render(self):
+        self.grid_rowconfigure((0, 1), weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        self.__getTextsFrame().grid(row=0, column=0, sticky="S")
+        self.__getButtonsFrame().grid(row=1, column=0, sticky="N")
         self.pack(expand=True, fill='both')
