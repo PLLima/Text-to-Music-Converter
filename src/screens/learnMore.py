@@ -5,8 +5,7 @@ from common.classes import Screen
 from common.functions import calculateFontSize
 from common.dictionaries import TEXT_SCALES
 from common.dictionaries import FONTS
-from common.widgets.title import screenTitle
-from common.widgets.button import backButton
+from common.widgets.screenHeader import screenHeader
 
 class Table():
     def __init__(self, parent, screenSize):
@@ -59,32 +58,18 @@ class learnScreen(ttk.Frame, Screen):
         self.setAppController(appController)
 
     def render(self):
-        headerFrame = ttk.Frame(self)
-        titleFrame = ttk.Frame(headerFrame)
+        header = screenHeader(self, lambda: self.switchScreen(self.getAppController().renderStartScreen()), 'Character Mapping',
+                              self.getAppController().getScreenSize())
+        titleFrame = ttk.Frame(header)
         tableFrame = ttk.Frame(self)
         # Center widgets inside main frame
         self.grid_rowconfigure((0, 1), weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        titleFrame.grid_rowconfigure(0, weight=1)
-        titleFrame.grid_columnconfigure(0, weight=1)
-
-        headerFrame.grid_columnconfigure(0, weight=1, uniform='column')
-        headerFrame.grid_columnconfigure(1, weight=1)
-        headerFrame.grid_columnconfigure(2, weight=1, uniform='column')
-
-        returnButton = backButton(headerFrame, lambda: self.switchScreen(self.getAppController().renderStartScreen()))
-        returnButton.getInstance().grid(row=0, column=0, sticky="W", padx=45)
-
-        title = screenTitle(titleFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["ScreenTitle"], self.getAppController().getScreenSize()))
-        title.setContent('Character Mapping')
-        title.getInstance().grid(row=0, column=1, sticky="NSEW")
-
         # Add table widget to tableFrame
         Table(tableFrame, self.getAppController().getScreenSize())
 
-        headerFrame.grid(row=0, column=0, sticky="NSEW", pady=20)
+        header.grid(row=0, column=0, sticky="NSEW", pady=20)
         titleFrame.grid(row=0, column=1, sticky="")
         tableFrame.grid(row=1, column=0, sticky="N")
         self.pack(expand=True, fill='both')
