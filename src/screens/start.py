@@ -12,44 +12,50 @@ class startScreen(ttk.Frame, Screen):
         ttk.Frame.__init__(self, self.getParent())
         self.setAppController(appController)
 
+    def __setTextsFrame(self, title, subtitle):
+        self.__textsFrame = ttk.Frame(self)
+
+        header = mainHeader(self.__getTextsFrame())
+        header.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], self.getAppController().getScreenSize()))
+        header.setContent(title)
+        header.getInstance().pack(pady=25)
+
+        subheader = mainSubtitle(self.__getTextsFrame())
+        subheader.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], self.getAppController().getScreenSize()))
+        subheader.setContent(subtitle)
+        subheader.getInstance().pack(pady=[0, 90])
+
     def __getTextsFrame(self):
-        textsFrame = ttk.Frame(self)
+        return self.__textsFrame
 
-        title = mainHeader(textsFrame)
-        title.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], self.getAppController().getScreenSize()))
-        title.setContent('Turn Text into Music')
-        title.getInstance().pack(pady=25)
+    def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
+        self.__buttonsFrame = ttk.Frame(self)
 
-        subtitle = mainSubtitle(textsFrame)
-        subtitle.setFontSize(calculateFontSize(TEXT_SCALES["MainSubtitle"], self.getAppController().getScreenSize()))
-        subtitle.setContent('Create beautiful melodies from your words')
-        subtitle.getInstance().pack(pady=[0, 90])
+        self.__getButtonsFrame().grid_rowconfigure(0, weight=1)
+        self.__getButtonsFrame().grid_columnconfigure((0, 1), weight=1)
 
-        return textsFrame
-
-    def __getButtonsFrame(self):
-        buttonsFrame = ttk.Frame(self)
-
-        buttonsFrame.grid_rowconfigure(0, weight=1)
-        buttonsFrame.grid_columnconfigure((0, 1), weight=1)
-
-        getStartedButton = textButton(buttonsFrame, lambda: self.switchScreen(self.__getStartScreen))
-        getStartedButton.setText('Get Started', calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        getStartedButton = textButton(self.__getButtonsFrame(), commandButton1)
+        getStartedButton.setText(textButton1, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
         getStartedButton.setBackgroundColor(BUTTON_COLORS["Red"])
         getStartedButton.setPadding(padx=45, pady=10)
         getStartedButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
-        learnMoreButton = textButton(buttonsFrame, lambda: self.switchScreen(self.getAppController().renderLearnScreen()))
-        learnMoreButton.setText('Learn More', calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        learnMoreButton = textButton(self.__getButtonsFrame(), commandButton2)
+        learnMoreButton.setText(textButton2, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
         learnMoreButton.setBackgroundColor(BUTTON_COLORS["Black"])
         learnMoreButton.setPadding(padx=50, pady=10)
         learnMoreButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
 
-        return buttonsFrame
+    def __getButtonsFrame(self):
+        return self.__buttonsFrame
 
     def render(self):
         self.grid_rowconfigure((0, 1), weight=1)
         self.grid_columnconfigure(0, weight=1)
+
+        self.__setTextsFrame('Turn Text into Music', 'Create beautiful melodies from your words')
+        self.__setButtonsFrame('Get Started', None,
+                               'Learn More', lambda: self.switchScreen(self.getAppController().renderLearnScreen()))
 
         self.__getTextsFrame().grid(row=0, column=0, sticky="S")
         self.__getButtonsFrame().grid(row=1, column=0, sticky="N")
