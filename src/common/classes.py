@@ -5,6 +5,17 @@ class Child():
     def getParent(self):
         return self.__parent
 
+class Screen(Child):
+    def setAppController(self, appController):
+        self.__appController = appController
+
+    def getAppController(self):
+        return self.__appController
+
+    def switchScreen(self, nextScreen):
+        nextScreen
+        self.destroy()
+
 class WindowSizeNotifier():
     def __init__(self, window, eventHandler):
         self.__window = window
