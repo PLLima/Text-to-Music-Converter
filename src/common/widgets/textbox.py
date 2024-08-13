@@ -109,8 +109,10 @@ class textbox(tk.Frame, Child):
         return self.__scrollbar
 
     def __writePlaceholder(self):
-        self.setContent(self.getPlaceholder())
-        self.__setForegroundColor(TEXTBOX_COLORS["ForegroundPlaceholder"])
+        placeholder = self.getPlaceholder()
+        if placeholder != None:
+            self.setContent(placeholder)
+            self.__setForegroundColor(TEXTBOX_COLORS["ForegroundPlaceholder"])
 
     def __isTextVisible(self):
         correctionTerm =  - 30
