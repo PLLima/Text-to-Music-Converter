@@ -86,12 +86,12 @@ class paramsScreen(tk.Frame, Screen):
 
         self.__setTextbox(self.__getTextOptionsFrame(), textboxPlaceholder, maxCharacters, self.__checkTextboxCharacter)
         self.__getTextbox().setHeight(9)
-        self.__getTextbox().setWidth(105)
+        self.__getTextbox().setWidth(95)
         self.__getTextbox().setFontSize(calculateFontSize(TEXT_SCALES["ParamsScreenTextbox"], self.getAppController().getScreenSize()))
         self.__getTextbox().grid(row=0, column=0, sticky="S")
 
         self.__setTextButtonFrame('Import', importCommand, maxCharacters)
-        self.__getTextButtonFrame().grid(row=1, column=0, sticky="NEW", padx=46)
+        self.__getTextButtonFrame().grid(row=1, column=0, sticky="NEW", padx=101)
 
     def __getTextOptionsFrame(self):
         return self.__textOptionsFrame
