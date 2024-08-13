@@ -21,40 +21,58 @@ class paramsScreen(tk.Frame, Screen):
     def __getTextbox(self):
         return self.__textInput
 
+    def __setImportButton(self, parent, command):
+        self.__importButton = textButton(parent, command)
+
+    def __getImportButton(self):
+        return self.__importButton
+
+    def __getCharacterCounter(self):
+        return self.__characterCounter
+
+    def __setCharacterCounter(self, parent, maxCharacters):
+        self.__characterCounter = textboxCounter(parent, maxCharacters)
+
+    def __getCharacterCounter(self):
+        return self.__characterCounter
+
+    def __checkTextboxCharacter(self, event, *args):
+        self.__getCharacterCounter().setCounter(len(self.__getTextbox().getContent()) - 1)
+
     def __setTextButtonFrame(self, textButton1, commandButton1, maxCharacters):
-        self.__textButtonFrame = tk.Frame(self.__getTextOptionsFrame(), bg=SCREEN_COLORS["Background"], borderwidth=2, relief='solid')
+        self.__textButtonFrame = tk.Frame(self.__getTextOptionsFrame(), bg=SCREEN_COLORS["Background"])
 
         self.__getTextButtonFrame().grid_rowconfigure(0, weight=1)
         self.__getTextButtonFrame().grid_columnconfigure((0, 1), weight=1, uniform="column")
 
-        importButton = textButton(self.__getTextButtonFrame(), commandButton1)
-        importButton.setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
-        importButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        importButton.setPadding(padx=25, pady=3)
-        importButton.getInstance().grid(row=0, column=0, sticky="W", pady=8)
+        self.__setImportButton(self.__getTextButtonFrame(), commandButton1)
+        self.__getImportButton().setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
+        self.__getImportButton().setBackgroundColor(BUTTON_COLORS["Red"])
+        self.__getImportButton().setPadding(padx=25, pady=3)
+        self.__getImportButton().getInstance().grid(row=0, column=0, sticky="W", pady=6)
 
-        characterCounter = textboxCounter(self.__getTextButtonFrame(), maxCharacters)
-        characterCounter.setFontSize(calculateFontSize(TEXT_SCALES["TextboxCounter"], self.getAppController().getScreenSize()))
-        characterCounter.setCounter(len(self.__getTextbox().getContent()) - 1)
-        characterCounter.grid(row=0, column=1, sticky="E", padx=5, pady=8)
+        self.__setCharacterCounter(self.__getTextButtonFrame(), maxCharacters)
+        self.__getCharacterCounter().setFontSize(calculateFontSize(TEXT_SCALES["TextboxCounter"], self.getAppController().getScreenSize()))
+        self.__getCharacterCounter().setCounter(0)
+        self.__getCharacterCounter().grid(row=0, column=1, sticky="E", padx=20, pady=6)
 
     def __getTextButtonFrame(self):
         return self.__textButtonFrame
 
     def __setTextOptionsFrame(self, textboxPlaceholder, maxCharacters, importCommand):
-        self.__textOptionsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"], borderwidth=2, relief='solid')
+        self.__textOptionsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.__getTextOptionsFrame().grid_rowconfigure((0, 1), weight=1)
         self.__getTextOptionsFrame().grid_columnconfigure(0, weight=1)
 
-        self.__setTextbox(self.__getTextOptionsFrame(), textboxPlaceholder, maxCharacters, None)
+        self.__setTextbox(self.__getTextOptionsFrame(), textboxPlaceholder, maxCharacters, self.__checkTextboxCharacter)
         self.__getTextbox().setHeight(9)
         self.__getTextbox().setWidth(105)
         self.__getTextbox().setFontSize(calculateFontSize(TEXT_SCALES["ParamsScreenTextbox"], self.getAppController().getScreenSize()))
-        self.__getTextbox().grid(row=0, column=0, sticky="N", ipady=10)
+        self.__getTextbox().grid(row=0, column=0, sticky="S")
 
         self.__setTextButtonFrame('Import', importCommand, maxCharacters)
-        self.__getTextButtonFrame().grid(row=1, column=0, sticky="N")
+        self.__getTextButtonFrame().grid(row=1, column=0, sticky="NEW", padx=46)
 
     def __getTextOptionsFrame(self):
         return self.__textOptionsFrame
@@ -68,6 +86,6 @@ class paramsScreen(tk.Frame, Screen):
         
         self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"], None)
 
-        header.grid(row=0, column=0, sticky="NSEW", pady=20)
-        self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NSEW")
+        header.grid(row=0, column=0, sticky="NEW", pady=20)
+        self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NEW")
         self.pack(expand=True, fill='both')

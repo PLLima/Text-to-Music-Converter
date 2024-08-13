@@ -47,7 +47,7 @@ class textboxCounter(tk.Frame, Child):
         return self.__getFont().actual()["size"]
     
     def setCounter(self, characterCount):
-        if characterCount == self.__getMaxCharacters():
+        if characterCount >= self.__getMaxCharacters():
             self.__setForegroundColor(TEXTBOXCOUNTER_COLORS["ForegroundMaxCharacters"])
         else:
             self.__setForegroundColor(TEXTBOXCOUNTER_COLORS["Foreground"])

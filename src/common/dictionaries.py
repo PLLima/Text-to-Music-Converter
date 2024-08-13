@@ -58,7 +58,7 @@ TEXTBOX_COLORS = {
 }
 
 TEXTBOX_PARAMS = {
-    "MaxCharacters": 1050
+    "MaxCharacters": 945
 }
 
 TEXTBOXCOUNTER_COLORS = {

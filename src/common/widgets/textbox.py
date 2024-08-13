@@ -19,7 +19,7 @@ class textbox(tk.Frame, Child):
         self.__setKeyPressedFunction(keyPressedFunction)
         self.getInstance().bind('<FocusIn>', self.__focusIn)
         self.getInstance().bind('<FocusOut>', self.__focusOut)
-        self.getInstance().bind('<KeyPress>', lambda event: self.__checkCharacters(event))
+        self.getInstance().bind('<KeyRelease>', lambda event: self.__checkCharacters(event))
         self.__writePlaceholder()
         self.__setScrollbar()
         self.getInstance().pack(expand=True, fill='both')
@@ -45,7 +45,7 @@ class textbox(tk.Frame, Child):
     def __setPlaceholder(self, placeholder):
         self.__placeholder = placeholder
 
-    def __getPlaceholder(self):
+    def getPlaceholder(self):
         return self.__placeholder
 
     def __setKeyPressedFunction(self, keyPressedFunction):
@@ -109,7 +109,7 @@ class textbox(tk.Frame, Child):
         return self.__scrollbar
 
     def __writePlaceholder(self):
-        self.setContent(self.__getPlaceholder())
+        self.setContent(self.getPlaceholder())
         self.__setForegroundColor(TEXTBOX_COLORS["ForegroundPlaceholder"])
 
     def __isTextVisible(self):
