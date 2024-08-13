@@ -5,9 +5,10 @@ class sliderModel(ttk.Scale):
     def __init__(self, parent, from_=0, to=100, length=200, command=None, initial_value=None, orient='horizontal', **kwargs):
         super().__init__(parent, from_=from_, to=to, length=length, command=self._internal_command, orient=orient, **kwargs)
 
-        self.user_command = command  # Armazena o comando passado pelo usuário
+        # Stores user command
+        self.user_command = command
 
-        # Estilo personalizado para remover números e fundo
+        # Personalized style to remove background and numbers
         style = ttk.Style()
         style.layout('TScale', [
             ('Trough', {
@@ -17,12 +18,12 @@ class sliderModel(ttk.Scale):
         ])
         self.configure(style="TScale")
 
-        # Configuração do seletor
+        # Selector configuration
         if initial_value is not None:
             self.set(initial_value)
 
     def _internal_command(self, value):
-        # Chama o comando do usuário, se houver, com apenas um argumento (valor)
+        # Calls user command, if available, with a single parameter
         if self.user_command:
             self.user_command(value)
 
