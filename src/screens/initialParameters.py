@@ -38,7 +38,13 @@ class paramsScreen(tk.Frame, Screen):
         return self.__characterCounter
 
     def __checkTextboxCharacter(self, event, *args):
-        self.__getCharacterCounter().setCounter(len(self.__getTextbox().getContent()) - 1)
+        textboxContent = self.__getTextbox().getContent()
+        contentLength = len(textboxContent) - 1
+        self.__getCharacterCounter().setCounter(contentLength)
+        if contentLength > 0:
+            self.__getGenerateButton().enable()
+        else:
+            self.__getGenerateButton().disable()
 
     def __openTextFile(self, maxCharacters):
         file = fd.askopenfile(mode='r', title='Open a text file', initialdir='./', filetypes=[('Text files', '*.txt')])
@@ -47,6 +53,7 @@ class paramsScreen(tk.Frame, Screen):
             if len(text) > maxCharacters:
                 text = text[:maxCharacters]
             if text != '':
+                self.__getGenerateButton().enable()
                 self.__getTextbox().setContent(text)
                 self.__getTextbox().enable()
                 self.__getCharacterCounter().setCounter(len(text))
@@ -79,15 +86,65 @@ class paramsScreen(tk.Frame, Screen):
 
         self.__setTextbox(self.__getTextOptionsFrame(), textboxPlaceholder, maxCharacters, self.__checkTextboxCharacter)
         self.__getTextbox().setHeight(9)
-        self.__getTextbox().setWidth(105)
+        self.__getTextbox().setWidth(95)
         self.__getTextbox().setFontSize(calculateFontSize(TEXT_SCALES["ParamsScreenTextbox"], self.getAppController().getScreenSize()))
         self.__getTextbox().grid(row=0, column=0, sticky="S")
 
         self.__setTextButtonFrame('Import', importCommand, maxCharacters)
-        self.__getTextButtonFrame().grid(row=1, column=0, sticky="NEW", padx=46)
+        self.__getTextButtonFrame().grid(row=1, column=0, sticky="NEW", padx=101)
 
     def __getTextOptionsFrame(self):
         return self.__textOptionsFrame
+
+    def __setVolumeSlider(self, initialValue, finalValue, defaultValue):
+        pass
+
+    def __getVolumeSlider(self):
+        pass
+
+    def __setOtherParamsFrame(self, textButton1, commandButton1, maxCharacters):
+        self.__otherParamsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
+
+        self.__getOtherParamsFrame().grid_rowconfigure((0, 1, 2), weight=1)
+        self.__getOtherParamsFrame().grid_columnconfigure(0, weight=1)
+
+
+
+        self.__setImportButton(self.__getTextButtonFrame(), commandButton1)
+        self.__getImportButton().setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
+        self.__getImportButton().setBackgroundColor(BUTTON_COLORS["Red"])
+        self.__getImportButton().setPadding(padx=25, pady=3)
+        self.__getImportButton().getInstance().grid(row=0, column=0, sticky="W", pady=6)
+
+        self.__setCharacterCounter(self.__getTextButtonFrame(), maxCharacters)
+        self.__getCharacterCounter().setFontSize(calculateFontSize(TEXT_SCALES["TextboxCounter"], self.getAppController().getScreenSize()))
+        self.__getCharacterCounter().setCounter(0)
+        self.__getCharacterCounter().grid(row=0, column=1, sticky="E", padx=20, pady=6)
+
+    def __getOtherParamsFrame(self):
+        return self.__otherParamsFrame
+
+    def __setGenerateButton(self, parent, command):
+        self.__generateButton = textButton(parent, command)
+
+    def __getGenerateButton(self):
+        return self.__generateButton
+
+    def __setGenerateFrame(self, text, command):
+        self.__generateFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
+
+        self.__setGenerateButton(self.__getGenerateFrame(), command)
+        self.__getGenerateButton().setText(text, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        self.__getGenerateButton().setBackgroundColor(BUTTON_COLORS["Red"])
+        self.__getGenerateButton().setPadding(padx=60, pady=10)
+        self.__getGenerateButton().getInstance().pack(pady=25)
+        self.__getGenerateButton().disable()
+
+    def __getGenerateFrame(self):
+        return self.__generateFrame
+
+    def __generateMusic(self):
+        self.switchScreen(self.getAppController().renderPlayerScreen())
 
     def render(self):
         self.grid_rowconfigure((0, 1, 2, 3), weight=1)
@@ -98,6 +155,9 @@ class paramsScreen(tk.Frame, Screen):
         
         self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"], lambda: self.__openTextFile(TEXTBOX_PARAMS["MaxCharacters"]))
 
+        self.__setGenerateFrame('Generate Music', lambda: self.__generateMusic())
+
         header.grid(row=0, column=0, sticky="NEW", pady=20)
         self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NEW")
+        self.__getGenerateFrame().grid(row=3, column=0, sticky="SEW")
         self.pack(expand=True, fill='both')
