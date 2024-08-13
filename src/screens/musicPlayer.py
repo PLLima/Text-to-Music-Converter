@@ -1,13 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-
 from common.functions import calculateFontSize
 from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, BUTTON_COLORS, FONTS
-
 from common.widgets.button import textButton
 from common.classes import Screen
 from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
+from common.widgets.sliderWithLabel import sliderWithLabel
 
 class playerScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -36,6 +35,8 @@ class playerScreen(tk.Frame, Screen):
     def __getButtonsFrame(self):
         return self.__buttonsFrame
 
+    def on_slider_change(self, value):
+        print(f"Slider changed to: {value}")
 
     def render(self):
         header = screenHeader(
@@ -43,6 +44,15 @@ class playerScreen(tk.Frame, Screen):
             lambda: self.switchScreen(self.getAppController().renderStartScreen()), 
             'Track Parameters',
             self.getAppController().getScreenSize()
+        )
+
+        slider = sliderWithLabel(
+            parent=self,
+            from_=0,
+            to=100,
+            length=600,
+            command=self.on_slider_change,
+            initial_value=50
         )
 
         # Create paramBoxGroup instance
@@ -61,6 +71,9 @@ class playerScreen(tk.Frame, Screen):
 
         # Place ParamBoxGroup in the next rows
         allParamBox.grid(row=1, column=0, columnspan=2, sticky="NSEW", pady=20)
+
+        # Place Slider at 4th row
+        slider.grid(row=4, column=0, sticky="N", columnspan=2)
 
         # Place Buttons in the last row
         self.__getButtonsFrame().grid(row=5, column=0, sticky="N", columnspan=2)

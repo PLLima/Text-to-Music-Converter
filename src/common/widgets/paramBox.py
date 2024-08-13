@@ -20,11 +20,18 @@ class paramBox(tk.Frame):
         self.border_color = border_color
         self.border_width = border_width
         self.setInstance()
+        # self.getInstance().pack(expand=True, fill="both")
 
     def setInstance(self):
+        self.configure(bg="#636363")
+        self.configure(bd=0.5)
         self.font = tkFont.Font(family=self.font_family, size=self.font_size, weight=self.font_weight)
-        self.label = tk.Label(self, text=f"{self.line1}\n{self.line2}", font=self.font, bg=self.bg, fg=self.font_color, anchor='center', justify='center', padx=10, pady=10, borderwidth=self.border_width, relief='solid', highlightbackground=self.border_color)
+        self.label = tk.Label(self, text=f"{self.line1}\n{self.line2}", font=self.font, bg=self.bg, fg=self.font_color, anchor='center', justify='center', padx=10, pady=10, borderwidth=0, relief='solid', highlightbackground=self.border_color)
         self.label.place(x=0, y=0, width=self.width, height=self.height)
+
+
+    def getInstance(self):
+        return self.label
 
     def setContent(self, line1, line2):
         self.line1 = line1
