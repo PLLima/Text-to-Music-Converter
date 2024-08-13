@@ -9,6 +9,7 @@ TEXT_SCALES = {
     "ScreenTitle": 0.054133333,
     "TextButton": 0.030041667,
     "TableContent": 0.015,
+    "ParamsScreenTextbox": 0.02,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
@@ -41,5 +42,6 @@ TEXTBOX_COLORS = {
     "Background": '#dcdcdc',
     "Foreground": '#000000',
     "ForegroundDisabled": '#636363',
+    "ForegroundPlaceholder": '#636363',
     "Border": '#636363',
 }
