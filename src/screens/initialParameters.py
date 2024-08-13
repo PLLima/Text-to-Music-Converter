@@ -30,8 +30,10 @@ class paramsScreen(ttk.Frame, Screen):
 
         textInput = textbox(self.__getTextOptionsFrame(), textboxPlaceholder, maxCharacters)
         textInput.setHeight(9)
-        textInput.setWidth(100)
+        textInput.setWidth(105)
         textInput.setFontSize(calculateFontSize(TEXT_SCALES["ParamsScreenTextbox"], self.getAppController().getScreenSize()))
+        textInput.setContent('Testando...' * 150)
+        textInput.disable()
         textInput.grid(row=0, column=0, sticky="S", ipady=10)
 
         self.__setTextButtonFrame('Import', None)
@@ -47,7 +49,7 @@ class paramsScreen(ttk.Frame, Screen):
         header = screenHeader(self, lambda: self.switchScreen(self.getAppController().renderStartScreen()), 'Initial Parameters',
                               self.getAppController().getScreenSize())
         
-        self.__setTextOptionsFrame('Insert your text here.', 1000)
+        self.__setTextOptionsFrame('Insert your text here.', 1050)
 
         header.grid(row=0, column=0, sticky="NSEW", pady=20)
         self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NSEW")

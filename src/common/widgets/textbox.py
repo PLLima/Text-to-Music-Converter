@@ -6,6 +6,9 @@ import tkinter as tk
 import tkinter.font as tkFont
 
 class textbox(tk.Frame, Child):
+    __allowedKeys = ('BackSpace', 'Delete', 'Down', 'Up', 'Left', 'Right', 'End', 'Home', 'KP_Up',
+                            'KP_Down', 'KP_Left', 'KP_Right', 'KP_End', 'KP_Home')
+
     def __init__(self, parent, placeholder, maxCharacters):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
@@ -16,14 +19,16 @@ class textbox(tk.Frame, Child):
         self.getInstance().bind('<FocusIn>', self.__focusIn)
         self.getInstance().bind('<FocusOut>', self.__focusOut)
         self.getInstance().bind('<KeyPress>', lambda event: self.__checkCharacters(event))
+        self.getInstance().bind('<Configure>', lambda event: self.__checkCharacters(event))
         self.__writePlaceholder()
+        self.__setScrollbar()
         self.getInstance().pack(expand=True, fill='both')
 
     def __setInstance(self):
         self.configure(bg=TEXTBOX_COLORS["Border"])
         self.configure(bd=0.5)
         self.__instance = tk.Text(self, borderwidth=0, highlightthickness= 0, relief='solid',
-                                   bg=TEXTBOX_COLORS["Background"], padx=15, pady=15)
+                                   bg=TEXTBOX_COLORS["Background"], wrap='word', padx=15, pady=15)
 
     def getInstance(self):
         return self.__instance
@@ -90,9 +95,22 @@ class textbox(tk.Frame, Child):
     def __getForegroundColor(self):
         return self.getInstance().cget("fg")
 
+    def __setScrollbar(self):
+        self.__scrollbar = tk.Scrollbar(self, orient=tk.VERTICAL, command=self.getInstance().yview)
+        self.getInstance().configure(yscrollcommand=self.__scrollbar.set)
+
+    def __getScrollbar(self):
+        return self.__scrollbar
+
     def __writePlaceholder(self):
         self.setContent(self.__getPlaceholder())
         self.__setForegroundColor(TEXTBOX_COLORS["ForegroundPlaceholder"])
+
+    def __isTextVisible(self):
+        correctionTerm =  - 30
+        contentHeight = self.getInstance().count("1.0", tk.END, "ypixels")[0]
+        visibleHeight = self.getInstance().winfo_height() + correctionTerm
+        return contentHeight > visibleHeight
 
     def __focusIn(self, *args):
         if self.__getForegroundColor() == TEXTBOX_COLORS["ForegroundPlaceholder"]:
@@ -104,18 +122,31 @@ class textbox(tk.Frame, Child):
             self.__writePlaceholder()
 
     def __checkCharacters(self, event, *args):
-        if event.keysym in ('BackSpace', 'Delete', 'Down', 'Up', 'Left', 'Right', 'End', 'Home', 'KP_Up',
-                            'KP_Down', 'KP_Left', 'KP_Right', 'KP_End', 'KP_Home'):
+        # Check if scrollbar should be created or not
+        if self.__isTextVisible():
+            self.getInstance().pack_forget()
+            self.__getScrollbar().pack(side=tk.RIGHT, fill=tk.Y)
+            self.getInstance().pack(expand=True, fill='both')
+        else:
+            self.__getScrollbar().pack_forget()
+
+        if event.keysym in self.__allowedKeys:
             return
 
         if self.getCharacterCount() > self.__getMaxCharacters():
             self.getInstance().delete('1.0 + %d chars' % self.__getMaxCharacters(), tk.END)
-            return "break"
+            return 'break'
 
     def enable(self):
         self.getInstance().configure(state=tk.NORMAL)
 
     def disable(self):
-        self.getInstance().configure(cursor='X_cursor')
-        self.__setForegroundColor(TEXTBOX_COLORS["ForegroundDisabled"])
+        self.getInstance().tag_configure("disabled", foreground=TEXTBOX_COLORS["ForegroundDisabled"])
+        self.getInstance().tag_configure("sel", foreground=TEXTBOX_COLORS["ForegroundDisabled"])
+        self.getInstance().tag_add("disabled", "1.0", tk.END)
+        # Check if scrollbar should be created or not
+        if self.__isTextVisible():
+            self.getInstance().pack_forget()
+            self.__getScrollbar().pack(side=tk.RIGHT, fill=tk.Y)
+            self.getInstance().pack(expand=True, fill='both')
         self.getInstance().configure(state=tk.DISABLED)
