@@ -1,4 +1,4 @@
-from common.dictionaries import SCREEN_MEASURE
+from common.dictionaries import SCREEN_MEASURE, SCREEN_ICON
 from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
@@ -15,6 +15,13 @@ class mainApplication(ttk.Frame, Child):
 
     def getAppName(self):
         return self.__appName
+
+    def setAppIcon(self, iconPath):
+        self.__icon = tk.PhotoImage(file=iconPath)
+        self.getParent().iconphoto(False, self.getAppIcon())
+
+    def getAppIcon(self):
+        return self.__icon
 
     def setMinAppScreenSize(self, minSize):
         self.__appMinScreenSize = minSize
@@ -49,6 +56,7 @@ def main():
     # Set main screen parameters
     app = mainApplication(root)
     app.setAppName('Text to Music Converter')
+    app.setAppIcon(SCREEN_ICON["Path"])
     app.setMinAppScreenSize(minScreenSize)
     app.setMaxAppScreenSize(maxScreenSize)
     app.setAppScreenSize(maxScreenSize)

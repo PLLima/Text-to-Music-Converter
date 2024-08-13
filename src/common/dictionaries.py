@@ -3,11 +3,16 @@ SCREEN_MEASURE = {
     "Height": 1,
 }
 
+SCREEN_ICON = {
+    "Path": './src/images/icon.png'
+}
+
 TEXT_SCALES = {
     "MainHeader": 0.0725,
     "MainSubtitle": 0.029041667,
     "ScreenTitle": 0.054133333,
     "TextButton": 0.030041667,
+    "ImportButton": 0.024033334,
     "TableContent": 0.015,
     "ParamsScreenTextbox": 0.02,
 }
