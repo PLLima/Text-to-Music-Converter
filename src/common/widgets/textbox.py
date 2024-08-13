@@ -87,7 +87,7 @@ class textbox(tk.Frame, Child):
 
     def __getFont(self):
         return self.__font
-    
+
     def setFontSize(self, fontSize):
         font = tkFont.Font(family=FONTS["Textbox"], size=fontSize)
         self.__setFont(font)
@@ -150,6 +150,7 @@ class textbox(tk.Frame, Child):
 
     def enable(self):
         self.getInstance().configure(state=tk.NORMAL)
+        self.__setForegroundColor(TEXTBOX_COLORS["Foreground"])
 
     def disable(self):
         self.getInstance().tag_configure("disabled", foreground=TEXTBOX_COLORS["ForegroundDisabled"])

@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog as fd
 
 from common.classes import Screen
 from common.functions import calculateFontSize
@@ -38,6 +39,17 @@ class paramsScreen(tk.Frame, Screen):
 
     def __checkTextboxCharacter(self, event, *args):
         self.__getCharacterCounter().setCounter(len(self.__getTextbox().getContent()) - 1)
+
+    def __openTextFile(self, maxCharacters):
+        file = fd.askopenfile(mode='r', title='Open a text file', initialdir='./', filetypes=[('Text files', '*.txt')])
+        if file != None:
+            text = file.read()
+            if len(text) > maxCharacters:
+                text = text[:maxCharacters]
+            if text != '':
+                self.__getTextbox().setContent(text)
+                self.__getTextbox().enable()
+                self.__getCharacterCounter().setCounter(len(text))
 
     def __setTextButtonFrame(self, textButton1, commandButton1, maxCharacters):
         self.__textButtonFrame = tk.Frame(self.__getTextOptionsFrame(), bg=SCREEN_COLORS["Background"])
@@ -84,7 +96,7 @@ class paramsScreen(tk.Frame, Screen):
         header = screenHeader(self, lambda: self.switchScreen(self.getAppController().renderStartScreen()), 'Initial Parameters',
                               self.getAppController().getScreenSize())
         
-        self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"], None)
+        self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"], lambda: self.__openTextFile(TEXTBOX_PARAMS["MaxCharacters"]))
 
         header.grid(row=0, column=0, sticky="NEW", pady=20)
         self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NEW")
