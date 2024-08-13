@@ -45,3 +45,7 @@ TEXTBOX_COLORS = {
     "ForegroundPlaceholder": '#636363',
     "Border": '#636363',
 }
+
+TEXTBOX_PARAMS = {
+    "MaxCharacters": 1050
+}

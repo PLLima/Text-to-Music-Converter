@@ -2,7 +2,7 @@ from tkinter import ttk
 
 from common.classes import Screen
 from common.functions import calculateFontSize
-from common.dictionaries import TEXT_SCALES, BUTTON_COLORS
+from common.dictionaries import TEXT_SCALES, TEXTBOX_PARAMS, BUTTON_COLORS
 from common.widgets.screenHeader import screenHeader
 from common.widgets.button import textButton
 from common.widgets.textbox import textbox
@@ -47,7 +47,7 @@ class paramsScreen(ttk.Frame, Screen):
         header = screenHeader(self, lambda: self.switchScreen(self.getAppController().renderStartScreen()), 'Initial Parameters',
                               self.getAppController().getScreenSize())
         
-        self.__setTextOptionsFrame('Insert your text here.', 1050)
+        self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"])
 
         header.grid(row=0, column=0, sticky="NSEW", pady=20)
         self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NSEW")
