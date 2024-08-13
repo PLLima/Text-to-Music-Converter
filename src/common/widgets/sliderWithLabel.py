@@ -9,15 +9,15 @@ class sliderWithLabel(ttk.Frame):
         self.from_ = from_
         self.to = to
 
-        # Cria a Label à esquerda
+        # Create label to the left
         self.label_left = tk.Label(self, text=str(int(initial_value if initial_value is not None else from_)))
         self.label_left.pack(side=tk.LEFT)
 
-        # Cria a Label à direita
+        # Create label to the right
         self.label_right = tk.Label(self, text=str(int(to)))
         self.label_right.pack(side=tk.RIGHT)
 
-        # Cria o sliderModel
+        # Create slider model
         self.slider = sliderModel(
             self,
             from_=from_,
@@ -28,13 +28,13 @@ class sliderWithLabel(ttk.Frame):
         )
         self.slider.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
-        # Atualiza o valor da Label quando o slider é movido
+        # Updates Label value when slider is moved
         if initial_value is not None:
             self.slider.set(initial_value)
             self._update_labels(initial_value)
 
     def _update_labels(self, value):
-        # Formata o valor para ser um inteiro
+        # Formats labels to integers
         value = int(float(value))
         self.label_left.config(text=str(value))
         self.label_right.config(text=str(self.to))
