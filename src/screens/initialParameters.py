@@ -21,6 +21,15 @@ class paramsScreen(tk.Frame, Screen):
     def __getTextbox(self):
         return self.__textInput
 
+    def __setImportButton(self, parent, command):
+        self.__importButton = textButton(parent, command)
+
+    def __getImportButton(self):
+        return self.__importButton
+
+    def __getCharacterCounter(self):
+        return self.__characterCounter
+
     def __setCharacterCounter(self, parent, maxCharacters):
         self.__characterCounter = textboxCounter(parent, maxCharacters)
 
@@ -36,11 +45,11 @@ class paramsScreen(tk.Frame, Screen):
         self.__getTextButtonFrame().grid_rowconfigure(0, weight=1)
         self.__getTextButtonFrame().grid_columnconfigure((0, 1), weight=1, uniform="column")
 
-        importButton = textButton(self.__getTextButtonFrame(), commandButton1)
-        importButton.setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
-        importButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        importButton.setPadding(padx=25, pady=3)
-        importButton.getInstance().grid(row=0, column=0, sticky="W", pady=6)
+        self.__setImportButton(self.__getTextButtonFrame(), commandButton1)
+        self.__getImportButton().setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
+        self.__getImportButton().setBackgroundColor(BUTTON_COLORS["Red"])
+        self.__getImportButton().setPadding(padx=25, pady=3)
+        self.__getImportButton().getInstance().grid(row=0, column=0, sticky="W", pady=6)
 
         self.__setCharacterCounter(self.__getTextButtonFrame(), maxCharacters)
         self.__getCharacterCounter().setFontSize(calculateFontSize(TEXT_SCALES["TextboxCounter"], self.getAppController().getScreenSize()))
