@@ -20,6 +20,7 @@ FONTS = {
     "TextButton": 'Courier New',
     "Table": 'Courier New',
     "Textbox": 'Courier New',
+    "Parambox": 'Courier New',
 }
 
 BUTTON_COLORS = {
