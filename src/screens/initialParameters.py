@@ -32,8 +32,6 @@ class paramsScreen(ttk.Frame, Screen):
         textInput.setHeight(9)
         textInput.setWidth(105)
         textInput.setFontSize(calculateFontSize(TEXT_SCALES["ParamsScreenTextbox"], self.getAppController().getScreenSize()))
-        textInput.setContent('Testando...' * 150)
-        textInput.disable()
         textInput.grid(row=0, column=0, sticky="S", ipady=10)
 
         self.__setTextButtonFrame('Import', None)
