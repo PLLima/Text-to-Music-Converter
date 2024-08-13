@@ -42,7 +42,6 @@ class textButton(button):
         self.getInstance().configure(disabledforeground=BUTTON_COLORS["Foreground"])
         self.getInstance().configure(activeforeground=BUTTON_COLORS["Foreground"])
         self.getInstance().configure(highlightcolor=BUTTON_COLORS["Foreground"])
-        self.getInstance().configure(cursor='hand2')
 
     def __setFont(self, fontSize):
         self.__font = tkFont.Font(family=FONTS["TextButton"], size=fontSize)
@@ -59,11 +58,13 @@ class textButton(button):
         self.getInstance().configure(bg=BUTTON_COLORS["Red"])
         self.getInstance().configure(activebackground=BUTTON_COLORS["RedActive"])
         self.getInstance().configure(highlightbackground=BUTTON_COLORS["RedActive"])
+        self.getInstance().configure(cursor='hand2')
 
     def __setBackgroundColorBlack(self):
         self.getInstance().configure(bg=BUTTON_COLORS["Black"])
         self.getInstance().configure(activebackground=BUTTON_COLORS["BlackActive"])
         self.getInstance().configure(highlightbackground=BUTTON_COLORS["BlackActive"])
+        self.getInstance().configure(cursor='hand2')
 
     def __setBackgroundColorGray(self):
         self.getInstance().configure(bg=BUTTON_COLORS["Gray"])
@@ -84,6 +85,7 @@ class textButton(button):
 
     def enable(self):
         self.getInstance().configure(state=tk.NORMAL)
+        self.setBackgroundColor(BUTTON_COLORS["Red"])
 
     def disable(self):
         self.setBackgroundColor(BUTTON_COLORS["Gray"])
