@@ -42,4 +42,3 @@ class midiGen:
 
         x = bool(1)
         return True, mid
-        #mid.save('output.mid')
