@@ -1,7 +1,7 @@
 from common.classes import Child
 from screens.start import startScreen
 from screens.learnMore import learnScreen
-#from screens.initialParameters import paramsScreen
+from screens.initialParameters import paramsScreen
 #from screens.musicPlayer import playerScreen
 
 class appController(Child):
@@ -45,9 +45,9 @@ class appController(Child):
     def __getParamsScreen(self):
         return self.__paramsScreen
 
-    # def renderParamsScreen(self):
-    #     self.__setParamsScreen(paramsScreen(self))
-    #     self.__getParamsScreen().render()
+    def renderParamsScreen(self):
+         self.__setParamsScreen(paramsScreen(self))
+         self.__getParamsScreen().render()
 
     def __setPlayerScreen(self, playerScreen):
         self.__playerScreen = playerScreen
@@ -55,6 +55,6 @@ class appController(Child):
     def __getPlayerScreen(self):
         return self.__playerScreen
 
-    # def renderPlayerScreen(self):
-    #     self.__selfPlayerScreen(playerScreen(self))
-    #     self.__getPlayerScreen().render()
+    def renderPlayerScreen(self):
+        self.__setPlayerScreen(playerScreen(self))
+        self.__getPlayerScreen().render()
