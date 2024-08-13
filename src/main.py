@@ -2,6 +2,7 @@ from common.dictionaries import SCREEN_MEASURE, SCREEN_ICON
 from common.classes import Child
 import tkinter as tk
 from tkinter import ttk
+from PIL import Image, ImageTk
 from controller import appController
 
 class mainApplication(ttk.Frame, Child):
@@ -17,7 +18,9 @@ class mainApplication(ttk.Frame, Child):
         return self.__appName
 
     def setAppIcon(self, iconPath):
-        self.__icon = tk.PhotoImage(file=iconPath)
+        image = Image.open(iconPath)
+        resizedImage = image.resize((128, 128), Image.LANCZOS)
+        self.__icon = ImageTk.PhotoImage(resizedImage)
         self.getParent().iconphoto(False, self.getAppIcon())
 
     def getAppIcon(self):
