@@ -33,6 +33,12 @@ FONTS = {
     "Textbox": 'Courier New',
     "TextboxCounter": 'Courier New',
     "Parambox": 'Courier New',
+    "SliderLabel": 'Courier New',
+}
+
+FONT_SIZES = {
+    "Boxes": 18,
+    "SliderLabel": 18
 }
 
 BUTTON_COLORS = {

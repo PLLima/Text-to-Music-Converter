@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from common.functions import calculateFontSize
-from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, BUTTON_COLORS, FONTS
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, BUTTON_COLORS, FONTS, TEXTBOX_PARAMS
 from common.widgets.button import textButton
 from common.classes import Screen
 from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
 from common.widgets.sliderWithLabel import sliderWithLabel
+from common.widgets.textbox import textbox
 
 class playerScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -38,6 +39,7 @@ class playerScreen(tk.Frame, Screen):
     def on_slider_change(self, value):
         print(f"Slider changed to: {value}")
 
+
     def render(self):
         header = screenHeader(
             self, 
@@ -52,8 +54,20 @@ class playerScreen(tk.Frame, Screen):
             to=100,
             length=600,
             command=self.on_slider_change,
-            initial_value=50
+            initial_value=0
         )
+
+        stringInput = textbox(
+            parent=self,
+            placeholder=None,
+            maxCharacters=TEXTBOX_PARAMS["MaxCharacters"],
+            keyPressedFunction=None
+        )
+
+        APAGAR = "TESTE DE STRING PARA A TEXTBOX"*150
+
+        stringInput.setContent(APAGAR)
+        stringInput.disable()
 
         # Create paramBoxGroup instance
         allParamBox = paramBoxGroup(self)
@@ -63,19 +77,22 @@ class playerScreen(tk.Frame, Screen):
                                'Download', lambda: self.switchScreen(self.getAppController().renderLearnScreen()))
         
         # Grid configuration for the main frame
-        self.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
+        self.grid_rowconfigure((0, 1, 2, 3), weight=1, minsize=80)
         self.grid_columnconfigure((0, 1), weight=1)
 
         # Place header in the first row
         header.grid(row=0, column=0, sticky="NSEW", pady=20, columnspan=2)
 
         # Place ParamBoxGroup in the next rows
-        allParamBox.grid(row=1, column=0, columnspan=2, sticky="NSEW", pady=20)
+        allParamBox.grid(row=1, column=0, columnspan=1, sticky="NSEW", pady=20)
 
-        # Place Slider at 4th row
-        slider.grid(row=4, column=0, sticky="N", columnspan=2)
+        # Place StringInput Textbox in the next rows
+        stringInput.grid(row=1, column=1, columnspan=1, sticky="NSEW", pady=20, padx=(0, 95))
+
+        # Place Slider at 2th row
+        slider.grid(row=2, column=0, sticky="N", columnspan=2, pady=(20, 0))
 
         # Place Buttons in the last row
-        self.__getButtonsFrame().grid(row=5, column=0, sticky="N", columnspan=2)
+        self.__getButtonsFrame().grid(row=3, column=0, sticky="N", columnspan=2)
         
         self.pack(expand=True, fill='both')
