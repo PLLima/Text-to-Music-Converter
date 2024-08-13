@@ -1,14 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
 
+from common.dictionaries import SCREEN_COLORS
 from common.classes import Screen
 from common.widgets.screenHeader import screenHeader
 from common.widgets.table import table
 
-class learnScreen(ttk.Frame, Screen):
+class learnScreen(tk.Frame, Screen):
     def __init__(self, appController):
         self.setParent(appController.getParent())
-        ttk.Frame.__init__(self, self.getParent())
+        tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
 
     def render(self):

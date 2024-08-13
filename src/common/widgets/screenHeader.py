@@ -3,18 +3,18 @@ from tkinter import ttk
 
 from common.classes import Child
 from common.functions import calculateFontSize
-from common.dictionaries import TEXT_SCALES
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES
 from common.widgets.title import screenTitle
 from common.widgets.button import backButton
 
-class screenHeader(ttk.Frame, Child):
+class screenHeader(tk.Frame, Child):
     def __init__(self, parent, lastScreen, title, screenSize):
-        ttk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, bg=SCREEN_COLORS["Background"])
         self.setParent(parent)
         self.__setLastScreen(lastScreen)
         self.__setTitle(title)
     
-        titleFrame = ttk.Frame(self)
+        titleFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.grid_columnconfigure(0, weight=1, uniform='column')
         self.grid_columnconfigure(1, weight=1)

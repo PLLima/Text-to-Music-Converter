@@ -1,13 +1,13 @@
 import tkinter as tk
 from common.functions import calculateFontSize
-from common.dictionaries import TEXT_SCALES, FONTS
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, FONTS
 from common.classes import Child
 import tkinter.font as tkFont
 
 
 class paramBox(tk.Frame):
     def __init__(self, parent, line1="", line2="", width=200, height=200, font_family="Arial", font_size=12, font_weight="normal", font_color="#000000", bg='#d9d9d9', border_color="#636363", border_width=2):
-        super().__init__(parent, width=width, height=height)
+        super().__init__(parent, bg=SCREEN_COLORS["Background"], width=width, height=height)
         self.line1 = line1
         self.line2 = line2
         self.width = width

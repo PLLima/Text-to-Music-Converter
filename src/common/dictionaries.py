@@ -3,6 +3,10 @@ SCREEN_MEASURE = {
     "Height": 1,
 }
 
+SCREEN_COLORS = {
+    "Background": '#ffffff',
+}
+
 SCREEN_ICON = {
     "Path": './src/images/icon.png'
 }
@@ -15,6 +19,7 @@ TEXT_SCALES = {
     "ImportButton": 0.024033334,
     "TableContent": 0.015,
     "ParamsScreenTextbox": 0.02,
+    "TextboxCounter": 0.02,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
@@ -26,6 +31,7 @@ FONTS = {
     "TextButton": 'Courier New',
     "Table": 'Courier New',
     "Textbox": 'Courier New',
+    "TextboxCounter": 'Courier New',
     "Parambox": 'Courier New',
 }
 
@@ -35,8 +41,8 @@ BUTTON_COLORS = {
     "Red": '#f66a6a',
 
     "Foreground": '#ffffff',
-    "BlackActive": '#2F2F2F',
-    "RedActive": '#FB8585',
+    "BlackActive": '#2f2f2f',
+    "RedActive": '#fb8585',
 }
 
 BUTTON_ICONS = {
@@ -53,4 +59,9 @@ TEXTBOX_COLORS = {
 
 TEXTBOX_PARAMS = {
     "MaxCharacters": 1050
+}
+
+TEXTBOXCOUNTER_COLORS = {
+    "Foreground": '#636363',
+    "ForegroundMaxCharacters": '#f66a6a',
 }

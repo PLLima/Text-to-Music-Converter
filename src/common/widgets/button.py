@@ -1,20 +1,21 @@
 from common.classes import Child
 from common.dictionaries import FONTS
-from common.dictionaries import BUTTON_COLORS, BUTTON_ICONS
+from common.dictionaries import SCREEN_COLORS, BUTTON_COLORS, BUTTON_ICONS
 from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkFont
 from PIL import Image, ImageTk
 
-class button(ttk.Frame, Child):
+class button(tk.Frame, Child):
     def __init__(self, parent, clickHandler):
-        ttk.Frame.__init__(self, parent)
         self.setParent(parent)
+        tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.__setEventHandler(clickHandler)
         self.__setInstance()
 
     def __setInstance(self):
-        self.__instance = tk.Button(self.getParent(), command=self.getEventHandler(), bd=0)
+        self.__instance = tk.Button(self.getParent(), command=self.getEventHandler(),
+                                    highlightbackground=SCREEN_COLORS["Background"], bg=SCREEN_COLORS["Background"], bd=0)
 
     def getInstance(self):
         return self.__instance

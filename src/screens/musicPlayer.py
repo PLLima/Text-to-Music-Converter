@@ -2,21 +2,21 @@ import tkinter as tk
 from tkinter import ttk
 
 from common.functions import calculateFontSize
-from common.dictionaries import TEXT_SCALES, BUTTON_COLORS, FONTS
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, BUTTON_COLORS, FONTS
 
 from common.widgets.button import textButton
 from common.classes import Screen
 from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
 
-class playerScreen(ttk.Frame, Screen):
+class playerScreen(tk.Frame, Screen):
     def __init__(self, appController):
         self.setParent(appController.getParent())
-        ttk.Frame.__init__(self, self.getParent())
+        tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
-        self.__buttonsFrame = ttk.Frame(self)
+        self.__buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.__getButtonsFrame().grid_rowconfigure(0, weight=1)
         self.__getButtonsFrame().grid_columnconfigure((0, 1), weight=1)

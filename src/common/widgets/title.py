@@ -11,7 +11,7 @@ class title(ttk.Frame, Child):
         self.__setInstance()
 
     def __setInstance(self):
-        self.__instance = tk.Text(self.getParent(), height=1, borderwidth=0, bg='#d9d9d9', highlightthickness=0)
+        self.__instance = tk.Text(self.getParent(), height=1, borderwidth=0, highlightthickness=0)
         self.getInstance().tag_configure('center', justify='center')
 
     def getInstance(self):

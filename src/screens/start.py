@@ -1,19 +1,20 @@
+import tkinter as tk
 from tkinter import ttk
 
 from common.classes import Screen
 from common.functions import calculateFontSize
-from common.dictionaries import TEXT_SCALES, BUTTON_COLORS
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, BUTTON_COLORS
 from common.widgets.title import mainHeader, mainSubtitle
 from common.widgets.button import textButton
 
-class startScreen(ttk.Frame, Screen):
+class startScreen(tk.Frame, Screen):
     def __init__(self, appController):
         self.setParent(appController.getParent())
-        ttk.Frame.__init__(self, self.getParent())
+        tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
 
     def __setTextsFrame(self, title, subtitle):
-        self.__textsFrame = ttk.Frame(self)
+        self.__textsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         header = mainHeader(self.__getTextsFrame())
         header.setFontSize(calculateFontSize(TEXT_SCALES["MainHeader"], self.getAppController().getScreenSize()))
@@ -29,7 +30,7 @@ class startScreen(ttk.Frame, Screen):
         return self.__textsFrame
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
-        self.__buttonsFrame = ttk.Frame(self)
+        self.__buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.__getButtonsFrame().grid_rowconfigure(0, weight=1)
         self.__getButtonsFrame().grid_columnconfigure((0, 1), weight=1)

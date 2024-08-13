@@ -1,10 +1,10 @@
 import tkinter as tk
 from common.widgets.paramBox import paramBox
-from common.dictionaries import FONTS
+from common.dictionaries import SCREEN_COLORS, FONTS
 
 class paramBoxGroup(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
+        super().__init__(parent, bg=SCREEN_COLORS["Background"], *args, **kwargs)
         self.createBoxGroup()
 
     def createBoxGroup(self):

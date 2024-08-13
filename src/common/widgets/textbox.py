@@ -9,17 +9,17 @@ class textbox(tk.Frame, Child):
     __allowedKeys = ('BackSpace', 'Delete', 'Down', 'Up', 'Left', 'Right', 'End', 'Home', 'KP_Up',
                             'KP_Down', 'KP_Left', 'KP_Right', 'KP_End', 'KP_Home')
 
-    def __init__(self, parent, placeholder, maxCharacters):
+    def __init__(self, parent, placeholder, maxCharacters, keyPressedFunction):
         tk.Frame.__init__(self, parent)
         self.setParent(parent)
         self.__setInstance()
         self.__setPlaceholder(placeholder)
         self.__setMaxCharacters(maxCharacters)
         self.__setForegroundColor(TEXTBOX_COLORS["Foreground"])
+        self.__setKeyPressedFunction(keyPressedFunction)
         self.getInstance().bind('<FocusIn>', self.__focusIn)
         self.getInstance().bind('<FocusOut>', self.__focusOut)
         self.getInstance().bind('<KeyPress>', lambda event: self.__checkCharacters(event))
-        self.getInstance().bind('<Configure>', lambda event: self.__checkCharacters(event))
         self.__writePlaceholder()
         self.__setScrollbar()
         self.getInstance().pack(expand=True, fill='both')
@@ -47,6 +47,12 @@ class textbox(tk.Frame, Child):
 
     def __getPlaceholder(self):
         return self.__placeholder
+
+    def __setKeyPressedFunction(self, keyPressedFunction):
+        self.__keyPressedFunction = keyPressedFunction
+
+    def __getKeyPressedFunction(self):
+        return self.__keyPressedFunction
 
     def setHeight(self, heightInLines):
         self.__height = heightInLines
@@ -122,6 +128,11 @@ class textbox(tk.Frame, Child):
             self.__writePlaceholder()
 
     def __checkCharacters(self, event, *args):
+        # Execute external functions that depend on text input key presses
+        keyPressedFunction = self.__getKeyPressedFunction()
+        if keyPressedFunction != None:
+            keyPressedFunction(event, *args)
+
         # Check if scrollbar should be created or not
         if self.__isTextVisible():
             self.getInstance().pack_forget()
