@@ -82,7 +82,7 @@ class playerScreen(tk.Frame, Screen):
 
     def pressDownloadReset(self):
         currentDR_text = self.downloadResetButton.getText()  # Get the current text of the Download/Reset track button
-        if currentDR_text == "Download": #Call Reset/Download based on button state
+        if currentDR_text == "Download": # Call Reset/Download based on button state
             self.download()
         else:
             self.reset()
@@ -91,7 +91,7 @@ class playerScreen(tk.Frame, Screen):
         pass
 
     def reset():
-        pass
+        player.playMusic()
 
     def render(self):
         header = screenHeader(
