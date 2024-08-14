@@ -114,7 +114,7 @@ class textbox(tk.Frame, Child):
             self.setContent(placeholder)
             self.__setForegroundColor(TEXTBOX_COLORS["ForegroundPlaceholder"])
 
-    def __isTextVisible(self):
+    def __isTextNotVisible(self):
         correctionTerm =  - 30
         contentHeight = self.getInstance().count("1.0", tk.END, "ypixels")[0]
         visibleHeight = self.getInstance().winfo_height() + correctionTerm
@@ -136,7 +136,7 @@ class textbox(tk.Frame, Child):
             keyPressedFunction(event, *args)
 
         # Check if scrollbar should be created or not
-        if self.__isTextVisible():
+        if self.__isTextNotVisible():
             self.getInstance().pack_forget()
             self.__getScrollbar().pack(side=tk.RIGHT, fill=tk.Y)
             self.getInstance().pack(expand=True, fill='both')
@@ -159,7 +159,7 @@ class textbox(tk.Frame, Child):
         self.getInstance().tag_configure("sel", foreground=TEXTBOX_COLORS["ForegroundDisabled"])
         self.getInstance().tag_add("disabled", "1.0", tk.END)
         # Check if scrollbar should be created or not
-        if self.__isTextVisible():
+        if self.__isTextNotVisible():
             self.getInstance().pack_forget()
             self.__getScrollbar().pack(side=tk.RIGHT, fill=tk.Y)
             self.getInstance().pack(expand=True, fill='both')
