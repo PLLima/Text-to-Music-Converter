@@ -3,16 +3,16 @@ from common.widgets.paramBox import paramBox
 from common.dictionaries import SCREEN_COLORS, FONTS, FONT_SIZES
 
 class paramBoxGroup(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, volume="75%", bpm="250", octave="C2", *args, **kwargs):
         super().__init__(parent, bg=SCREEN_COLORS["Background"], *args, **kwargs)
-        self.createBoxGroup()
+        self.createBoxGroup(volume, bpm, octave)
 
-    def createBoxGroup(self):
+    def createBoxGroup(self, volume, bpm, octave):
         # Create and place paramBox widgets
         self.box1 = paramBox(
             self, 
             line1="Volume", 
-            line2="75%", 
+            line2=volume, 
             width=100, 
             height=100, 
             font_family=FONTS["Parambox"], 
@@ -26,7 +26,7 @@ class paramBoxGroup(tk.Frame):
         self.box2 = paramBox(
             self, 
             line1="BPM", 
-            line2="250", 
+            line2=bpm, 
             width=100, 
             height=100, 
             font_family=FONTS["Parambox"], 
@@ -40,7 +40,7 @@ class paramBoxGroup(tk.Frame):
         self.box3 = paramBox(
             self, 
             line1="Octave", 
-            line2="C2", 
+            line2=octave, 
             width=100, 
             height=100, 
             font_family=FONTS["Parambox"], 

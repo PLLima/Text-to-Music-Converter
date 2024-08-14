@@ -14,6 +14,9 @@ class playerScreen(tk.Frame, Screen):
         self.setParent(appController.getParent())
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
+        self.playTrackButton = None  # Initialize the play track button attribute
+        self.downloadButton = None   # Initialize the download button attribute
+        self.slider = None           # Initialize the slider attribute
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
         self.__buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
@@ -21,17 +24,17 @@ class playerScreen(tk.Frame, Screen):
         self.__getButtonsFrame().grid_rowconfigure(0, weight=1)
         self.__getButtonsFrame().grid_columnconfigure((0, 1), weight=1)
 
-        playTrackButton = textButton(self.__getButtonsFrame(), commandButton1)
-        playTrackButton.setText(textButton1, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
-        playTrackButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        playTrackButton.setPadding(padx=45, pady=10)
-        playTrackButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
+        self.playTrackButton = textButton(self.__getButtonsFrame(), commandButton1)  # Store the play track button reference
+        self.playTrackButton.setText(textButton1, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        self.playTrackButton.setBackgroundColor(BUTTON_COLORS["Red"])
+        self.playTrackButton.setPadding(padx=45, pady=10)
+        self.playTrackButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
-        downloadButton = textButton(self.__getButtonsFrame(), commandButton2)
-        downloadButton.setText(textButton2, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
-        downloadButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        downloadButton.setPadding(padx=50, pady=10)
-        downloadButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
+        self.downloadButton = textButton(self.__getButtonsFrame(), commandButton2)  # Store the download button reference
+        self.downloadButton.setText(textButton2, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        self.downloadButton.setBackgroundColor(BUTTON_COLORS["Red"])
+        self.downloadButton.setPadding(padx=50, pady=10)
+        self.downloadButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
 
     def __getButtonsFrame(self):
         return self.__buttonsFrame
@@ -39,6 +42,33 @@ class playerScreen(tk.Frame, Screen):
     def on_slider_change(self, value):
         print(f"Slider changed to: {value}")
 
+    def pressPlay(self):
+        if self.playTrackButton:  # Check if the play track button is initialized
+            current_text = self.playTrackButton.getText()  # Get the current text of the play track button
+            if current_text == "Play Track":
+                # ADICIONAR AQUI O CÓDIGO QUE RODA A MUSICA
+                new_text = "Pause Track"
+                # Disable the download button
+                if self.downloadButton:
+                    self.downloadButton.disable()
+                # Disable the slider
+                if self.slider:
+                    self.slider.slider.config(state=tk.DISABLED)
+            else:
+                # ADICIONAR AQUI O CÓDIGO QUE PAUSA A MUSICA
+                new_text = "Play Track"
+                # Enable the download button
+                if self.downloadButton:
+                    self.downloadButton.enable()
+                # Enable the slider
+                if self.slider:
+                    self.slider.slider.config(state=tk.NORMAL)
+            # Set the new text for the play track button
+            self.playTrackButton.setText(new_text, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+
+    def pressDownload(self):
+        #ADICIONAR AQUI O CÓDIGO QUE BAIXA O ARQUIVO MIDI
+        pass
 
     def render(self):
         header = screenHeader(
@@ -48,7 +78,7 @@ class playerScreen(tk.Frame, Screen):
             self.getAppController().getScreenSize()
         )
 
-        slider = sliderWithLabel(
+        self.slider = sliderWithLabel(
             parent=self,
             from_=0,
             to=100,
@@ -70,11 +100,14 @@ class playerScreen(tk.Frame, Screen):
         stringInput.disable()
 
         # Create paramBoxGroup instance
-        allParamBox = paramBoxGroup(self)
+        initialVolume = 25
+        initialBpm = 250
+        initialOctave = "C2"
+        allParamBox = paramBoxGroup(self, volume=f"{initialVolume}%", bpm=initialBpm, octave=initialOctave)
 
         # Create Buttons Frame
-        self.__setButtonsFrame('Play Track', lambda: self.switchScreen(self.getAppController().renderParamsScreen()),
-                               'Download', lambda: self.switchScreen(self.getAppController().renderLearnScreen()))
+        self.__setButtonsFrame('Play Track', lambda: self.pressPlay(),
+                               'Download', lambda: self.pressDownload())
         
         # Grid configuration for the main frame
         self.grid_rowconfigure((0, 1, 2, 3), weight=1, minsize=80)
@@ -90,7 +123,7 @@ class playerScreen(tk.Frame, Screen):
         stringInput.grid(row=1, column=1, columnspan=1, sticky="NSEW", pady=20, padx=(0, 95))
 
         # Place Slider at 2th row
-        slider.grid(row=2, column=0, sticky="N", columnspan=2, pady=(20, 0))
+        self.slider.grid(row=2, column=0, sticky="N", columnspan=2, pady=(20, 0))
 
         # Place Buttons in the last row
         self.__getButtonsFrame().grid(row=3, column=0, sticky="N", columnspan=2)
