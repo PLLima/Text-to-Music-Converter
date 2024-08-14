@@ -71,3 +71,7 @@ TEXTBOXCOUNTER_COLORS = {
     "Foreground": '#636363',
     "ForegroundMaxCharacters": '#f66a6a',
 }
+
+SLIDER_COLORS = {
+    "Foreground": '#636363',
+}

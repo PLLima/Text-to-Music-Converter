@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from common.widgets.slider import sliderModel
-from common.dictionaries import FONTS, FONT_SIZES
+from common.dictionaries import SCREEN_COLORS, SLIDER_COLORS, FONTS, FONT_SIZES
 
-class sliderWithLabel(ttk.Frame):
+class sliderWithLabel(tk.Frame):
     def __init__(self, parent, from_=0, to=100, length=200, command=None, initial_value=None, orient='horizontal', font_size=FONT_SIZES["SliderLabel"], **kwargs):
-        super().__init__(parent, **kwargs)
+        super().__init__(parent, bg=SCREEN_COLORS["Background"])
 
         self.from_ = from_
         self.to = to
@@ -18,11 +18,13 @@ class sliderWithLabel(ttk.Frame):
         self.label_right_var = tk.StringVar()
 
         # Create label to the left
-        self.label_left = tk.Label(self, textvariable=self.label_left_var, font=self.font, width=6, anchor='e')
+        self.label_left = tk.Label(self, textvariable=self.label_left_var, font=self.font, fg= SLIDER_COLORS["Foreground"],
+                                   bg=SCREEN_COLORS["Background"], width=6, anchor='e')
         self.label_left.pack(side=tk.LEFT, padx=(10, 5))
 
         # Create label to the right
-        self.label_right = tk.Label(self, textvariable=self.label_right_var, font=self.font, width=6, anchor='w')
+        self.label_right = tk.Label(self, textvariable=self.label_right_var, font=self.font, fg= SLIDER_COLORS["Foreground"],
+                                    bg=SCREEN_COLORS["Background"], width=6, anchor='w')
         self.label_right.pack(side=tk.RIGHT, padx=(5, 10))
 
         # Create slider model
