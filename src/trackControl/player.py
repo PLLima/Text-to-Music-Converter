@@ -1,5 +1,5 @@
-from mido import MidiFile
 import pygame
+import os
 class setPlayer:
     def __init__(self,midiFile):
         self.midiFile = midiFile
@@ -17,9 +17,13 @@ class setPlayer:
 
     def unloadMusic(midi):
         pygame.mixer.music.unload()
+        os.remove('output.mid')
 
     def getBusy(midi):
         return pygame.mixer.music.get_busy()
     
     def pauseMusic(midi):
         pygame.mixer.music.pause()
+
+    def downloadMusic(midi, fileName):
+        midi.midiFile.save(fileName + '.mid')
