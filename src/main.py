@@ -49,7 +49,7 @@ class mainApplication(ttk.Frame, Child):
 
     def begin(self):
         # Starting point of the application
-        appController(self).renderPlayerScreen()
+        appController(self).renderStartScreen()
 
 def main():
     minScreenSize = ['1280', '720']

@@ -11,19 +11,25 @@ from common.widgets.textbox import textbox
 from trackControl import player
 
 class playerScreen(tk.Frame, Screen):
-    def __init__(self, appController):
+    def __init__(self, appController, initialVolume, initialBpm, initialOctave, initialString):
         self.setParent(appController.getParent())
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
         self.playTrackButton = None  # Initialize the play track button attribute
         self.downloadButton = None   # Initialize the download button attribute
         self.slider = None           # Initialize the slider attribute
+        
+        self.initialVolume = initialVolume 
+        self.initialBpm = initialBpm 
+        self.initialOctave = initialOctave
+        self.initialString = initialString
+
         self.loadMusicStart()
 
     def loadMusicStart(self):
         # ADICIONAR AQUI O LOAD DA MUSICA
-        music = player.setPlayer(midiFile)
-        music.loadMusic()
+        # music = player.setPlayer(midiFile)
+        # music.loadMusic()
         pass
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
@@ -54,7 +60,6 @@ class playerScreen(tk.Frame, Screen):
         if self.playTrackButton:  # Check if the play track button is initialized
             current_text = self.playTrackButton.getText()  # Get the current text of the play track button
             if current_text == "Play Track":
-                # ADICIONAR AQUI O CÓDIGO QUE RODA A MUSICA
                 player.playMusic()
                 new_text = "Pause Track"
                 # Disable the download button
@@ -66,7 +71,6 @@ class playerScreen(tk.Frame, Screen):
                 # Set a fixed width for the button to prevent resizing
                 self.playTrackButton.getInstance().config(width=12)
             else:
-                # ADICIONAR AQUI O CÓDIGO QUE PAUSA A MUSICA
                 player.pauseMusic()
                 new_text = "Play Track"
                 # Enable the download button
@@ -108,16 +112,17 @@ class playerScreen(tk.Frame, Screen):
             keyPressedFunction=None
         )
 
-        APAGAR = "TESTE DE STRING PARA A TEXTBOX"*150
 
-        stringInput.setContent(APAGAR)
+        stringInput.setContent(self.initialString)
         stringInput.disable()
 
         # Create paramBoxGroup instance
-        initialVolume = 25
-        initialBpm = 250
-        initialOctave = "C2"
-        allParamBox = paramBoxGroup(self, volume=f"{initialVolume}%", bpm=initialBpm, octave=initialOctave)
+        allParamBox = paramBoxGroup(
+            self, 
+            volume = f"{self.initialVolume}%", 
+            bpm = self.initialBpm, 
+            octave = self.initialOctave
+            )
 
         # Create Buttons Frame
         self.__setButtonsFrame('Play Track', lambda: self.pressPlay(),
