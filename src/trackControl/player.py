@@ -7,12 +7,19 @@ class setPlayer:
     def getMusicLength(midi):
         return midi.midiFile.length
     
-    def playMusic(midi):
-        midi.midiFile.save('output.mid')
-
+    def loadMusic(midi):
+        midi.midiFile.save('sound.mid')
         pygame.init()
-        pygame.mixer.music.load("output.mid")
+        pygame.mixer.music.load("sound.mid")
+    
+    def playMusic(midi):
         pygame.mixer.music.play()
-        
+
+    def unloadMusic(midi):
+        pygame.mixer.music.unload()
+
     def getBusy(midi):
         return pygame.mixer.music.get_busy()
+    
+    def pauseMusic(midi):
+        pygame.mixer.music.pause()

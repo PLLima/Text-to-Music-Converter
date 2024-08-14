@@ -8,6 +8,7 @@ from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
 from common.widgets.sliderWithLabel import sliderWithLabel
 from common.widgets.textbox import textbox
+from trackControl import player
 
 class playerScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -47,6 +48,7 @@ class playerScreen(tk.Frame, Screen):
             current_text = self.playTrackButton.getText()  # Get the current text of the play track button
             if current_text == "Play Track":
                 # ADICIONAR AQUI O CÓDIGO QUE RODA A MUSICA
+                player.playMusic()
                 new_text = "Pause Track"
                 # Disable the download button
                 if self.downloadButton:
@@ -56,6 +58,7 @@ class playerScreen(tk.Frame, Screen):
                     self.slider.slider.config(state=tk.DISABLED)
             else:
                 # ADICIONAR AQUI O CÓDIGO QUE PAUSA A MUSICA
+                player.pauseMusic()
                 new_text = "Play Track"
                 # Enable the download button
                 if self.downloadButton:
