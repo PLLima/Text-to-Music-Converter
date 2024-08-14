@@ -17,6 +17,11 @@ class playerScreen(tk.Frame, Screen):
         self.playTrackButton = None  # Initialize the play track button attribute
         self.downloadButton = None   # Initialize the download button attribute
         self.slider = None           # Initialize the slider attribute
+        self.loadMusicStart()
+
+    def loadMusicStart(self):
+        # ADICIONAR AQUI O LOAD DA MUSICA
+        pass
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
         self.__buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
