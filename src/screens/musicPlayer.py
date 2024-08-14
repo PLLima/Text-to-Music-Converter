@@ -22,6 +22,8 @@ class playerScreen(tk.Frame, Screen):
 
     def loadMusicStart(self):
         # ADICIONAR AQUI O LOAD DA MUSICA
+        music = player.setPlayer(midiFile)
+        music.loadMusic()
         pass
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
