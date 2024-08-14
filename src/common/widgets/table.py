@@ -18,21 +18,21 @@ class table():
                ('Space', 'Silence or pause', ';', 'Change BPM to random value'),
                ('+', 'Double the volume', 'Any other Character', 'Keep previous state')]
         
-        total_rows = len(lst)
-        total_columns = len(lst[0])
+        totalRows = len(lst)
+        totalColumns = len(lst[0])
 
         border_thickness = 0.5
-        min_cell_width = 155
+        minCellWidth = 155
         # Internal Label paddings
         iPadding = 7
 
         self.tableFrame = tk.Frame(parent, bd=border_thickness, bg='#636363')
 
         # Create table using bordered Labels
-        for i in range(total_rows):
-            for j in range(total_columns):
+        for i in range(totalRows):
+            for j in range(totalColumns):
                 # Define an apropriate value for cell width
-                wraplength = min_cell_width
+                wraplength = minCellWidth
                 self.eFrame = tk.Frame(self.tableFrame, bd=border_thickness, bg='#636363')
                 self.e = tk.Label(self.eFrame, fg='#636363', font=(FONTS["Table"], calculateFontSize(TEXT_SCALES["TableContent"], screenSize), 'normal'), 
                                    text=lst[i][j], anchor='center', wraplength=wraplength, justify='center', background='#ffffff')
@@ -43,10 +43,10 @@ class table():
                 self.eFrame.grid(row=i, column=j, padx=0, pady=0, sticky='nsew')
 
         # Adjust columns to have the same minimum width
-        for j in range(total_columns):
-            parent.grid_columnconfigure(j, weight=1, minsize=min_cell_width)
+        for j in range(totalColumns):
+            parent.grid_columnconfigure(j, weight=1, minsize=minCellWidth)
         # Adjust lines to have the same height
-        for i in range(total_rows):
+        for i in range(totalRows):
             parent.grid_rowconfigure(i, weight=1)
 
         self.tableFrame.pack()

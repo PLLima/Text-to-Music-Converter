@@ -15,12 +15,12 @@ class paramBoxGroup(tk.Frame):
             line2=volume, 
             width=100, 
             height=100, 
-            font_family=FONTS["Parambox"], 
-            font_size=FONT_SIZES["Boxes"], 
-            font_color="#636363",
+            fontFamily=FONTS["Parambox"], 
+            fontSize=FONT_SIZES["Boxes"], 
+            fontColor="#636363",
             bg='#D9D9D9',
-            border_color="#636363", 
-            border_width=0.5 
+            borderColor="#636363", 
+            borderWidth=0.5 
         )
         
         self.box2 = paramBox(
@@ -29,12 +29,12 @@ class paramBoxGroup(tk.Frame):
             line2=bpm, 
             width=100, 
             height=100, 
-            font_family=FONTS["Parambox"], 
-            font_size=FONT_SIZES["Boxes"], 
-            font_color="#636363",
+            fontFamily=FONTS["Parambox"], 
+            fontSize=FONT_SIZES["Boxes"], 
+            fontColor="#636363",
             bg='#D9D9D9',
-            border_color="#636363", 
-            border_width=0.5 
+            borderColor="#636363", 
+            borderWidth=0.5 
         )
         
         self.box3 = paramBox(
@@ -43,21 +43,21 @@ class paramBoxGroup(tk.Frame):
             line2=octave, 
             width=100, 
             height=100, 
-            font_family=FONTS["Parambox"], 
-            font_size=FONT_SIZES["Boxes"], 
-            font_color="#636363",
+            fontFamily=FONTS["Parambox"], 
+            fontSize=FONT_SIZES["Boxes"], 
+            fontColor="#636363",
             bg='#D9D9D9',
-            border_color="#636363", 
-            border_width=0.5 
+            borderColor="#636363", 
+            borderWidth=0.5 
         )
 
         # Grid configuration with left and right margins
-        margin_left = 95  # Define the margin here
-        margin_right = 40  # Define the right margin here
+        marginLeft = 95  # Define the margin here
+        marginRight = 40  # Define the right margin here
         space = 20         # Space between Boxes
-        self.box1.grid(row=0, column=0, columnspan=2, sticky="NSEW", pady=(0, space), padx=(margin_left, margin_right))
-        self.box2.grid(row=1, column=0, columnspan=2, sticky="NSEW", pady=space/2, padx=(margin_left, margin_right))
-        self.box3.grid(row=2, column=0, columnspan=2, sticky="NSEW", pady=(space, 0), padx=(margin_left, margin_right))
+        self.box1.grid(row=0, column=0, columnspan=2, sticky="NSEW", pady=(0, space), padx=(marginLeft, marginRight))
+        self.box2.grid(row=1, column=0, columnspan=2, sticky="NSEW", pady=space/2, padx=(marginLeft, marginRight))
+        self.box3.grid(row=2, column=0, columnspan=2, sticky="NSEW", pady=(space, 0), padx=(marginLeft, marginRight))
 
         # Configure rows and columns to expand
         self.grid_rowconfigure(0, weight=1)
