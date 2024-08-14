@@ -16,13 +16,15 @@ class playerScreen(tk.Frame, Screen):
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
         self.playTrackButton = None  # Initialize the play track button attribute
-        self.downloadButton = None   # Initialize the download button attribute
+        self.downloadResetButton = None   # Initialize the download button attribute
         self.slider = None           # Initialize the slider attribute
         
         self.initialVolume = initialVolume 
         self.initialBpm = initialBpm 
         self.initialOctave = initialOctave
         self.initialString = initialString
+
+        self.controlPause = 0
 
         self.loadMusicStart()
 
@@ -44,11 +46,11 @@ class playerScreen(tk.Frame, Screen):
         self.playTrackButton.setPadding(padx=45, pady=10)
         self.playTrackButton.getInstance().grid(row=0, column=0, sticky="E", padx=25)
 
-        self.downloadButton = textButton(self.__getButtonsFrame(), commandButton2)  # Store the download button reference
-        self.downloadButton.setText(textButton2, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
-        self.downloadButton.setBackgroundColor(BUTTON_COLORS["Red"])
-        self.downloadButton.setPadding(padx=50, pady=10)
-        self.downloadButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
+        self.downloadResetButton = textButton(self.__getButtonsFrame(), commandButton2)  # Store the download button reference
+        self.downloadResetButton.setText(textButton2, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+        self.downloadResetButton.setBackgroundColor(BUTTON_COLORS["Red"])
+        self.downloadResetButton.setPadding(padx=50, pady=10)
+        self.downloadResetButton.getInstance().grid(row=0, column=1, sticky="W", padx=25)
 
     def __getButtonsFrame(self):
         return self.__buttonsFrame
@@ -58,34 +60,37 @@ class playerScreen(tk.Frame, Screen):
 
     def pressPlay(self):
         if self.playTrackButton:  # Check if the play track button is initialized
-            current_text = self.playTrackButton.getText()  # Get the current text of the play track button
-            if current_text == "Play Track":
-                player.playMusic()
-                new_text = "Pause Track"
-                # Disable the download button
-                if self.downloadButton:
-                    self.downloadButton.disable()
-                # Disable the slider
-                if self.slider:
-                    self.slider.slider.config(state=tk.DISABLED)
-                # Set a fixed width for the button to prevent resizing
-                self.playTrackButton.getInstance().config(width=12)
+            current_textPT = self.playTrackButton.getText()  # Get the current text of the play track button
+            if current_textPT == "Play Track":
+                if self.controlPause == 0:
+                    player.playMusic()
+                    self.controlPause = 1
+                else:
+                    player.unpauseMusic()  
+                new_textPT = "Pause Track"
+                new_textDR = "Reset" # Change button to Reset
             else:
                 player.pauseMusic()
-                new_text = "Play Track"
-                # Enable the download button
-                if self.downloadButton:
-                    self.downloadButton.enable()
-                # Enable the slider
-                if self.slider:
-                    self.slider.slider.config(state=tk.NORMAL)
-                # Set a fixed width for the button to prevent resizing
-                self.playTrackButton.getInstance().config(width=12)
+                new_textPT = "Play Track"
+                new_textDR = "Download" # Change button to Download
             # Set the new text for the play track button
-            self.playTrackButton.setText(new_text, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+            self.playTrackButton.setText(new_textPT, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
+            self.playTrackButton.getInstance().config(width=12) # Set a fixed width for the button to prevent resizing
+            if self.downloadResetButton:
+                self.downloadResetButton.getInstance().config(width=12) # Set a fixed width for the button to prevent resizing
+                self.downloadResetButton.setText(new_textDR, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
 
-    def pressDownload(self):
-        #ADICIONAR AQUI O CÓDIGO QUE BAIXA O ARQUIVO MIDI
+    def pressDownloadReset(self):
+        currentDR_text = self.downloadResetButton.getText()  # Get the current text of the Download/Reset track button
+        if currentDR_text == "Download": #Call Reset/Download based on button state
+            self.download()
+        else:
+            self.reset()
+        
+    def download():
+        pass
+
+    def reset():
         pass
 
     def render(self):
@@ -104,6 +109,10 @@ class playerScreen(tk.Frame, Screen):
             command=self.on_slider_change,
             initial_value=0
         )
+
+        # Disable the slider
+        if self.slider:
+            self.slider.slider.config(state=tk.DISABLED)
 
         stringInput = textbox(
             parent=self,
@@ -126,7 +135,7 @@ class playerScreen(tk.Frame, Screen):
 
         # Create Buttons Frame
         self.__setButtonsFrame('Play Track', lambda: self.pressPlay(),
-                               'Download', lambda: self.pressDownload())
+                               'Download', lambda: self.pressDownloadReset())
         
         # Grid configuration for the main frame
         self.grid_rowconfigure((0, 1, 2, 3), weight=1, minsize=80)
