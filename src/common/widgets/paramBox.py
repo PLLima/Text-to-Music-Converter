@@ -15,24 +15,26 @@ class paramBox(tk.Frame):
         self.setInstance()
 
     def setInstance(self):
-        # Configura a borda do Frame
-        self.configure(borderwidth=self.border_width, relief='solid', highlightbackground=self.border_color)
+        # Configure frame's border
+        self.configure(bd=self.border_width, bg=self.border_color)
 
-        # Cria um Frame interno para centralizar os Labels
+        # Creates an internal frame to fill background correctly
         self.inner_frame = tk.Frame(self, bg=self.bg)
-        self.inner_frame.place(relx=0.5, rely=0.5, anchor='center')
+        self.inner_frame.grid_columnconfigure(0, weight=1)
+        self.inner_frame.grid_rowconfigure((0, 1), weight=1)
 
-        # Configura as fontes para as duas linhas
+        # Configures fonts for both lines
         self.font_line1 = tkFont.Font(family=self.font_family, size=self.font_size, weight="bold")
         self.font_line2 = tkFont.Font(family=self.font_family, size=self.font_size, weight="normal")
 
-        # Cria os labels para cada linha de texto
+        # Creates labels for each line
         self.label_line1 = tk.Label(self.inner_frame, text=self.line1, font=self.font_line1, bg=self.bg, fg=self.font_color)
         self.label_line2 = tk.Label(self.inner_frame, text=self.line2, font=self.font_line2, bg=self.bg, fg=self.font_color)
 
-        # Posiciona os labels dentro do Frame interno
-        self.label_line1.pack()
-        self.label_line2.pack()
+        # Places them inside the inner label
+        self.label_line1.grid(row=0, column=0, sticky="S")
+        self.label_line2.grid(row=1, column=0, sticky="N")
+        self.inner_frame.pack(expand=True, fill='both')
 
     def setContent(self, line1, line2):
         self.line1 = line1
