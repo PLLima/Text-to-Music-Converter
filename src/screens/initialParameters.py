@@ -9,6 +9,7 @@ from common.widgets.screenHeader import screenHeader
 from common.widgets.button import textButton
 from common.widgets.textbox import textbox
 from common.widgets.textboxCounter import textboxCounter
+from common.widgets.slider import paramSlider
 
 class paramsScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -96,30 +97,23 @@ class paramsScreen(tk.Frame, Screen):
     def __getTextOptionsFrame(self):
         return self.__textOptionsFrame
 
-    def __setVolumeSlider(self, initialValue, finalValue, defaultValue):
-        pass
+    def __setVolumeSlider(self, parent, minValue, maxValue, initialValue):
+        self.__volumeSlider = paramSlider(parent, minValue, maxValue, initialValue,
+                                          calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()), True)
 
     def __getVolumeSlider(self):
-        pass
+        return self.__volumeSlider
 
-    def __setOtherParamsFrame(self, textButton1, commandButton1, maxCharacters):
+    def __setOtherParamsFrame(self):
         self.__otherParamsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.__getOtherParamsFrame().grid_rowconfigure((0, 1, 2), weight=1)
         self.__getOtherParamsFrame().grid_columnconfigure(0, weight=1)
 
-
-
-        self.__setImportButton(self.__getTextButtonFrame(), commandButton1)
-        self.__getImportButton().setText(textButton1, calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
-        self.__getImportButton().setBackgroundColor(BUTTON_COLORS["Red"])
-        self.__getImportButton().setPadding(padx=25, pady=3)
-        self.__getImportButton().getInstance().grid(row=0, column=0, sticky="W", pady=6)
-
-        self.__setCharacterCounter(self.__getTextButtonFrame(), maxCharacters)
-        self.__getCharacterCounter().setFontSize(calculateFontSize(TEXT_SCALES["TextboxCounter"], self.getAppController().getScreenSize()))
-        self.__getCharacterCounter().setCounter(0)
-        self.__getCharacterCounter().grid(row=0, column=1, sticky="E", padx=20, pady=6)
+        self.__setVolumeSlider(self.__getOtherParamsFrame(), 0, 100, 50)
+        self.__getVolumeSlider().setTitleText('Volume', calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
+        self.__getVolumeSlider().setTextPadding(40, 40)
+        self.__getVolumeSlider().grid(row=0, column=0, sticky="NEW", padx=250)
 
     def __getOtherParamsFrame(self):
         return self.__otherParamsFrame
@@ -154,10 +148,11 @@ class paramsScreen(tk.Frame, Screen):
                               self.getAppController().getScreenSize())
         
         self.__setTextOptionsFrame('Insert your text here.', TEXTBOX_PARAMS["MaxCharacters"], lambda: self.__openTextFile(TEXTBOX_PARAMS["MaxCharacters"]))
-
+        self.__setOtherParamsFrame()
         self.__setGenerateFrame('Generate Music', lambda: self.__generateMusic())
 
         header.grid(row=0, column=0, sticky="NEW", pady=20)
         self.__getTextOptionsFrame().grid(row=1, column=0, sticky="NEW")
+        self.__getOtherParamsFrame().grid(row=2, column=0, sticky="NEW")
         self.__getGenerateFrame().grid(row=3, column=0, sticky="SEW")
         self.pack(expand=True, fill='both')
