@@ -6,7 +6,7 @@ from common.widgets.button import textButton
 from common.classes import Screen
 from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
-from common.widgets.sliderWithLabel import sliderWithLabel
+from common.widgets.slider import sliderWithLabel
 from common.widgets.textbox import textbox
 from trackControl import player
 
