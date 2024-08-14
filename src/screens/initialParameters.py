@@ -99,10 +99,17 @@ class paramsScreen(tk.Frame, Screen):
 
     def __setVolumeSlider(self, parent, minValue, maxValue, initialValue):
         self.__volumeSlider = paramSlider(parent, minValue, maxValue, initialValue,
-                                          calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()), True)
+                                          calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()), True)
 
     def __getVolumeSlider(self):
         return self.__volumeSlider
+
+    def __setBPMSlider(self, parent, minValue, maxValue, initialValue):
+        self.__BPMSlider = paramSlider(parent, minValue, maxValue, initialValue,
+                                          calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()), False)
+
+    def __getBPMSlider(self):
+        return self.__BPMSlider
 
     def __setOtherParamsFrame(self):
         self.__otherParamsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
@@ -111,9 +118,14 @@ class paramsScreen(tk.Frame, Screen):
         self.__getOtherParamsFrame().grid_columnconfigure(0, weight=1)
 
         self.__setVolumeSlider(self.__getOtherParamsFrame(), 0, 100, 50)
-        self.__getVolumeSlider().setTitleText('Volume', calculateFontSize(TEXT_SCALES["ImportButton"], self.getAppController().getScreenSize()))
+        self.__getVolumeSlider().setTitleText('Volume', calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()))
         self.__getVolumeSlider().setTextPadding(40, 40)
-        self.__getVolumeSlider().grid(row=0, column=0, sticky="NEW", padx=250)
+        self.__getVolumeSlider().grid(row=0, column=0, sticky="NSEW", padx=250, pady=7)
+
+        self.__setBPMSlider(self.__getOtherParamsFrame(), 1, 1000, 500)
+        self.__getBPMSlider().setTitleText('BPM', calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()))
+        self.__getBPMSlider().setTextPadding(82, 40)
+        self.__getBPMSlider().grid(row=1, column=0, sticky="NSEW", padx=250, pady=7)
 
     def __getOtherParamsFrame(self):
         return self.__otherParamsFrame

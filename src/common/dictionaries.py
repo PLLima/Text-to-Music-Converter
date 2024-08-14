@@ -20,6 +20,7 @@ TEXT_SCALES = {
     "TableContent": 0.015,
     "ParamsScreenTextbox": 0.02,
     "TextboxCounter": 0.02,
+    "SliderFont": 0.024033334,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005

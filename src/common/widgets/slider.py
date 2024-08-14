@@ -112,8 +112,9 @@ class paramSlider(tk.Frame, sliderModel, Child):
         else:
             self.__enablePercentage()
         self.__setMaxValue(maxValue)
-        self.setTextPadding(40, 40)
+        self.setTitleText('', 1)
         self.__createLabel(initialValue, fontSize)
+        self.setTextPadding(0, 0)
         self.__setSlider(minValue, maxValue, initialValue)
 
         self.grid_rowconfigure(0, weight=1)
@@ -122,6 +123,8 @@ class paramSlider(tk.Frame, sliderModel, Child):
     def setTextPadding(self, padxLeft, padxRight):
         self.__padxLeft = padxLeft
         self.__padxRight = padxRight
+        self.__getTitle().grid(row=0, column=0, sticky="E", padx=(0, self.getTextPaddingLeft()))
+        self.__getLabel().grid(row=0, column=2, sticky="W", padx=(self.getTextPaddingRight(), 0))
 
     def getTextPaddingLeft(self):
         return self.__padxLeft
@@ -146,7 +149,6 @@ class paramSlider(tk.Frame, sliderModel, Child):
     def __setTitle(self, title, fontSize):
         titleFont = tkFont.Font(family=FONTS["SliderLabel"], size=fontSize, weight='bold')
         self.__title = tk.Label(self, text=title, font=titleFont, bg=SCREEN_COLORS["Background"], fg=SLIDER_COLORS["Foreground"])
-        self.__getTitle().grid(row=0, column=0, sticky="E", padx=(0, self.getTextPaddingLeft()))
 
     def __getTitle(self):
         return self.__title
@@ -180,7 +182,6 @@ class paramSlider(tk.Frame, sliderModel, Child):
             labelLength = len(str(self.__getMaxValue())) + 1
         self.__label = tk.Label(self, textvariable= self.__getLabelVar(), font=labelFont, width=labelLength,
                                 bg=SCREEN_COLORS["Background"], fg=SLIDER_COLORS["Foreground"])
-        self.__getLabel().grid(row=0, column=2, sticky="W", padx=(self.getTextPaddingRight(), 0))
 
     def __getLabel(self):
         return self.__label
