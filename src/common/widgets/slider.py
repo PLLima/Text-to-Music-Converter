@@ -98,6 +98,9 @@ class sliderWithLabel(tk.Frame):
 
     def get_initial_value(self):
         return self.slider.getValue()
+    
+    def disable(self):
+        self.slider.config(state=tk.DISABLED)
 
 class paramSlider(tk.Frame, sliderModel, Child):
     def __init__(self, parent, minValue=0, maxValue=100, length=200, command=None, initialValue=None, orient='horizontal'):
