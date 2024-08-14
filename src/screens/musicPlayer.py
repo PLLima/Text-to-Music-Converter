@@ -54,6 +54,8 @@ class playerScreen(tk.Frame, Screen):
                 # Disable the slider
                 if self.slider:
                     self.slider.slider.config(state=tk.DISABLED)
+                # Set a fixed width for the button to prevent resizing
+                self.playTrackButton.getInstance().config(width=12)
             else:
                 # ADICIONAR AQUI O CÓDIGO QUE PAUSA A MUSICA
                 new_text = "Play Track"
@@ -63,6 +65,8 @@ class playerScreen(tk.Frame, Screen):
                 # Enable the slider
                 if self.slider:
                     self.slider.slider.config(state=tk.NORMAL)
+                # Set a fixed width for the button to prevent resizing
+                self.playTrackButton.getInstance().config(width=12)
             # Set the new text for the play track button
             self.playTrackButton.setText(new_text, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
 
