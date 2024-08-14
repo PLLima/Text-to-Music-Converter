@@ -18,6 +18,11 @@ class playerScreen(tk.Frame, Screen):
         self.playTrackButton = None  # Initialize the play track button attribute
         self.downloadButton = None   # Initialize the download button attribute
         self.slider = None           # Initialize the slider attribute
+        self.loadMusicStart()
+
+    def loadMusicStart(self):
+        # ADICIONAR AQUI O LOAD DA MUSICA
+        pass
 
     def __setButtonsFrame(self, textButton1, commandButton1, textButton2, commandButton2):
         self.__buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
@@ -56,6 +61,8 @@ class playerScreen(tk.Frame, Screen):
                 # Disable the slider
                 if self.slider:
                     self.slider.slider.config(state=tk.DISABLED)
+                # Set a fixed width for the button to prevent resizing
+                self.playTrackButton.getInstance().config(width=12)
             else:
                 # ADICIONAR AQUI O CÓDIGO QUE PAUSA A MUSICA
                 player.pauseMusic()
@@ -66,6 +73,8 @@ class playerScreen(tk.Frame, Screen):
                 # Enable the slider
                 if self.slider:
                     self.slider.slider.config(state=tk.NORMAL)
+                # Set a fixed width for the button to prevent resizing
+                self.playTrackButton.getInstance().config(width=12)
             # Set the new text for the play track button
             self.playTrackButton.setText(new_text, calculateFontSize(TEXT_SCALES["TextButton"], self.getAppController().getScreenSize()))
 
