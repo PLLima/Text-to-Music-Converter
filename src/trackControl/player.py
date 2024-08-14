@@ -24,6 +24,12 @@ class setPlayer:
     
     def pauseMusic(midi):
         pygame.mixer.music.pause()
+    
+    def unpauseMusic(midi):
+        pygame.mixer.music.unpause()
 
     def downloadMusic(midi, fileName):
         midi.midiFile.save(fileName + '.mid')
+
+    def getTime(midi):
+        return pygame.mixer.music.get_pos()
