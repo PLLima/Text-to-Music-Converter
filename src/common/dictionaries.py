@@ -76,3 +76,15 @@ TEXTBOXCOUNTER_COLORS = {
 SLIDER_COLORS = {
     "Foreground": '#636363',
 }
+
+OCTAVES = {
+    "C0": -4,
+    "C1": -3,
+    "C2": -2,
+    "C3": -1,
+    "C4": 0,
+    "C5": 1,
+    "C6": 2,
+    "C7": 3,
+    "C8": 4,
+}
