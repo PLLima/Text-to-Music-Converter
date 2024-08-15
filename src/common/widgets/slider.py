@@ -104,7 +104,7 @@ class sliderWithLabel(tk.Frame):
         self.slider.config(state=tk.DISABLED)
 
 class paramSlider(tk.Frame, sliderModel, Child):
-    def __init__(self, parent, minValue=0, maxValue=100, length=200, command=None, initialValue=None, orient='horizontal'):
+    def __init__(self, parent, minValue, maxValue, initialValue, fontSize, isPercentage):
         self.setParent(parent)
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         if isPercentage == False:
@@ -139,8 +139,8 @@ class paramSlider(tk.Frame, sliderModel, Child):
         return self.__maxValue
 
     def __setSlider(self, minValue, maxValue, initialValue):
-        self.__slider = sliderModel(self, from_=minValue, to=maxValue, command=self.__onSlideChange,
-                                           initial_value=initialValue, orient='horizontal')
+        self.__slider = sliderModel(self, minValue=minValue, maxValue=maxValue, command=self.__onSlideChange,
+                                           initialValue=initialValue, orient='horizontal')
         self.__getSlider().grid(row=0, column=1, sticky="EW")
 
     def __getSlider(self):
