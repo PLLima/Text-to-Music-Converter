@@ -123,7 +123,7 @@ class paramsScreen(tk.Frame, Screen):
 
     def __setOtherParamsFrame(self):
         octaves = ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8']
-        defaultOctave = 'C0'
+        defaultOctave = 'C4'
         
         self.__otherParamsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
