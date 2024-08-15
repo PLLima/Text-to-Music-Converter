@@ -34,9 +34,8 @@ class player:
         pygame.mixer.music.unpause()
 
     def downloadMusic(midi):
-        #root = Tk()
-        fileName = filedialog.asksaveasfilename(initialdir = "./",title = "Choose a filename for download",filetypes = [("MIDI sequence","*.mid")])
-        #fileName = root.filename
+        fileName = filedialog.asksaveasfilename(initialdir = "./",title = "Choose a filename for download",filetypes = [("MIDI sequence","*.mid")]) 
+        fileName += ".mid"
         file = open(fileName, 'wb')
 
         with midifiles.meta.meta_charset(midi.midiFile.charset):
