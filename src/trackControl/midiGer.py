@@ -30,8 +30,8 @@ class midiGen:
                 track.append(Message('program_change', program = param.opList[op][0], time = 0))
             elif param.opList[op][1] == "Telephone":
                 track.append(Message('program_change', program = 124, time = 0))
-                track.append(Message('note_on', note=param.opList[op][0], velocity=param.opList[op][2], time=240 ))
-                track.append(Message('note_off', note=param.opList[op][0], velocity=param.opList[op][2], time=240))
+                track.append(Message('note_on', note=60, velocity=param.opList[op][0], time=240 ))
+                track.append(Message('note_off', note=60, velocity=param.opList[op][0], time=240))
                 track.append(Message('program_change', program = param.opList[op][2], time = 0))
             elif param.opList[op][1] == "BPMPlus":
                 bpm += 80

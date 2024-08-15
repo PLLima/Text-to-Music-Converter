@@ -92,7 +92,7 @@ class parseText:
                 if lastCommand == "Note":
                     opList.append((NOTES[lastNote] + (octave * 12),"Note",volume))
                 else:
-                    opList.append((NOTES[lastNote] + (octave * 12),"Telephone",instrument))
+                    opList.append((volume,"Telephone",instrument))
                 lastCommand = "NotNote"
             elif text.characters[i] == 'R':
                 if text.characters[i+1] != None and text.characters[i+1] == '+':
