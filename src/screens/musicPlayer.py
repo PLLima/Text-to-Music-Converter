@@ -98,11 +98,16 @@ class playerScreen(tk.Frame, Screen):
             self.slider.disable()
             self.controlAfter = self.after(1000, self.updateSliderPerSec)
         else:
-            self.getMusic().stopMusic()
-            self.updateButton(self.playTrackButton, "Play Track")
-            self.updateButton(self.downloadResetButton, "Download")
-            self.controlPause = 0
-            self.pauseAfter()
+            self.finishMusic()
+
+
+    def finishMusic(self):
+        self.getMusic().stopMusic()
+        self.getMusic().loadMusic()
+        self.updateButton(self.playTrackButton, "Play Track")
+        self.updateButton(self.downloadResetButton, "Download")
+        self.controlPause = 0
+        self.pauseAfter()
 
 
 
