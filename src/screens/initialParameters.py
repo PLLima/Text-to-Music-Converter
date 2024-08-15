@@ -144,7 +144,7 @@ class paramsScreen(tk.Frame, Screen):
         return self.__generateFrame
 
     def __generateMusic(self):
-        self.switchScreen(self.getAppController().renderPlayerScreen(50, 250, "C2", "ABUBLEABUBLEABULE"))
+        self.switchScreen(self.getAppController().renderPlayerScreen(50, 250, "C2", "2CDEFF F CDCDD D CGFEE E CDEFF F2,CDEFF F CDCDD D CGFEE E CDEFF F,CDEFF F CDCDD D CGFEE E CDEFF F,"))
 
     def render(self):
         self.grid_rowconfigure((0, 1, 2, 3), weight=1)
