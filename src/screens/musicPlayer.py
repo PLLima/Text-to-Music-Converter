@@ -9,6 +9,7 @@ from common.widgets.paramBoxGroup import paramBoxGroup
 from common.widgets.slider import sliderWithLabel
 from common.widgets.textbox import textbox
 from trackControl.player import player
+import math
 
 class playerScreen(tk.Frame, Screen):
     def __init__(self, appController, initialVolume, initialBpm, initialOctave, initialString, midiFile):
@@ -16,11 +17,13 @@ class playerScreen(tk.Frame, Screen):
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)
 
+
         # Store initial values
         self.initialVolume = initialVolume 
         self.initialBpm = initialBpm 
         self.initialOctave = initialOctave
         self.initialString = initialString
+        self.controlAfter = None
 
 
         self.controlPause = 0
@@ -30,21 +33,27 @@ class playerScreen(tk.Frame, Screen):
         self.downloadResetButton = None
         self.slider = None
 
-        self.loadMusicStart(midiFile)
+
+        self.setMusic(midiFile)
+        self.loadMusicStart()
         self.render()
 
     
     def getMusic(self):
         return self.music
 
-    def setMusic(self, music):
-        self.music = music
+    def setMusic(self, midiFile):
+        self.music = player(midiFile)
 
+    def getMusicTotalTime(self):
+        return self.getMusic().getMusicLength()
+    
+    def getMusicActualTime(self):
+        return self.getMusic().getTime()
 
-    def loadMusicStart(self, midiFile):
-        music = player(midiFile)
-        music.loadMusic()
-        self.setMusic(music)
+    def loadMusicStart(self):
+        self.getMusic().loadMusic()
+
         
 
     def createButtons(self, textButton1, commandButton1, textButton2, commandButton2):
@@ -74,18 +83,34 @@ class playerScreen(tk.Frame, Screen):
     def onSliderChange(self, value):
         print(f"Slider changed to: {value}")
 
+
+    def updateSliderPerSec(self):
+        currentValue = self.slider.getValue()
+
+        if currentValue < self.getMusicTotalTime():
+            self.slider.setValue(currentValue + 1)
+        self.controlAfter = self.after(1000, self.updateSliderPerSec)
+
+    def pauseAfter(self):
+        if self.controlAfter is not None:
+            self.after_cancel(self.controlAfter)
+            controlAfter = None
+
     def pressPlay(self):
         currentTextPT = self.playTrackButton.getText()  # Get the current text of the play track button
         if currentTextPT == "Play Track":
             if self.controlPause == 0:
                 self.getMusic().playMusic()
+                self.updateSliderPerSec()
                 self.controlPause = 1
             else:
                 self.getMusic().unpauseMusic()  
+                self.updateSliderPerSec()
             newTextPT = "Pause Track"
             newTextDR = "Reset"  # Change button to Reset
         else:
             self.getMusic().pauseMusic()
+            self.pauseAfter()
             newTextPT = "Play Track"
             newTextDR = "Download"  # Change button to Download
 
@@ -118,16 +143,20 @@ class playerScreen(tk.Frame, Screen):
             self.getAppController().getScreenSize()
         )
 
+        print(self.getMusicTotalTime())
+        musicTime = math.ceil(self.getMusicTotalTime())
         # Create slider
         self.slider = sliderWithLabel(
             parent=self,
-            from_=0,
-            to=100,
+            minValue=0,
+            maxValue=musicTime,
             length=600,
             command=lambda: self.on_slider_change,
-            initial_value=0
+            initialValue=0
         )
-        self.slider.disable()
+        print(musicTime)
+
+        #self.slider.disable()
 
         # Create textbox for string input
         stringInput = textbox(

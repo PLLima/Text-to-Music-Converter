@@ -39,9 +39,10 @@ class sliderModel(ttk.Scale):
 
     def getValue(self):
         return self.get()
+    
 
 class sliderWithLabel(tk.Frame):
-    def __init__(self, parent, minValue=0, maxValue=100, length=200, command=None, initialValue=None, orient='horizontal', font_size=FONT_SIZES["SliderLabel"], **kwargs):
+    def __init__(self, parent, minValue=0, maxValue=100, length=100, command=None, initialValue=0, orient='horizontal', font_size=FONT_SIZES["SliderLabel"], **kwargs):
         super().__init__(parent, bg=SCREEN_COLORS["Background"])
 
         self.minValue = minValue
@@ -93,12 +94,13 @@ class sliderWithLabel(tk.Frame):
     def set_command(self, command):
         self.slider.setSliderCallback(command)
 
-    def set_initial_value(self, value):
+    def setValue(self, value):
         self.slider.setValue(value)
         self.updateLabels(value)
 
-    def get_initial_value(self):
+    def getValue(self):
         return self.slider.getValue()
+    
     
     def disable(self):
         self.slider.config(state=tk.DISABLED)
