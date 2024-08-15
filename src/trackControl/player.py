@@ -35,7 +35,7 @@ class setPlayer:
 
     def downloadMusic(midi, fileName):
         root = Tk()
-        root.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("midi files","*.mid"),("all files","*.*")))
+        root.filename = filedialog.asksaveasfilename(initialdir = "/",title = "Choose a filename for download",filetypes = (("midi files","*.mid"),("all files","*.*")))
         fileName = root.filename
         file = open(fileName, 'wb')
 
