@@ -135,9 +135,9 @@ class paramsScreen(tk.Frame, Screen):
         self.__getVolumeSlider().setTextPadding(40, 40)
         self.__getVolumeSlider().grid(row=0, column=0, sticky="NSEW", padx=250, pady=7)
 
-        self.__setBPMSlider(self.__getOtherParamsFrame(), 1, 1000, 500)
+        self.__setBPMSlider(self.__getOtherParamsFrame(), 30, 500, 120)
         self.__getBPMSlider().setTitleText('BPM', calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()))
-        self.__getBPMSlider().setTextPadding(82, 40)
+        self.__getBPMSlider().setTextPadding(82, 55)
         self.__getBPMSlider().grid(row=1, column=0, sticky="NSEW", padx=250, pady=7)
 
         self.__setOctaveDropdown(self.__getOtherParamsFrame(), defaultOctave, *octaves)
