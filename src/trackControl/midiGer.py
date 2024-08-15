@@ -6,8 +6,8 @@ class midiGen:
         if bpm == None:
             self.bpm = 120
         else:
-            if bpm < 1:
-                self.bpm = 1
+            if bpm < 4:
+                self.bpm = 4
             elif bpm > 1000:
                 self.bpm = 1000
             else:
