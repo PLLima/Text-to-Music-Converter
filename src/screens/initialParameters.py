@@ -10,6 +10,7 @@ from common.widgets.button import textButton
 from common.widgets.textbox import textbox
 from common.widgets.textboxCounter import textboxCounter
 from common.widgets.slider import paramSlider
+from common.widgets.dropdown import titledDropdown
 
 class paramsScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -111,7 +112,16 @@ class paramsScreen(tk.Frame, Screen):
     def __getBPMSlider(self):
         return self.__BPMSlider
 
+    def __setOctaveDropdown(self, parent, initialValue, *options):
+        self.__octaveDropdown = titledDropdown(parent, initialValue, *options)
+
+    def __getOctaveDropdown(self):
+        return self.__octaveDropdown
+
     def __setOtherParamsFrame(self):
+        octaves = ['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8']
+        defaultOctave = 'C0'
+        
         self.__otherParamsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
         self.__getOtherParamsFrame().grid_rowconfigure((0, 1, 2), weight=1)
@@ -126,6 +136,11 @@ class paramsScreen(tk.Frame, Screen):
         self.__getBPMSlider().setTitleText('BPM', calculateFontSize(TEXT_SCALES["SliderFont"], self.getAppController().getScreenSize()))
         self.__getBPMSlider().setTextPadding(82, 40)
         self.__getBPMSlider().grid(row=1, column=0, sticky="NSEW", padx=250, pady=7)
+
+        self.__setOctaveDropdown(self.__getOtherParamsFrame(), defaultOctave, *octaves)
+        self.__getOctaveDropdown().setTitleText('Octave', calculateFontSize(TEXT_SCALES["Dropdown"], self.getAppController().getScreenSize()))
+        self.__getOctaveDropdown().setTextPadding(275)
+        self.__getOctaveDropdown().grid(row=2, column=0, sticky="NSEW", padx=250, pady=7)
 
     def __getOtherParamsFrame(self):
         return self.__otherParamsFrame
