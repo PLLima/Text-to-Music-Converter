@@ -33,20 +33,17 @@ class playerScreen(tk.Frame, Screen):
         self.loadMusicStart(midiFile)
         self.render()
 
-    
     def getMusic(self):
         return self.music
 
     def setMusic(self, music):
         self.music = music
 
-
     def loadMusicStart(self, midiFile):
         music = player(midiFile)
         music.loadMusic()
         self.setMusic(music)
         
-
     def createButtons(self, textButton1, commandButton1, textButton2, commandButton2):
         buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
 
@@ -70,9 +67,6 @@ class playerScreen(tk.Frame, Screen):
         button.setPadding(padx=pad[0], pady=pad[1])
         button.getInstance().grid(row=0, column=column, sticky=sticky, padx=padx)
         return button
-
-    def onSliderChange(self, value):
-        print(f"Slider changed to: {value}")
 
     def pressPlay(self):
         currentTextPT = self.playTrackButton.getText()  # Get the current text of the play track button
@@ -109,11 +103,15 @@ class playerScreen(tk.Frame, Screen):
     def reset(self):
         self.getMusic().playMusic()
 
+    def returnScreen(self):
+        self.getMusic().pauseMusic()
+        self.switchScreen(self.getAppController().renderParamsScreen())
+
     def render(self):
         # Create header
         header = screenHeader(
             self, 
-            lambda: self.switchScreen(self.getAppController().renderStartScreen()), 
+            self.returnScreen, 
             'Track Parameters',
             self.getAppController().getScreenSize()
         )
@@ -123,8 +121,8 @@ class playerScreen(tk.Frame, Screen):
             parent=self,
             from_=0,
             to=100,
+            command=None,
             length=600,
-            command=lambda: self.on_slider_change,
             initial_value=0
         )
         self.slider.disable()
