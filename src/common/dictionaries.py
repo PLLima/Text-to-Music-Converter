@@ -20,6 +20,7 @@ TEXT_SCALES = {
     "TableContent": 0.015,
     "ParamsScreenTextbox": 0.02,
     "TextboxCounter": 0.02,
+    "SliderFont": 0.024033334,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
@@ -74,4 +75,16 @@ TEXTBOXCOUNTER_COLORS = {
 
 SLIDER_COLORS = {
     "Foreground": '#636363',
+}
+
+OCTAVES = {
+    "C0": -4,
+    "C1": -3,
+    "C2": -2,
+    "C3": -1,
+    "C4": 0,
+    "C5": 1,
+    "C6": 2,
+    "C7": 3,
+    "C8": 4,
 }

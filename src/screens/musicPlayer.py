@@ -115,8 +115,8 @@ class playerScreen(tk.Frame, Screen):
             from_=0,
             to=100,
             length=600,
-            command=self.onSliderChange,
-            initialValue=0
+            command=lambda: self.on_slider_change,
+            initial_value=0
         )
         self.slider.disable()
 
