@@ -103,7 +103,7 @@ class sliderWithLabel(tk.Frame):
     def disable(self):
         self.slider.config(state=tk.DISABLED)
 
-class paramSlider(tk.Frame, sliderModel, Child):
+class paramSlider(tk.Frame, Child):
     def __init__(self, parent, minValue, maxValue, initialValue, fontSize, isPercentage):
         self.setParent(parent)
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])

@@ -21,6 +21,7 @@ TEXT_SCALES = {
     "ParamsScreenTextbox": 0.02,
     "TextboxCounter": 0.02,
     "SliderFont": 0.024033334,
+    "Dropdown": 0.024033334,
 }
 
 TEXT_SCALES["TableHeader"] = TEXT_SCALES["TableContent"] + 0.005
@@ -35,6 +36,7 @@ FONTS = {
     "TextboxCounter": 'Courier New',
     "Parambox": 'Courier New',
     "SliderLabel": 'Courier New',
+    "Dropdown": 'Courier New',
 }
 
 FONT_SIZES = {
