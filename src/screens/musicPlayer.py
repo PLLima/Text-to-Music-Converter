@@ -144,7 +144,8 @@ class playerScreen(tk.Frame, Screen):
         self.getMusic().downloadMusic()
 
     def reset(self):
-        self.getMusic().pauseMusic()
+        self.getMusic().stopMusic()
+        self.getMusic().loadMusic()
         self.getMusic().playMusic()
         self.resetSlider()
 

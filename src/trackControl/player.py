@@ -34,6 +34,9 @@ class player:
     def unpauseMusic(midi):
         pygame.mixer.music.unpause()
 
+    def stopMusic(midi):
+        pygame.mixer.music.stop()
+
     def downloadMusic(midi):
         fileName = filedialog.asksaveasfilename(initialdir = "./",title = "Choose a filename for download",filetypes = [("MIDI sequence","*.mid")]) 
         if not fileName.endswith('.mid'):
