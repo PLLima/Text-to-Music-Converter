@@ -22,7 +22,8 @@ class player:
 
     def unloadMusic(midi):
         pygame.mixer.music.unload()
-        os.remove('sound.mid')
+        if os.path.isfile('sound.mid'):
+            os.remove('sound.mid')
 
     def getBusy(midi):
         return pygame.mixer.music.get_busy()

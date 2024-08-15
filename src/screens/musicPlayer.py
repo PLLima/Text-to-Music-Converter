@@ -30,6 +30,7 @@ class playerScreen(tk.Frame, Screen):
         self.downloadResetButton = None
         self.slider = None
 
+        self.getParent().protocol("WM_DELETE_WINDOW", self.onWindowClosing)
         self.loadMusicStart(midiFile)
         self.render()
 
@@ -105,7 +106,13 @@ class playerScreen(tk.Frame, Screen):
 
     def returnScreen(self):
         self.getMusic().pauseMusic()
+        self.getMusic().unloadMusic()
         self.switchScreen(self.getAppController().renderParamsScreen())
+
+    def onWindowClosing(self):
+        
+        self.getMusic().unloadMusic()
+        self.getParent().destroy()
 
     def render(self):
         # Create header
