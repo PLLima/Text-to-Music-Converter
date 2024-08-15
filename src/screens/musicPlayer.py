@@ -8,7 +8,7 @@ from common.widgets.screenHeader import screenHeader
 from common.widgets.paramBoxGroup import paramBoxGroup
 from common.widgets.slider import sliderWithLabel
 from common.widgets.textbox import textbox
-from trackControl import player
+from trackControl.player import player
 
 class playerScreen(tk.Frame, Screen):
     def __init__(self, appController, initialVolume, initialBpm, initialOctave, initialString, midiFile):
@@ -22,6 +22,7 @@ class playerScreen(tk.Frame, Screen):
         self.initialOctave = initialOctave
         self.initialString = initialString
 
+
         self.controlPause = 0
 
         # Initialize UI elements
@@ -29,14 +30,22 @@ class playerScreen(tk.Frame, Screen):
         self.downloadResetButton = None
         self.slider = None
 
-        self.loadMusicStart()
+        self.loadMusicStart(midiFile)
         self.render()
 
-    def loadMusicStart(self):
-        # ADICIONAR AQUI O LOAD DA MÚSICA
-        # music = player.setPlayer(midiFile)
-        # music.loadMusic()
-        pass
+    
+    def getMusic(self):
+        return self.music
+
+    def setMusic(self, music):
+        self.music = music
+
+
+    def loadMusicStart(self, midiFile):
+        music = player(midiFile)
+        music.loadMusic()
+        self.setMusic(music)
+        
 
     def createButtons(self, textButton1, commandButton1, textButton2, commandButton2):
         buttonsFrame = tk.Frame(self, bg=SCREEN_COLORS["Background"])
@@ -69,14 +78,14 @@ class playerScreen(tk.Frame, Screen):
         currentTextPT = self.playTrackButton.getText()  # Get the current text of the play track button
         if currentTextPT == "Play Track":
             if self.controlPause == 0:
-                player.playMusic()
+                self.getMusic().playMusic()
                 self.controlPause = 1
             else:
-                player.unpauseMusic()  
+                self.getMusic().unpauseMusic()  
             newTextPT = "Pause Track"
             newTextDR = "Reset"  # Change button to Reset
         else:
-            player.pauseMusic()
+            self.getMusic().pauseMusic()
             newTextPT = "Play Track"
             newTextDR = "Download"  # Change button to Download
 
@@ -95,10 +104,10 @@ class playerScreen(tk.Frame, Screen):
             self.reset()
 
     def download(self):
-        pass
+        self.getMusic().downloadMusic()
 
     def reset(self):
-        player.playMusic()
+        self.getMusic().playMusic()
 
     def render(self):
         # Create header

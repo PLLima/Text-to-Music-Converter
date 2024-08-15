@@ -5,7 +5,7 @@ import struct
 from tkinter import filedialog
 from tkinter import *
 
-class setPlayer:
+class player:
     def __init__(self,midiFile):
         self.midiFile = midiFile
 
@@ -33,10 +33,10 @@ class setPlayer:
     def unpauseMusic(midi):
         pygame.mixer.music.unpause()
 
-    def downloadMusic(midi, fileName):
-        root = Tk()
-        root.filename = filedialog.asksaveasfilename(initialdir = "/",title = "Choose a filename for download",filetypes = (("midi files","*.mid"),("all files","*.*")))
-        fileName = root.filename
+    def downloadMusic(midi):
+        #root = Tk()
+        fileName = filedialog.asksaveasfilename(initialdir = "./",title = "Choose a filename for download",filetypes = [("MIDI sequence","*.mid")])
+        #fileName = root.filename
         file = open(fileName, 'wb')
 
         with midifiles.meta.meta_charset(midi.midiFile.charset):
