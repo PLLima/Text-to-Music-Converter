@@ -6,8 +6,8 @@ class midiGen:
         if bpm == None:
             self.bpm = 120
         else:
-            if bpm < 1:
-                self.bpm = 1
+            if bpm < 4:
+                self.bpm = 4
             elif bpm > 1000:
                 self.bpm = 1000
             else:
@@ -22,7 +22,7 @@ class midiGen:
         bpm = param.bpm
         track.append(mido.MetaMessage(type='set_tempo',tempo = mido.bpm2tempo(bpm)))
 
-        for op in range(1, len(param.opList)):
+        for op in range(0, len(param.opList)):
             if param.opList[op][1] == "Note":
                 track.append(Message('note_on', note=param.opList[op][0], velocity=param.opList[op][2], time=240 ))
                 track.append(Message('note_off', note=param.opList[op][0], velocity=param.opList[op][2], time=240))

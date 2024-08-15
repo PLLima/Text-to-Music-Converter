@@ -15,14 +15,15 @@ class player:
     def loadMusic(midi):
         midi.midiFile.save('sound.mid')
         pygame.init()
-        pygame.mixer.music.load("sound.mid")
+        pygame.mixer.music.load('sound.mid')
     
     def playMusic(midi):
         pygame.mixer.music.play()
 
     def unloadMusic(midi):
         pygame.mixer.music.unload()
-        os.remove('sound.mid')
+        if os.path.isfile('sound.mid'):
+            os.remove('sound.mid')
 
     def getBusy(midi):
         return pygame.mixer.music.get_busy()
@@ -35,7 +36,8 @@ class player:
 
     def downloadMusic(midi):
         fileName = filedialog.asksaveasfilename(initialdir = "./",title = "Choose a filename for download",filetypes = [("MIDI sequence","*.mid")]) 
-        fileName += ".mid"
+        if not fileName.endswith('.mid'):
+            fileName += '.mid'
         file = open(fileName, 'wb')
 
         with midifiles.meta.meta_charset(midi.midiFile.charset):

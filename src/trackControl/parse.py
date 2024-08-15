@@ -40,7 +40,7 @@ class parseText:
             "Not" : 0, #Silence
         }
 
-        for i in range(1, len(text.characters)):
+        for i in range(0, len(text.characters)):
             if skipCounter > 0:
                 skipCounter -= 1
                 continue
@@ -78,7 +78,7 @@ class parseText:
                 lastNote = "Si"
                 lastCommand = "Note"
             elif text.characters[i] == ' ':
-                opList.append((NOTES["Not"],"Note",volume))
+                opList.append((NOTES["Not"],"Note",0))
                 lastCommand = "NotNote"
             elif text.characters[i] == '+':
                 lastCommand = "NotNote"

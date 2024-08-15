@@ -35,10 +35,10 @@ class playerScreen(tk.Frame, Screen):
 
 
         self.setMusic(midiFile)
+        self.getParent().protocol("WM_DELETE_WINDOW", self.onWindowClosing)
         self.loadMusicStart()
         self.render()
 
-    
     def getMusic(self):
         return self.music
 
@@ -134,11 +134,21 @@ class playerScreen(tk.Frame, Screen):
     def reset(self):
         self.getMusic().playMusic()
 
+    def returnScreen(self):
+        self.getMusic().pauseMusic()
+        self.getMusic().unloadMusic()
+        self.switchScreen(self.getAppController().renderParamsScreen())
+
+    def onWindowClosing(self):
+        
+        self.getMusic().unloadMusic()
+        self.getParent().destroy()
+
     def render(self):
         # Create header
         header = screenHeader(
             self, 
-            lambda: self.switchScreen(self.getAppController().renderStartScreen()), 
+            self.returnScreen, 
             'Track Parameters',
             self.getAppController().getScreenSize()
         )
