@@ -55,6 +55,6 @@ class appController(Child):
     def __getPlayerScreen(self):
         return self.__playerScreen
 
-    def renderPlayerScreen(self, initialVolume, initialBpm, initialOcatave, initialString):
-        self.__setPlayerScreen(playerScreen(self, initialVolume, initialBpm, initialOcatave, initialString))
+    def renderPlayerScreen(self, initialVolume, initialBpm, initialOcatave, initialString, midiFile):
+        self.__setPlayerScreen(playerScreen(self, initialVolume, initialBpm, initialOcatave, initialString, midiFile))
         self.__getPlayerScreen().render()

@@ -4,13 +4,16 @@ from tkinter import filedialog as fd
 
 from common.classes import Screen
 from common.functions import calculateFontSize
-from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, TEXTBOX_PARAMS, BUTTON_COLORS
+from common.dictionaries import SCREEN_COLORS, TEXT_SCALES, TEXTBOX_PARAMS, BUTTON_COLORS, OCTAVES
 from common.widgets.screenHeader import screenHeader
 from common.widgets.button import textButton
 from common.widgets.textbox import textbox
 from common.widgets.textboxCounter import textboxCounter
 from common.widgets.slider import paramSlider
 from common.widgets.dropdown import titledDropdown
+
+from trackControl.parse import parseText
+from trackControl.midiGer import midiGen
 
 class paramsScreen(tk.Frame, Screen):
     def __init__(self, appController):
@@ -165,12 +168,17 @@ class paramsScreen(tk.Frame, Screen):
         return self.__generateFrame
 
     def __generateMusic(self):
-        
+        inputText = self.__getTextbox().getContent()
+        inputVolume = self.__getVolumeSlider().getSliderValue()
+        convertedVolume = int(1.26 * inputVolume)
+        inputBPM = self.__getBPMSlider().getSliderValue()
+        inputOctave = self.__getOctaveDropdown().getSelectedValue()
 
-        self.switchScreen(self.getAppController().renderPlayerScreen(self.__getVolumeSlider().getSliderValue(),
-                                                                     self.__getBPMSlider().getSliderValue(),
-                                                                     self.__getOctaveDropdown().getSelectedValue(),
-                                                                     self.__getTextbox().getContent()))
+        musicParser = parseText(OCTAVES[inputOctave], convertedVolume, inputText)
+        generatedMidi = midiGen(inputBPM, musicParser.parserText())
+        midiFile = generatedMidi.gerMidi()
+
+        self.switchScreen(self.getAppController().renderPlayerScreen(inputVolume, inputBPM, inputOctave, inputText, midiFile))
 
     def render(self):
         self.grid_rowconfigure((0, 1, 2, 3), weight=1)

@@ -11,7 +11,7 @@ from common.widgets.textbox import textbox
 from trackControl import player
 
 class playerScreen(tk.Frame, Screen):
-    def __init__(self, appController, initialVolume, initialBpm, initialOctave, initialString):
+    def __init__(self, appController, initialVolume, initialBpm, initialOctave, initialString, midiFile):
         self.setParent(appController.getParent())
         tk.Frame.__init__(self, self.getParent(), bg=SCREEN_COLORS["Background"])
         self.setAppController(appController)

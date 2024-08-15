@@ -40,5 +40,4 @@ class midiGen:
                 bpm = param.opList[op][0]
                 track.append(mido.MetaMessage(type='set_tempo',tempo = mido.bpm2tempo(bpm)))
 
-        x = bool(1)
-        return True, mid
+        return mid
