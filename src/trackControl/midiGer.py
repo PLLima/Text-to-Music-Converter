@@ -22,7 +22,7 @@ class midiGen:
         bpm = param.bpm
         track.append(mido.MetaMessage(type='set_tempo',tempo = mido.bpm2tempo(bpm)))
 
-        for op in range(1, len(param.opList)):
+        for op in range(0, len(param.opList)):
             if param.opList[op][1] == "Note":
                 track.append(Message('note_on', note=param.opList[op][0], velocity=param.opList[op][2], time=240 ))
                 track.append(Message('note_off', note=param.opList[op][0], velocity=param.opList[op][2], time=240))
