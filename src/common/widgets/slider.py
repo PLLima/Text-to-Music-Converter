@@ -88,8 +88,17 @@ class sliderWithLabel(tk.Frame):
     def updateLabels(self, value):
         # Formats labels maxValue integers
         value = int(float(value))
-        self.labelLeftVar.set(str(value))
-        self.labelRightVar.set(str(self.maxValue))
+        self.labelLeftVar.set(self.formatTime(value))
+        self.labelRightVar.set(self.formatTime(self.maxValue))
+
+    def formatTime(self, time):
+        min = 0
+        while time >=60:
+            time -= 60
+            min+=1
+        if time < 10:
+            time = "0"+str(time)
+        return str(min)+":"+str(time)
 
     def set_command(self, command):
         self.slider.setSliderCallback(command)
@@ -101,6 +110,9 @@ class sliderWithLabel(tk.Frame):
     def getValue(self):
         return self.slider.getValue()
     
+    
+    def enable(self):
+        self.slider.config(state=tk.NORMAL)
     
     def disable(self):
         self.slider.config(state=tk.DISABLED)

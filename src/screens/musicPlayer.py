@@ -84,12 +84,24 @@ class playerScreen(tk.Frame, Screen):
         print(f"Slider changed to: {value}")
 
 
+    def resetSlider(self):
+        self.slider.enable()
+        self.slider.setValue(0)
+        self.slider.disable()
+
     def updateSliderPerSec(self):
         currentValue = self.slider.getValue()
 
         if currentValue < self.getMusicTotalTime():
+            self.slider.enable()
             self.slider.setValue(currentValue + 1)
+            self.slider.disable()
+        else:
+            self.slider.enable()
+            self.resetSlider()
+            self.slider.disable()
         self.controlAfter = self.after(1000, self.updateSliderPerSec)
+
 
     def pauseAfter(self):
         if self.controlAfter is not None:
@@ -132,7 +144,10 @@ class playerScreen(tk.Frame, Screen):
         self.getMusic().downloadMusic()
 
     def reset(self):
+        self.getMusic().pauseMusic()
         self.getMusic().playMusic()
+        self.resetSlider()
+
 
     def returnScreen(self):
         self.getMusic().pauseMusic()
@@ -153,20 +168,19 @@ class playerScreen(tk.Frame, Screen):
             self.getAppController().getScreenSize()
         )
 
-        print(self.getMusicTotalTime())
-        musicTime = math.ceil(self.getMusicTotalTime())
+        
         # Create slider
         self.slider = sliderWithLabel(
             parent=self,
             minValue=0,
-            maxValue=musicTime,
+            maxValue=math.ceil(self.getMusicTotalTime()),
             length=600,
             command=lambda: self.on_slider_change,
             initialValue=0
         )
-        print(musicTime)
+        self.slider.disable()
+        
 
-        #self.slider.disable()
 
         # Create textbox for string input
         stringInput = textbox(
