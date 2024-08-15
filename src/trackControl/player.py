@@ -1,5 +1,10 @@
 import pygame
 import os
+from mido import midifiles
+import struct
+from tkinter import filedialog
+from tkinter import *
+
 class setPlayer:
     def __init__(self,midiFile):
         self.midiFile = midiFile
@@ -29,7 +34,20 @@ class setPlayer:
         pygame.mixer.music.unpause()
 
     def downloadMusic(midi, fileName):
-        midi.midiFile.save(fileName + '.mid')
+        root = Tk()
+        root.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("midi files","*.mid"),("all files","*.*")))
+        fileName = root.filename
+        file = open(fileName, 'wb')
+
+        with midifiles.meta.meta_charset(midi.midiFile.charset):
+            header = struct.pack('>hhh', midi.midiFile.type,
+                                 len(midi.midiFile.tracks),
+                                 midi.midiFile.ticks_per_beat)
+
+            midifiles.midifiles.write_chunk(file, b'MThd', header)
+
+            for track in midi.midiFile.tracks:
+                midifiles.midifiles.write_track(file, track)
 
     def getTime(midi):
         return pygame.mixer.music.get_pos()
